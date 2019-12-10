@@ -1,20 +1,38 @@
-#tmbd-logo {
-    width: 50px;
-    margin: 10px;
+#app-footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    height: 100px;
+}
+.tmbd-credit {
+    display: flex;  
+    /* flex-direction: column;  */
+    align-items: center;
+    margin: 15px;
 }
 
-.tmbd-credit {
+.tmbd-text {
     display: flex;  
     flex-direction: column; 
     align-items: center;
+    margin: 0 15px;
+}
+
+
+
+#tmbd-logo {
+   height: 58px;
 }
 
 .tmbd-credit p {
-    margin: 10px;
     font-size: .75em;
     width: 220px;
+    margin: 5px 0;
 }
 
-.tmbd-credit p a {
-    font-size: 1.2em;
+.tmbd-credit a {
+    font-size: .85em;
 }

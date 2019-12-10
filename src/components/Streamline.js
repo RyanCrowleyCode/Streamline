@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import "bootstrap/dist/css/bootstrap.min.css"
+
 import './Streamline.css'
 import NavBar from './nav/NavBar'
 import ApplicationsView from './ApplicationViews'

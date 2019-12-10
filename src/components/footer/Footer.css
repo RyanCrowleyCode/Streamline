@@ -1,0 +1,20 @@
+#tmbd-logo {
+    width: 50px;
+    margin: 10px;
+}
+
+.tmbd-credit {
+    display: flex;  
+    flex-direction: column; 
+    align-items: center;
+}
+
+.tmbd-credit p {
+    margin: 10px;
+    font-size: .75em;
+    width: 220px;
+}
+
+.tmbd-credit p a {
+    font-size: 1.2em;
+}

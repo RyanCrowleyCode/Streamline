@@ -1,4 +1,5 @@
 #app-footer {
+    /* keep footer at the bottom of the page */
     position: absolute;
     left: 0;
     bottom: 0;
@@ -9,7 +10,6 @@
 }
 .tmbd-credit {
     display: flex;  
-    /* flex-direction: column;  */
     align-items: center;
     margin: 15px;
 }
@@ -17,10 +17,8 @@
 .tmbd-text {
     display: flex;  
     flex-direction: column; 
-    /* align-items: center; */
     margin: 0 15px;
 }
-
 
 
 #tmbd-logo {

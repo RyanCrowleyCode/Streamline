@@ -18,10 +18,14 @@
     Author(s): Ryan Crowley
 */
 
+// REACT
 import React, { Component } from 'react'
-import "bootstrap/dist/css/bootstrap.min.css"
 
+// STYLES
+import "bootstrap/dist/css/bootstrap.min.css"
 import './Streamline.css'
+
+// COMPONENTS
 import NavBar from './nav/NavBar'
 import ApplicationsView from './ApplicationViews'
 import Footer from './footer/Footer'

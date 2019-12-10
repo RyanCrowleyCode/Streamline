@@ -1,3 +1,12 @@
+/*
+    WatchlistsList.js
+
+    Purpose:    This component is responsible for rendering WatchlistCards
+                that the user has created.
+
+    Author(s): Ryan Crowley
+*/
+
 import React, { Component } from 'react'
 
 class Watchlists extends Component {

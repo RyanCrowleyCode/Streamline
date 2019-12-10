@@ -1,0 +1,19 @@
+/*
+    apiKeys.js.js
+
+    *** WARNING ** 
+    Do NOT share your API key with anyone. Do not store your apiKey one any file
+    that is stored on Github or any other open source platform for other users
+    to view.
+
+    Purpose:    This module is responsible for storing the API key used
+                to access TMDb API.
+
+    Author(s): Ryan Crowley
+*/
+
+const apiKeys = {
+    TMDbKey = "YOUR KEY GOES HERE"
+}
+
+export default apiKeys

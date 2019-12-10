@@ -1,10 +1,21 @@
 import React, { Component } from 'react'
-import './App.css'
+import './Streamline.css'
+import NavBar from './nav/NavBar'
+import ApplicationsView from './ApplicationViews'
+import Footer from './footer/Footer'
 
-class Streamline extends Component () {
-  return (
+class Streamline extends Component {
+
+  render() {
     
-  )
+    return (
+      <React.Fragment>
+        <NavBar />
+        <ApplicationsView />
+        <Footer />
+      </React.Fragment>
+    )
+  }
 }
 
 export default Streamline;

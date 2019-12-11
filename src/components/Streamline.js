@@ -42,16 +42,15 @@ class Streamline extends Component {
   }
 
   // check for logged in user in localStorage
-  isAuthenticated = () => localStorage.getItem("streamlineCredentials") !== null
+  isAuthenticated = () => localStorage.getItem("streamlineCredentials")
 
 
   /*  adds user info into local storage, calls isAuthenticated, and updates 
       state with user information. */
   setUser = (authObj) => {
-    localStorage.setItem(
-      "streamlineCredentials",
-      JSON.stringify(authObj)
-    )
+    localStorage.setItem("streamlineCredentials", true)
+    localStorage.setItem("userId", authObj.userId)
+    localStorage.setItem("username", authObj.username)
     this.setState({
       isLoggedIn: this.isAuthenticated()
     })

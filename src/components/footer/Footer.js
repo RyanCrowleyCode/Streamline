@@ -1,5 +1,14 @@
 import React, { Component } from 'react'
 
+/*
+    Footer.js
+
+    Purpose:    This component is responsible for rendering Footer for
+                Streamline that will be at the bottom of all user views.
+
+    Author(s): Ryan Crowley
+*/
+
 import './Footer.css'
 
 class Footer extends Component {

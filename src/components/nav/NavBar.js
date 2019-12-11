@@ -14,11 +14,13 @@ import './NavBar.css'
 
 class NavBar extends Component {
     render () {
+        // styles for button link
         const btnLink = {
             border: "none",
             background: "none",
             color: "white"
         }
+        
         return (
             <nav className="navbar bg-dark text-white flex-md-nowrap p-0 shadow">
                 <h3>Streamline</h3>

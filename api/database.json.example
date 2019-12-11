@@ -1,0 +1,19 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "fullName": "User One",
+            "email": "userone@users.com",
+            "username": "coolUser77",
+            "password": "asdf"
+        }
+    ],
+    "movies": [],
+    "userMovies": [],
+    "watchlists": [],
+    "watchlistMovies": [],
+    "movieSources": [],
+    "rankingslists": [],
+    "rankingslistMovies": [],
+    "friends": []
+}

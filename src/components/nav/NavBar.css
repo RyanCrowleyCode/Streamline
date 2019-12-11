@@ -1,3 +1,7 @@
 .navbar h3 {
     margin: 15px;
 }
+
+.nav-link {
+    color: white;
+}

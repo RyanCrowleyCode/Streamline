@@ -1,0 +1,16 @@
+#login-form {
+    padding: 10px;
+}
+
+#login-form button {
+    margin: 10px;
+}
+
+.welcome-header {
+    margin: 50px;
+}
+
+.welcome-view {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}

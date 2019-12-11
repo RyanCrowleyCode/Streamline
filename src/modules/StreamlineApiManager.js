@@ -10,3 +10,12 @@
 
     Author(s): Ryan Crowley
 */
+
+const baseUrl = 'http://localhost:5002'
+
+export default {
+    getAll(endpoint, params ="") {
+        return fetch(`${baseUrl}/${endpoint}?${params}`)
+        .then(result => result.json())
+    }
+}

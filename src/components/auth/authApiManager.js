@@ -6,3 +6,11 @@
 
     Author(s): Ryan Crowley
 */
+import StreamlineApiManager from '../../modules/StreamlineApiManager'
+
+export default {
+    getAllUsers(params ="") {
+        return StreamlineApiManager.getAll("users", params=`${params}`)
+    }
+
+}

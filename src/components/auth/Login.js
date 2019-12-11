@@ -54,8 +54,6 @@ class Login extends Component {
                                     userId: user[0].id,
                                     fullName: user[0].fullName
                                 })
-                                // localStorage.setItem("userId", parseInt(user[0].id))
-                                // localStorage.setItem("username", user[0].username)
                                 this.props.history.push("/")
                             } else {
                                 window.alert("Hmm... please check your email/username and password")

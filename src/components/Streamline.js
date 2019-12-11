@@ -13,7 +13,13 @@
                 TMDb.
 
     Purpose:    This component is responsible for rendering the information for
-                a single Watchlist to the Watchlists view.
+                a single Watchlist to the Watchlists view. This component checks
+                to see if a user is logged in. This component sets user 
+                credentials to local storage to log in a user, and passes the 
+                setUser method as props. This component uses a clearUser method 
+                to log a user out of the application. This component uses a 
+                loggedInUser function that gets the logged in user and passes 
+                that method as props.
 
     Author(s): Ryan Crowley
 */
@@ -31,9 +37,32 @@ import ApplicationsView from './ApplicationViews'
 import Footer from './footer/Footer'
 
 class Streamline extends Component {
+  state = {
+    isLoggedIn: false,
+    user: {}
+  }
+
+  // check for logged in user in localStorage
+  isAuthenticated = () => localStorage.getItem("streamlineCredentials") !== null
+
+
+  /*  adds user info into local storage, calls isAuthenticated, and updates 
+      state with user information. */
+  setUser = (authObj) => {
+    localStorage.setItem(
+      "streamlineCredentials",
+      JSON.stringify(authObj)
+    )
+    this.setState({
+      isLoggedIn: this.isAuthenticated(),
+      user: authObj
+    })
+  }
+
+
 
   render() {
-    
+
     return (
       <React.Fragment>
         <NavBar />

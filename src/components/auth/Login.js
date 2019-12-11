@@ -32,8 +32,10 @@ class Login extends Component {
         e.preventDefault()
         const { email, password } = this.state
         authApiManager.getAllUsers(`email=${email.toLowerCase()}&password=${password}`)
-        .then(users => {
-            console.log(users)
+        .then(user => {
+            if (user.length > 0) {
+                
+            }
         })
 
     }

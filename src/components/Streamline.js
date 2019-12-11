@@ -59,14 +59,24 @@ class Streamline extends Component {
     })
   }
 
+  // handles logout functionality
+  clearUser = () => {
+    localStorage.removeItem('streamlineCredentials')
+  }
+
+  // check for logged in user on rerender
+  componentDidMount() {
+    this.setState({
+      isLoggedIn: this.isAuthenticated()
+    })
+  }
 
 
   render() {
-
     return (
       <React.Fragment>
-        <NavBar />
-        <ApplicationsView />
+        <NavBar isLoggedIn={isLoggedIn} />
+        <ApplicationsView isLoggedIn={isLoggedIn} setUser={this.setUser} />
         <Footer />
       </React.Fragment>
     )

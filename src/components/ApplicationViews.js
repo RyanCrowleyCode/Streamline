@@ -26,7 +26,7 @@ class ApplicationsView extends Component {
         return (
             <React.Fragment>
                 <Route path="/login" render={props => {
-                    return <Login />
+                    return <Login setUser={this.props.setUser} {...props}/>
                 }}/>
                 <Route path="/register" render={props => {
                     return <Register />

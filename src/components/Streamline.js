@@ -60,6 +60,8 @@ class Streamline extends Component {
   // handles logout functionality
   clearUser = () => {
     localStorage.removeItem('streamlineCredentials')
+    localStorage.removeItem('userId')
+    localStorage.removeItem('username')
   }
 
   // check for logged in user on rerender
@@ -69,13 +71,24 @@ class Streamline extends Component {
     })
   }
 
+  // Gets ID of logged in user, function to be passed as props
+  getLoggedInUser() {
+    return {
+      userId: parseInt(localStorage.getItem("userId")),
+      username: localStorage.getItem("username")
+    }
+  }
+
 
   render() {
-    console.log("state when SL renders: ", this.state)
     return (
       <React.Fragment>
         <NavBar isLoggedIn={this.state.isLoggedIn} />
-        <ApplicationsView isLoggedIn={this.state.isLoggedIn} setUser={this.setUser} />
+        <ApplicationsView
+          isLoggedIn={this.state.isLoggedIn}
+          setUser={this.setUser}
+          getLoggedInUser={this.getLoggedInUser}
+        />
         <Footer />
       </React.Fragment>
     )

@@ -31,30 +31,34 @@ class Login extends Component {
     // Login the user when they press the login button
     handleLogin = e => {
         e.preventDefault()
-        const { loginName, password } = this.state
+        const {loginName, password} = this.state
         authApiManager.getAllUsers(`email=${loginName.toLowerCase()}&password=${password}`)
             .then(user => {
-                console.log("user from fetch: ", user)
                 if (user.length > 0) {
                     this.props.setUser({
-                        email: loginName,
-                        password: password,
+                        email: user[0].email,
+                        password: user[0].password,
                         username: user[0].username,
                         userId: user[0].id,
                         fullName: user[0].fullName
                     })
+                    localStorage.setItem("userId", parseInt(user[0].id))
+                    localStorage.setItem("username", user[0].username)
+                    this.props.history.push("/")
                 } else {
                     authApiManager.getAllUsers(`username=${loginName}&password=${password}`)
-                    .then(user => {
-                        console.log("user from SECOND fetch: ", user)
+                        .then(user => {
                             if (user.length > 0) {
                                 this.props.setUser({
                                     email: user[0].email,
-                                    password: password,
-                                    username: loginName,
+                                    password: user[0].password,
+                                    username: user[0].username,
                                     userId: user[0].id,
                                     fullName: user[0].fullName
                                 })
+                                localStorage.setItem("userId", parseInt(user[0].id))
+                                localStorage.setItem("username", user[0].username)
+                                this.props.history.push("/")
                             } else {
                                 window.alert("Hmm... please check your email/username and password")
                             }

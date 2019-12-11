@@ -22,21 +22,25 @@ import Watchlists from './watchlists/WatchlistList'
 
 
 class ApplicationsView extends Component {
-    render () {
+    render() {
         return (
             <React.Fragment>
                 <Route path="/login" render={props => {
-                    return <Login setUser={this.props.setUser} {...props}/>
-                }}/>
+                    return <Login
+                        setUser={this.props.setUser} 
+                        getLoggedInUser={this.props.getLoggedInUser}
+                        {...props}
+                    />
+                }} />
                 <Route path="/register" render={props => {
                     return <Register />
-                }}/>
+                }} />
                 <Route exact path="/" render={props => {
                     return <MovieList />
                 }} />
                 <Route path="/watchlists" render={props => {
                     return <Watchlists />
-                }}/>
+                }} />
             </React.Fragment>
         )
     }

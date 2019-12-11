@@ -38,8 +38,7 @@ import Footer from './footer/Footer'
 
 class Streamline extends Component {
   state = {
-    isLoggedIn: false,
-    user: {}
+    isLoggedIn: false
   }
 
   // check for logged in user in localStorage
@@ -54,8 +53,7 @@ class Streamline extends Component {
       JSON.stringify(authObj)
     )
     this.setState({
-      isLoggedIn: this.isAuthenticated(),
-      user: authObj
+      isLoggedIn: this.isAuthenticated()
     })
   }
 
@@ -73,10 +71,11 @@ class Streamline extends Component {
 
 
   render() {
+    console.log("state when SL renders: ", this.state)
     return (
       <React.Fragment>
-        <NavBar isLoggedIn={isLoggedIn} />
-        <ApplicationsView isLoggedIn={isLoggedIn} setUser={this.setUser} />
+        <NavBar isLoggedIn={this.state.isLoggedIn} />
+        <ApplicationsView isLoggedIn={this.state.isLoggedIn} setUser={this.setUser} />
         <Footer />
       </React.Fragment>
     )

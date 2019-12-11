@@ -19,38 +19,61 @@ import authApiManager from './authApiManager'
 
 class Login extends Component {
     state = {
-        email: '',
+        loginName: '',
         password: ''
     }
 
+    // update email and password in state with every keystroke in input field
     handleFieldChange = e => {
-        // update email and password in state with every keystroke in input field
-        this.setState({[e.target.id]: e.target.value})
+        this.setState({ [e.target.id]: e.target.value })
     }
 
+    // Login the user when they press the login button
     handleLogin = e => {
         e.preventDefault()
-        const { email, password } = this.state
-        authApiManager.getAllUsers(`email=${email.toLowerCase()}&password=${password}`)
-        .then(user => {
-            if (user.length > 0) {
-                
-            }
-        })
-
+        const { loginName, password } = this.state
+        authApiManager.getAllUsers(`email=${loginName.toLowerCase()}&password=${password}`)
+            .then(user => {
+                console.log("user from fetch: ", user)
+                if (user.length > 0) {
+                    this.props.setUser({
+                        email: loginName,
+                        password: password,
+                        username: user[0].username,
+                        userId: user[0].id,
+                        fullName: user[0].fullName
+                    })
+                } else {
+                    authApiManager.getAllUsers(`username=${loginName}&password=${password}`)
+                    .then(user => {
+                        console.log("user from SECOND fetch: ", user)
+                            if (user.length > 0) {
+                                this.props.setUser({
+                                    email: user[0].email,
+                                    password: password,
+                                    username: loginName,
+                                    userId: user[0].id,
+                                    fullName: user[0].fullName
+                                })
+                            } else {
+                                window.alert("Hmm... please check your email/username and password")
+                            }
+                        })
+                }
+            })
     }
 
     render() {
         return (
             <React.Fragment>
                 <div className="jumbotron text-center">
-                    <form 
+                    <form
                         id="login-form"
                         onSubmit={this.handleLogin}>
                         <input
-                            id="email"
+                            id="loginName"
                             type="text"
-                            placeholder="email@email.com"
+                            placeholder="email or username"
                             onChange={this.handleFieldChange}
                             required
                         />

@@ -35,7 +35,10 @@ class ApplicationsView extends Component {
                 }} />
                 <Route path="/register" render={props => {
                     return !this.props.isLoggedIn ?
-                        <Register {...props} />
+                        <Register
+                            setUser={this.props.setUser}
+                            {...props} 
+                        />
                         :
                         <Redirect to="/" />
                 }} />

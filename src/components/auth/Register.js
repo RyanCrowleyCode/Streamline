@@ -46,7 +46,7 @@ class Register extends Component {
             this.setState({ loadingStatus: true })
             const newUser = {
                 fullName: this.state.fullName,
-                email: this.state.email,
+                email: this.state.email.toLowerCase(),
                 username: this.state.username,
                 password: this.state.password1
             }
@@ -55,14 +55,26 @@ class Register extends Component {
             authApiManager.getAllUsers(`email=${newUser.email}`)
                 .then(users => {
                     if (users.length === 0) {
-                        console.log("UNIQUE EMAIL")
+                        // Make sure username is unique
+                        authApiManager.getAllUsers(`username=${newUser.username}`)
+                            .then(users => {
+                                if (users.length === 0) {
+                                    // Valid new user, POST to database and setUser
+                                    authApiManager.createNewUser(newUser)
+                                        .then(user => {
+                                            this.props.setUser(user)
+                                        })
+                                } else {
+                                    window.alert("There is already an account with that username.")
+                                    this.setState({ loadingStatus: false })
+                                }
+                            })
                     } else {
                         window.alert("There is already an account with that email address.")
                         this.setState({ loadingStatus: false })
                     }
                 })
 
-            // // BEFORE POSTING NEW USER, NEED TO MAKE SURE USERNAME UNIQUE
             // authApiManager.createNewUser(newUser)
             //     .then(user => {
             //         // SET USER AFTER POST, WILL NEED ID FROM RETURN!!
@@ -76,9 +88,6 @@ class Register extends Component {
     }
 
     render() {
-
-        const { fullName, email, username, password1, password2 } = this.state;
-
         return (
             <React.Fragment>
                 <div className="jumbotron text-center welcome-view">
@@ -98,7 +107,7 @@ class Register extends Component {
                             required
                         />
                         <br />
-                        <label htmlFor="email">Email Address</label>
+                        <label htmlFor="email">Email</label>
                         <input
                             id="email"
                             type="email"
@@ -107,7 +116,7 @@ class Register extends Component {
                             required
                         />
                         <br />
-                        <label htmlFor="username">Create a Username</label>
+                        <label htmlFor="username">Username</label>
                         <input
                             id="username"
                             type="text"
@@ -116,7 +125,7 @@ class Register extends Component {
                             required
                         />
                         <br />
-                        <label htmlFor="password1">Create a Password</label>
+                        <label htmlFor="password1">Password</label>
                         <input
                             id="password1"
                             type="password"
@@ -125,7 +134,7 @@ class Register extends Component {
                             required
                         />
                         <br />
-                        <label htmlFor="password2">Confirm your Password</label>
+                        <label htmlFor="password2">Confirm Password</label>
                         <input
                             id="password2"
                             type="password"

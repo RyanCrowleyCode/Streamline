@@ -2,6 +2,12 @@
     margin: 15px;
 }
 
-.nav-link {
+.nav-link, #username-btn {
     color: white;
+    transition: .1s;
+}
+
+#username-btn:hover {
+    text-decoration: none;
+    color: #0056b3;
 }

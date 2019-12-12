@@ -98,51 +98,59 @@ class Register extends Component {
                     <form
                         id="register-form"
                         onSubmit={this.handleRegister}>
-                        <label htmlFor="fullName">First and Last Name</label>
-                        <input
-                            id="fullName"
-                            type="text"
-                            placeholder="Tony Stark"
-                            onChange={this.handleFieldChange}
-                            required
-                        />
-                        <br />
-                        <label htmlFor="email">Email</label>
-                        <input
-                            id="email"
-                            type="email"
-                            placeholder="smartguy@avengers.gov"
-                            onChange={this.handleFieldChange}
-                            required
-                        />
-                        <br />
-                        <label htmlFor="username">Username</label>
-                        <input
-                            id="username"
-                            type="text"
-                            placeholder="ironGiant1"
-                            onChange={this.handleFieldChange}
-                            required
-                        />
-                        <br />
-                        <label htmlFor="password1">Password</label>
-                        <input
-                            id="password1"
-                            type="password"
-                            placeholder="password"
-                            onChange={this.handleFieldChange}
-                            required
-                        />
-                        <br />
-                        <label htmlFor="password2">Confirm Password</label>
-                        <input
-                            id="password2"
-                            type="password"
-                            placeholder="confirm password"
-                            onChange={this.handleFieldChange}
-                            required
-                        />
-                        <br />
+                        <div className="input-field-container">
+                            <div className="register-category">
+                                <label htmlFor="fullName">Full Name</label>
+                                <input
+                                    id="fullName"
+                                    type="text"
+                                    placeholder="Tony Stark"
+                                    onChange={this.handleFieldChange}
+                                    required
+                                />
+                            </div>
+                            <div className="register-category">
+                                <label htmlFor="email">Email</label>
+                                <input
+                                    id="email"
+                                    type="email"
+                                    placeholder="smartguy@stark.com"
+                                    onChange={this.handleFieldChange}
+                                    required
+                                />
+                            </div>
+                            <div className="register-category">
+                                <label htmlFor="username">Username</label>
+                                <input
+                                    id="username"
+                                    type="text"
+                                    placeholder="ironGiant1"
+                                    onChange={this.handleFieldChange}
+                                    required
+                                />
+                            </div>
+                            <div className="register-category">
+                                <label htmlFor="password1">Password</label>
+                                <input
+                                    id="password1"
+                                    type="password"
+                                    placeholder="password"
+                                    onChange={this.handleFieldChange}
+                                    required
+                                />
+                            </div>
+                            <div className="register-category">
+
+                                <label htmlFor="password2">Password Again</label>
+                                <input
+                                    id="password2"
+                                    type="password"
+                                    placeholder="confirm password"
+                                    onChange={this.handleFieldChange}
+                                    required
+                                />
+                            </div>
+                        </div>
                         <button
                             type="submit"
                             value="Submit"

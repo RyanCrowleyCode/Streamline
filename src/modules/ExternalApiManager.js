@@ -8,3 +8,9 @@
 
     Author(s): Ryan Crowley
 */
+
+// TMDb apiKey
+import apiKeys from '../apiKeys'
+
+const apiKey = apiKeys.TMDbKey
+

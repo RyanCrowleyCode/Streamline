@@ -12,13 +12,23 @@
     Author(s): Ryan Crowley
 */
 
+// REACT
 import React, { Component } from 'react'
 
+// COMPONENTS
+import MovieCard from './MovieCard'
+
+// DATA
+import ExternalApiManager from '../../modules/ExternalApiManager'
+
 class MovieList extends Component {
-    render () {
+    render() {
         return (
             <React.Fragment>
-                <h1>MovieList!</h1>
+                <section >
+                    <h2>Movies</h2>
+                </section>
+                <MovieCard />
             </React.Fragment>
         )
     }

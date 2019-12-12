@@ -82,7 +82,9 @@ class Streamline extends Component {
   render() {
     return (
       <React.Fragment>
-        <NavBar isLoggedIn={this.state.isLoggedIn} />
+        <NavBar
+          isLoggedIn={this.state.isLoggedIn}
+        />
         <ApplicationsView
           isLoggedIn={this.state.isLoggedIn}
           setUser={this.setUser}

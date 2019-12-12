@@ -61,6 +61,7 @@ class Streamline extends Component {
     localStorage.removeItem('streamlineCredentials')
     localStorage.removeItem('userId')
     localStorage.removeItem('username')
+    this.setState({ isLoggedIn: this.isAuthenticated() })
   }
 
   // check for logged in user on rerender
@@ -84,6 +85,7 @@ class Streamline extends Component {
       <React.Fragment>
         <NavBar
           isLoggedIn={this.state.isLoggedIn}
+          clearUser={this.clearUser}
         />
         <ApplicationsView
           isLoggedIn={this.state.isLoggedIn}

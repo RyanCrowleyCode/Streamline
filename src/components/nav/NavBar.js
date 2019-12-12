@@ -12,21 +12,17 @@
 // REACT
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import DropdownButton from 'react-bootstrap/DropdownButton'
 
 // STYLES
 import './NavBar.css'
 
 // MODULES
-import {activeUsername} from '../../modules/activeUser'
+import { activeUsername } from '../../modules/activeUser'
+import Dropdown from 'react-bootstrap/Dropdown'
 
 class NavBar extends Component {
     render() {
-        // styles for button link
-        const btnLink = {
-            border: "none",
-            background: "none",
-            color: "white"
-        }
 
         return (
             <nav className="navbar bg-dark text-white flex-md-nowrap p-0 shadow">
@@ -39,9 +35,15 @@ class NavBar extends Component {
                         <li className="nav-item">
                             <Link className="nav-link" to="/watchlists">Watchlists</Link>
                         </li>
-                        <li className="nav-item">
-                            <button className="nav-link" style={btnLink}>{activeUsername()}</button>
-                        </li>
+                        <DropdownButton
+                            id="username-btn"
+                            title={activeUsername()}
+                            variant="link"
+                        >
+                            <Dropdown.Item onClick={this.props.clearUser}>
+                                Logout
+                            </Dropdown.Item>
+                        </DropdownButton>
                     </ul>
                     :
                     <ul className="nav nav-pills nav-fill">

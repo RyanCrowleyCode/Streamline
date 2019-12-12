@@ -12,12 +12,14 @@
 // REACT
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import DropdownButton from 'react-bootstrap/DropdownButton'
 
 // STYLES
 import './NavBar.css'
 
 // MODULES
 import {activeUsername} from '../../modules/activeUser'
+import Dropdown from 'react-bootstrap/Dropdown'
 
 class NavBar extends Component {
     render() {
@@ -39,9 +41,12 @@ class NavBar extends Component {
                         <li className="nav-item">
                             <Link className="nav-link" to="/watchlists">Watchlists</Link>
                         </li>
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                             <button className="nav-link" style={btnLink}>{activeUsername()}</button>
-                        </li>
+                        </li> */}
+                        <DropdownButton title={activeUsername()}>
+                            <Dropdown.Item onClick={this.props.clearUser}>Logout</Dropdown.Item>
+                        </DropdownButton>
                     </ul>
                     :
                     <ul className="nav nav-pills nav-fill">

@@ -22,11 +22,42 @@ import MovieCard from './MovieCard'
 import ExternalApiManager from '../../modules/ExternalApiManager'
 
 class MovieList extends Component {
+    state = {
+        movies: [],
+        searchWord: ''
+    }
+
+    // Update searchWord in state as user types
+    handleEventChange = e => {
+        this.setState({[e.target.id]: e.target.value})
+    }
+
+    // Use searchWord to search external api
+    handleSearch = e => {
+        ExternalApiManager.search(this.state.searchWord)
+        .then(response => {
+            console.log(response.results[0])
+        })
+    }
+
     render() {
         return (
             <React.Fragment>
                 <section >
                     <h2>Movies</h2>
+                    <input
+                        id="searchWord"
+                        type="search"
+                        onChange={this.handleEventChange}
+                    >
+                    </input>
+                    <button
+                        type="button"
+                        className="btn btn-primary"
+                        onClick={this.handleSearch}
+                    >
+                        Search
+                    </button>
                 </section>
                 <MovieCard />
             </React.Fragment>

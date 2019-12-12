@@ -13,4 +13,12 @@
 import apiKeys from '../apiKeys'
 
 const apiKey = apiKeys.TMDbKey
+const baseUrl = "https://api.themoviedb.org/3/search/movie?"
 
+
+export default {
+    search(movie) {
+        return fetch(`${baseUrl}api_key=${apiKey}&language=en-US&query=${movie}&page=1&include_adult=false`)
+        .then(result => result.json())
+    }
+}

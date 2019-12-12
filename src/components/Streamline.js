@@ -49,7 +49,7 @@ class Streamline extends Component {
       state with user information. */
   setUser = (authObj) => {
     localStorage.setItem("streamlineCredentials", true)
-    localStorage.setItem("userId", authObj.userId)
+    localStorage.setItem("userId", authObj.id)
     localStorage.setItem("username", authObj.username)
     this.setState({
       isLoggedIn: this.isAuthenticated()

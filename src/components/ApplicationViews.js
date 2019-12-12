@@ -29,33 +29,44 @@ class ApplicationsView extends Component {
                     return !this.props.isLoggedIn ?
                         <Login
                             setUser={this.props.setUser}
-                            getLoggedInUser={this.props.getLoggedInUser}
                             {...props} />
                         :
                         <Redirect to="/" />
                 }} />
                 <Route path="/register" render={props => {
                     return !this.props.isLoggedIn ?
-                        <Register />
+                        <Register
+                            setUser={this.props.setUser}
+                            {...props} 
+                        />
                         :
                         <Redirect to="/" />
                 }} />
                 <Route exact path="/" render={props => {
                     return this.props.isLoggedIn ?
-                        <MovieList />
-                    :
+                        <MovieList
+                            getLoggedInUser={this.props.getLoggedInUser}
+                            {...props}
+                        />
+                        :
                         <Redirect to="/login" />
                 }} />
                 <Route exact path="/movies" render={props => {
                     return this.props.isLoggedIn ?
-                        <MovieList />
-                    :
+                        <MovieList
+                            getLoggedInUser={this.props.getLoggedInUser}
+                            {...props}
+                        />
+                        :
                         <Redirect to="/login" />
                 }} />
                 <Route path="/watchlists" render={props => {
                     return this.props.isLoggedIn ?
-                        <Watchlists />
-                    :
+                        <Watchlists
+                            getLoggedInUser={this.props.getLoggedInUser}
+                            {...props}
+                        />
+                        :
                         <Redirect to="/login" />
                 }} />
             </React.Fragment>

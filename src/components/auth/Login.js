@@ -41,7 +41,7 @@ class Login extends Component {
                         email: user[0].email,
                         password: user[0].password,
                         username: user[0].username,
-                        userId: user[0].id,
+                        id: user[0].id,
                         fullName: user[0].fullName
                     })
                     this.props.history.push("/")
@@ -55,7 +55,7 @@ class Login extends Component {
                                     email: user[0].email,
                                     password: user[0].password,
                                     username: user[0].username,
-                                    userId: user[0].id,
+                                    id: user[0].id,
                                     fullName: user[0].fullName
                                 })
                                 this.props.history.push("/")

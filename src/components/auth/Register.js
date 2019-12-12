@@ -27,7 +27,7 @@ class Register extends Component {
         username: '',
         password1: '',
         password2: '',
-        buttonDisabled: true
+        loadingStatus: false
     }
 
     // update properties in state with every keystroke in input field
@@ -35,7 +35,50 @@ class Register extends Component {
         this.setState({ [e.target.id]: e.target.value })
     }
 
+    // if user has completed all fields and all fields meet the requirements,
+    // then register new user and log in new user.
+    handleRegister = e => {
+        e.preventDefault()
+        const { password1, password2 } = this.state
+
+        // Check if passwords match
+        if (password1 === password2 && password1 !== "") {
+            this.setState({ loadingStatus: true })
+            const newUser = {
+                fullName: this.state.fullName,
+                email: this.state.email,
+                username: this.state.username,
+                password: this.state.password1
+            }
+
+            // Make sure email is unique
+            authApiManager.getAllUsers(`email=${newUser.email}`)
+                .then(users => {
+                    if (users.length === 0) {
+                        console.log("UNIQUE EMAIL")
+                    } else {
+                        window.alert("There is already an account with that email address.")
+                        this.setState({ loadingStatus: false })
+                    }
+                })
+
+            // // BEFORE POSTING NEW USER, NEED TO MAKE SURE USERNAME UNIQUE
+            // authApiManager.createNewUser(newUser)
+            //     .then(user => {
+            //         // SET USER AFTER POST, WILL NEED ID FROM RETURN!!
+            //         console.log("new user: ", user)
+            //     })
+        } else {
+            window.alert("Please make sure your passwords match")
+            this.setState({ loadingStatus: false })
+
+        }
+    }
+
     render() {
+
+        const { fullName, email, username, password1, password2 } = this.state;
+
         return (
             <React.Fragment>
                 <div className="jumbotron text-center welcome-view">
@@ -43,6 +86,63 @@ class Register extends Component {
                         <h1 className="font-weight-light text-center">STREAMLINE</h1>
                         <h3 className="font-weight-light text-center">New to Streamline? Sign up. It's free!</h3>
                     </header>
+                    <form
+                        id="register-form"
+                        onSubmit={this.handleRegister}>
+                        <label htmlFor="fullName">First and Last Name</label>
+                        <input
+                            id="fullName"
+                            type="text"
+                            placeholder="Tony Stark"
+                            onChange={this.handleFieldChange}
+                            required
+                        />
+                        <br />
+                        <label htmlFor="email">Email Address</label>
+                        <input
+                            id="email"
+                            type="email"
+                            placeholder="smartguy@avengers.gov"
+                            onChange={this.handleFieldChange}
+                            required
+                        />
+                        <br />
+                        <label htmlFor="username">Create a Username</label>
+                        <input
+                            id="username"
+                            type="text"
+                            placeholder="ironGiant1"
+                            onChange={this.handleFieldChange}
+                            required
+                        />
+                        <br />
+                        <label htmlFor="password1">Create a Password</label>
+                        <input
+                            id="password1"
+                            type="password"
+                            placeholder="password"
+                            onChange={this.handleFieldChange}
+                            required
+                        />
+                        <br />
+                        <label htmlFor="password2">Confirm your Password</label>
+                        <input
+                            id="password2"
+                            type="password"
+                            placeholder="confirm password"
+                            onChange={this.handleFieldChange}
+                            required
+                        />
+                        <br />
+                        <button
+                            type="submit"
+                            value="Submit"
+                            className="btn-primary"
+                            disabled={this.state.loadingStatus}
+                        >
+                            Submit
+                    </button>
+                    </form>
                 </div>
             </React.Fragment>
         )

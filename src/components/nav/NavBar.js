@@ -1,7 +1,10 @@
 /*
     NavBar.js
 
-    Purpose: This component is responsible for rendering the NavBar.
+    Purpose:    This component is responsible for rendering the NavBar.
+                NavBar will render dynamically based on whether a user is
+                logged in or not. NavBar handles the logout functionality
+                via a dropdown on the dynamically rendered "username" button.
 
     Author(s): Ryan Crowley
 */
@@ -9,8 +12,12 @@
 // REACT
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-// Styles
+
+// STYLES
 import './NavBar.css'
+
+// MODULES
+import {activeUsername} from '../../modules/activeUser'
 
 class NavBar extends Component {
     render() {
@@ -33,7 +40,7 @@ class NavBar extends Component {
                             <Link className="nav-link" to="/watchlists">Watchlists</Link>
                         </li>
                         <li className="nav-item">
-                            <button className="nav-link" style={btnLink}>USERNAME</button>
+                            <button className="nav-link" style={btnLink}>{activeUsername()}</button>
                         </li>
                     </ul>
                     :

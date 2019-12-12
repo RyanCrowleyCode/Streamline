@@ -17,5 +17,15 @@ export default {
     getAll(endpoint, params ="") {
         return fetch(`${baseUrl}/${endpoint}?${params}`)
         .then(result => result.json())
+    },
+
+    post(endpoint, newObject) {
+        return fetch(`${baseUrl}/${endpoint}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newObject)
+        }).then(data => data.json())
     }
 }

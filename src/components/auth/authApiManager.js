@@ -11,6 +11,10 @@ import StreamlineApiManager from '../../modules/StreamlineApiManager'
 export default {
     getAllUsers(params ="") {
         return StreamlineApiManager.getAll("users", params=`${params}`)
+    },
+
+    createNewUser(userObj) {
+        return StreamlineApiManager.post("users", userObj)
     }
 
 }

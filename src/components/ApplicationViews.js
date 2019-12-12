@@ -8,7 +8,7 @@
 
 // REACT
 import React, { Component } from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 
 // Authorization
 import Login from './auth/Login'
@@ -26,20 +26,37 @@ class ApplicationsView extends Component {
         return (
             <React.Fragment>
                 <Route path="/login" render={props => {
-                    return <Login
-                        setUser={this.props.setUser} 
-                        getLoggedInUser={this.props.getLoggedInUser}
-                        {...props}
-                    />
+                    return !this.props.isLoggedIn ?
+                        <Login
+                            setUser={this.props.setUser}
+                            getLoggedInUser={this.props.getLoggedInUser}
+                            {...props} />
+                        :
+                        <Redirect to="/" />
                 }} />
                 <Route path="/register" render={props => {
-                    return <Register />
+                    return !this.props.isLoggedIn ?
+                        <Register />
+                        :
+                        <Redirect to="/" />
                 }} />
                 <Route exact path="/" render={props => {
-                    return <MovieList />
+                    return this.props.isLoggedIn ?
+                        <MovieList />
+                    :
+                        <Redirect to="/login" />
+                }} />
+                <Route exact path="/movies" render={props => {
+                    return this.props.isLoggedIn ?
+                        <MovieList />
+                    :
+                        <Redirect to="/login" />
                 }} />
                 <Route path="/watchlists" render={props => {
-                    return <Watchlists />
+                    return this.props.isLoggedIn ?
+                        <Watchlists />
+                    :
+                        <Redirect to="/login" />
                 }} />
             </React.Fragment>
         )

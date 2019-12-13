@@ -12,6 +12,8 @@ import React, { Component } from 'react'
 
 // STYLES
 import './MovieCard.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFilm } from '@fortawesome/free-solid-svg-icons'
 
 class MovieCard extends Component {
     baseUrlPoster = "https://image.tmdb.org/t/p/original/"
@@ -24,7 +26,7 @@ class MovieCard extends Component {
                     {this.movie.poster_path ?
                     <img src={`${this.baseUrlPoster}${this.movie.poster_path}`} alt={this.movie.title} />
                     :
-                    <h2>NO POSTER</h2>
+                    <FontAwesomeIcon className="default-icon" icon={faFilm} size="6x" />
                     }
                     <h4>{this.movie.title}</h4>
                 </div>

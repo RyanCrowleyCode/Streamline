@@ -29,6 +29,8 @@ class MovieCard extends Component {
                     <FontAwesomeIcon className="default-icon" icon={faFilm} size="6x" />
                     }
                     <h4>{this.movie.title}</h4>
+                    <h6>{this.movie.release_date}</h6>
+                    <p>{this.movie.overview}</p>
                 </div>
             </React.Fragment>
         )

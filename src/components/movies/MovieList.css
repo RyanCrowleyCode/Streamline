@@ -1,0 +1,8 @@
+.movie-list {
+    /* border: 1px solid red; */
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    justify-content: space-around;
+    margin: 25px;
+}

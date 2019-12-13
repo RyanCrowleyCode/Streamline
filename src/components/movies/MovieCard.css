@@ -1,7 +1,13 @@
 .movie-card img {
-    width: 100px;
+    height: auto;
+    width: 40%;
 }
 
-/* .movie-card .default-icon{
-    color: red;
-} */
+.movie-card {
+    border: 1px solid black;
+    display: flex;
+    margin: 30px 20px;
+    width: 45%;
+    min-width: 360px;
+    
+}

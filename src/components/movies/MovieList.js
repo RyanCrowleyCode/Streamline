@@ -21,6 +21,9 @@ import MovieCard from './MovieCard'
 // DATA
 import ExternalApiManager from '../../modules/ExternalApiManager'
 
+// STYLES
+import './MovieList.css'
+
 class MovieList extends Component {
     state = {
         movies: [],
@@ -62,12 +65,14 @@ class MovieList extends Component {
                         Search
                     </button>
                 </section>
-                {this.state.movies.map(movie =>
-                    <MovieCard
-                        key={movie.id}
-                        movieObj={movie}
-                    />
-                )}
+                <section className="movie-list">
+                    {this.state.movies.map(movie =>
+                        <MovieCard
+                            key={movie.id}
+                            movieObj={movie}
+                        />
+                    )}
+                </section>
             </React.Fragment>
         )
     }

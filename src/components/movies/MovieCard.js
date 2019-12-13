@@ -24,13 +24,15 @@ class MovieCard extends Component {
             <React.Fragment>
                 <div className="movie-card">
                     {this.movie.poster_path ?
-                    <img src={`${this.baseUrlPoster}${this.movie.poster_path}`} alt={this.movie.title} />
-                    :
-                    <FontAwesomeIcon className="default-icon" icon={faFilm} size="6x" />
+                        <img src={`${this.baseUrlPoster}${this.movie.poster_path}`} alt={this.movie.title} />
+                        :
+                        <FontAwesomeIcon className="default-icon" icon={faFilm} size="6x" />
                     }
-                    <h4>{this.movie.title}</h4>
-                    <h6>{this.movie.release_date}</h6>
-                    <p>{this.movie.overview}</p>
+                    <div className="movie-card-details">
+                        <h4>{this.movie.title}</h4>
+                        <h6>{this.movie.release_date}</h6>
+                        <p>{this.movie.overview}</p>
+                    </div>
                 </div>
             </React.Fragment>
         )

@@ -15,12 +15,18 @@ import './MovieCard.css'
 
 class MovieCard extends Component {
     baseUrlPoster = "https://image.tmdb.org/t/p/original/"
+    movie = this.props.movieObj
+
     render() {
         return (
             <React.Fragment>
                 <div className="movie-card">
-                    <img src={`${this.baseUrlPoster}${this.props.movie.poster_path}`} alt={this.props.movie.title} />
-                    <h4>{this.props.movie.title}</h4>
+                    {this.movie.poster_path ?
+                    <img src={`${this.baseUrlPoster}${this.movie.poster_path}`} alt={this.movie.title} />
+                    :
+                    <h2>NO POSTER</h2>
+                    }
+                    <h4>{this.movie.title}</h4>
                 </div>
             </React.Fragment>
         )

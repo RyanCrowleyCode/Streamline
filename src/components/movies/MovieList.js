@@ -37,6 +37,7 @@ class MovieList extends Component {
         if (this.state.searchWord) {
             ExternalApiManager.searchTitle(this.state.searchWord)
                 .then(response => {
+                    console.log(response.results)
                     this.setState({ movies: response.results })
                 })
         }
@@ -64,7 +65,7 @@ class MovieList extends Component {
                 {this.state.movies.map(movie =>
                     <MovieCard
                         key={movie.id}
-                        movie={movie}
+                        movieObj={movie}
                     />
                 )}
             </React.Fragment>

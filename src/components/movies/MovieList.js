@@ -12,13 +12,67 @@
     Author(s): Ryan Crowley
 */
 
+// REACT
 import React, { Component } from 'react'
 
+// COMPONENTS
+import MovieCard from './MovieCard'
+
+// DATA
+import ExternalApiManager from '../../modules/ExternalApiManager'
+
+// STYLES
+import './MovieList.css'
+
 class MovieList extends Component {
-    render () {
+    state = {
+        movies: [],
+        searchWord: '',
+    }
+
+    // Update searchWord in state as user types
+    handleEventChange = e => {
+        this.setState({ [e.target.id]: e.target.value })
+    }
+
+    // Use searchWord to search external api
+    handleSearch = e => {
+        if (this.state.searchWord) {
+            ExternalApiManager.searchTitle(this.state.searchWord)
+                .then(response => {
+                    console.log(response.results)
+                    this.setState({ movies: response.results })
+                })
+        }
+    }
+
+    render() {
         return (
             <React.Fragment>
-                <h1>MovieList!</h1>
+                <section >
+                    <h2>Movies</h2>
+                    <input
+                        id="searchWord"
+                        type="search"
+                        onChange={this.handleEventChange}
+                    >
+                    </input>
+                    <button
+                        type="button"
+                        className="btn btn-primary"
+                        onClick={this.handleSearch}
+                    >
+                        Search
+                    </button>
+                </section>
+                <section className="movie-list">
+                    {this.state.movies.map(movie =>
+                        <MovieCard
+                            key={movie.id}
+                            movieObj={movie}
+                        />
+                    )}
+                </section>
             </React.Fragment>
         )
     }

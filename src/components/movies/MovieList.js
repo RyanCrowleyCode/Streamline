@@ -24,20 +24,22 @@ import ExternalApiManager from '../../modules/ExternalApiManager'
 class MovieList extends Component {
     state = {
         movies: [],
-        searchWord: ''
+        searchWord: '',
     }
 
     // Update searchWord in state as user types
     handleEventChange = e => {
-        this.setState({[e.target.id]: e.target.value})
+        this.setState({ [e.target.id]: e.target.value })
     }
 
     // Use searchWord to search external api
     handleSearch = e => {
-        ExternalApiManager.search(this.state.searchWord)
-        .then(response => {
-            console.log(response.results[0])
-        })
+        if (this.state.searchWord) {
+            ExternalApiManager.searchTitle(this.state.searchWord)
+                .then(response => {
+                    this.setState({ movies: response.results })
+                })
+        }
     }
 
     render() {
@@ -59,7 +61,12 @@ class MovieList extends Component {
                         Search
                     </button>
                 </section>
-                <MovieCard />
+                {this.state.movies.map(movie =>
+                    <MovieCard
+                        key={movie.id}
+                        movie={movie}
+                    />
+                )}
             </React.Fragment>
         )
     }

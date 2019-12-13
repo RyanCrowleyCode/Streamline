@@ -29,7 +29,7 @@ class MovieCard extends Component {
                         <FontAwesomeIcon className="default-icon" icon={faFilm} size="6x" />
                     }
                     <div className="movie-card-details">
-                        <h4>{this.movie.title}</h4>
+                        <h5>{this.movie.title}</h5>
                         <h6>{this.movie.release_date}</h6>
                         <p>{this.movie.overview}</p>
                     </div>

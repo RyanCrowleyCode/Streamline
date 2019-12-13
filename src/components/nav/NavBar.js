@@ -16,10 +16,10 @@ import DropdownButton from 'react-bootstrap/DropdownButton'
 
 // STYLES
 import './NavBar.css'
+import Dropdown from 'react-bootstrap/Dropdown'
 
 // MODULES
 import { activeUsername } from '../../modules/activeUser'
-import Dropdown from 'react-bootstrap/Dropdown'
 
 class NavBar extends Component {
     render() {

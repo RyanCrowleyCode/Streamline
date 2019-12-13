@@ -70,6 +70,7 @@ class MovieList extends Component {
                         <MovieCard
                             key={movie.id}
                             movieObj={movie}
+                            movieKey={movie.id}
                         />
                     )}
                 </section>

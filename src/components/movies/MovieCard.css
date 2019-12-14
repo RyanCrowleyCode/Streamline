@@ -9,6 +9,7 @@
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     border-radius: 10px; /* rounded corners */
     background: rgb(240, 240, 240);
+    justify-content: space-between;
 }
 
 .movie-card-top img {

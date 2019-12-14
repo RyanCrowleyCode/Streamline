@@ -1,10 +1,14 @@
 .movie-card {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     display: flex;
     margin: 30px 10px;
     width: 30%;
     min-width: 360px;
     flex-direction: column;
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border-radius: 10px; /* rounded corners */
+    background: rgb(240, 240, 240);
 }
 
 .movie-card-top img {
@@ -21,7 +25,7 @@
 }
 
 .movie-card-top {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     display: flex;
     min-width: 360px;
 }
@@ -44,6 +48,7 @@
 .movie-card-top p {
     font-size: .85em;
 }
+
 
 .movie-card .watchlist-button{
     text-align: center;

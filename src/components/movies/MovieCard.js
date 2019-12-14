@@ -38,19 +38,21 @@ class MovieCard extends Component {
                             <p>{this.movie.overview}</p>
                         </div>
                     </div>
-                    <DropdownButton
-                        id={this.props.movieKey}
-                        title="Watch"
-                        variant="success"
-                        className="watchlist-button"
-                    >
-                        <Dropdown.Item>
-                            Test dropdown option
+                    <div className="movie-card-bottom">
+                        <DropdownButton
+                            id={this.props.movieKey}
+                            title="Watch"
+                            variant="success"
+                            className="watchlist-button"
+                        >
+                            <Dropdown.Item>
+                                Test dropdown option
                             </Dropdown.Item>
-                        <Dropdown.Item>
-                            Test dropdown option2
+                            <Dropdown.Item>
+                                Test dropdown option2
                             </Dropdown.Item>
-                    </DropdownButton>
+                        </DropdownButton>
+                    </div>
                 </div>
             </React.Fragment>
         )

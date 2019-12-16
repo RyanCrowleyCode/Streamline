@@ -13,7 +13,7 @@ class Watchlists extends Component {
     render () {
         return (
             <React.Fragment>
-                <h1>Watchlists!</h1>
+                <h1>Watchlists</h1>
             </React.Fragment>
         )
     }

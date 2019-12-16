@@ -23,7 +23,7 @@ import ExternalApiManager from '../../modules/ExternalApiManager'
 import watchlistApiManager from '../watchlists/watchlistApiManager'
 
 // HELPER FUNCTIONS
-import {getLoggedInUser} from '../../modules/helper'
+import { getLoggedInUser } from '../../modules/helper'
 
 // STYLES
 import './MovieList.css'
@@ -43,6 +43,7 @@ class MovieList extends Component {
 
     // Use searchWord to search external api
     handleSearch = e => {
+        e.preventDefault()
         if (this.state.searchWord) {
             ExternalApiManager.searchTitle(this.state.searchWord)
                 .then(response => {
@@ -53,32 +54,34 @@ class MovieList extends Component {
 
     componentDidMount() {
         watchlistApiManager.getOwnWatchlists(getLoggedInUser())
-        .then(watchlists => {
-            this.setState({watchlists: watchlists})
-        })
-        
+            .then(watchlists => {
+                this.setState({ watchlists: watchlists })
+            })
+
     }
 
     render() {
         return (
             <React.Fragment>
                 <h1>Movies</h1>
-                <section className="search-area">
+                <form className="search-area" onSubmit={this.handleSearch}>
                     <input
                         id="searchWord"
                         type="search"
                         placeholder="search by title"
                         onChange={this.handleEventChange}
+
                     >
                     </input>
                     <button
-                        type="button"
+                        type="submit"
+                        value="Submit"
                         className="btn btn-primary"
                         onClick={this.handleSearch}
                     >
                         Search
                     </button>
-                </section>
+                </form>
                 <section className="movie-list">
                     {this.state.movies.map(movie =>
                         <MovieCard

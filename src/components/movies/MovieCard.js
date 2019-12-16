@@ -22,9 +22,9 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import ExternalApiManager from '../../modules/ExternalApiManager'
 
 // MODULES
-import { toDatePhrase } from '../../modules/helper'
 import moviesApiManager from './moviesApiManager'
-import { addMovie } from '../../modules/helper'
+import { toDatePhrase } from '../../modules/helper'
+import { loopMoviesAddOrEdit } from '../../modules/helper'
 
 
 class MovieCard extends Component {
@@ -32,23 +32,7 @@ class MovieCard extends Component {
     movie = this.props.movieObj
 
 
-    // Loop through Movies in Database to determine if movie exists in database.
-    // Call correct post or edit function based on results.
-    loopThroughMovies = (tmdbMovie, movies) => {
-        // need to loop through movies using imdb_id
-        // if movie in database, update movie with latest data.
-        let movieInDatabase = false
-        for (const m of movies) {
-            if (m.imdb_id === tmdbMovie.imdb_id) {
-                movieInDatabase = true
-                return addMovie(tmdbMovie, "edit", m.score, m.id)
-            }
-        }
-        // if movie not in database, add movie to database.
-        if (!movieInDatabase) {
-            return addMovie(tmdbMovie, "create")
-        }
-    }
+    
 
     // Add movie to a watchlist when user selects watchlist
     addToWatchlist = e => {
@@ -61,7 +45,7 @@ class MovieCard extends Component {
                 moviesApiManager.getMovies()
                     .then(movies => {
                         // add or edit movie in database with tmdbMovie
-                        return this.loopThroughMovies(tmdbMovie, movies)
+                        return loopMoviesAddOrEdit(tmdbMovie, movies)
                     })
                     .then(response => {
                         // simultaneously, get userMovies and create if not there

@@ -42,7 +42,7 @@ class MovieCard extends Component {
             score: null
         }
         if (mode === "create") {
-            moviesApiManager.postMovie(movie)
+            return moviesApiManager.postMovie(movie)
         } else {
             /*  score is an internal app measurement, not external. make sure
                 score stays as whatever it was in Streamline, we are only trying
@@ -50,7 +50,7 @@ class MovieCard extends Component {
             */
             movie.score = score
             movie.id = id
-            moviesApiManager.editMovie(movie)
+            return moviesApiManager.editMovie(movie)
         }
     }
 
@@ -63,12 +63,12 @@ class MovieCard extends Component {
         for (const m of movies) {
             if (m.imdb_id === tmdbMovie.imdb_id) {
                 movieInDatabase = true
-                this.addMovie(tmdbMovie, "edit", m.score, m.id)
+                return this.addMovie(tmdbMovie, "edit", m.score, m.id)
             }
         }
         // if movie not in database, add movie to database.
         if (!movieInDatabase) {
-            this.addMovie(tmdbMovie, "create")
+            return this.addMovie(tmdbMovie, "create")
         }
     }
 
@@ -83,7 +83,11 @@ class MovieCard extends Component {
                 moviesApiManager.getMovies()
                     .then(movies => {
                         // add or edit movie in database with tmdbMovie
-                        this.loopThroughMovies(tmdbMovie, movies)
+                        return this.loopThroughMovies(tmdbMovie, movies)
+                    })
+                    .then(response => {
+                        // simultaneously, get userMovies and create if not there
+                        // AND get watchlistMovie and create if not there
                     })
             })
     }

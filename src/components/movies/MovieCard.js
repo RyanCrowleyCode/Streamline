@@ -30,7 +30,7 @@ class MovieCard extends Component {
     movie = this.props.movieObj
 
     // add to or update a movie (internal database)
-    addMovie = (movieObj, mode) => {
+    addMovie = (movieObj, mode, score="", id="") => {
         const movie = {
             imdb_id: movieObj.imdb_id,
             title: movieObj.title,
@@ -44,7 +44,13 @@ class MovieCard extends Component {
         if (mode === "create") {
             moviesApiManager.postMovie(movie)
         } else {
-            console.log("function movie: ", movie)
+            /*  score is an internal app measurement, not external. make sure
+                score stays as whatever it was in Streamline, we are only trying
+                to update items we are pulling from TMDb. 
+            */
+            movie.score = score
+            movie.id = id
+            moviesApiManager.editMovie(movie)
         }
 
     }
@@ -55,13 +61,24 @@ class MovieCard extends Component {
         const movieId = this.movie.id
         
         ExternalApiManager.getMovie(movieId)
-        .then(movie => {
-            // get movies from internal database. if movie not in database, add
-            // movie to database.
+        .then(tmdbMovie => {
+            // get movies from internal database. 
             moviesApiManager.getMovies()
             .then(movies => {
-                // console.log(movie.imdb_id)
-                // console.log(movies)
+                // need to loop through movies using imdb_id
+                // if movie in database, update movie with latest data.
+                let movieInDatabase = false
+                for (const m of movies) {
+                    if (m.imdb_id === tmdbMovie.imdb_id) {
+                        movieInDatabase = true
+                        this.addMovie(tmdbMovie, "edit", m.score, m.id)
+                    }
+                }
+                // if movie not in database, add movie to database.
+                if (!movieInDatabase) {
+                    this.addMovie(tmdbMovie, "create")
+                }
+
 
             })
         })

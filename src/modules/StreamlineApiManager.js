@@ -30,7 +30,7 @@ export default {
     },
 
     update(endpoint, updatedObject) {
-        return fetch(`${baseUrl}/${endpoint}`, {
+        return fetch(`${baseUrl}/${endpoint}/${updatedObject.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"

@@ -25,6 +25,14 @@ class MovieCard extends Component {
     baseUrlPoster = "https://image.tmdb.org/t/p/original/"
     movie = this.props.movieObj
 
+
+    // Add movie to a watchlist when user selects watchlist
+    addToWatchlist = e => {
+        console.log("watchlist selected: ", e.target.id)
+        console.log("selected movie: ", this.movie.title)
+        console.log("selected movieId: ", this.movie.id)
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -61,7 +69,11 @@ class MovieCard extends Component {
                             variant="success"
                             className="watchlist-button"
                         >{this.props.watchlists.map(watchlist =>
-                            <Dropdown.Item key={`${this.props.movieKey}-${watchlist.id}`}>
+                            <Dropdown.Item 
+                                key={`${this.props.movieKey}-${watchlist.id}`}
+                                id={watchlist.id}
+                                onClick={this.addToWatchlist}
+                                >
                                 {watchlist.listName}
                             </Dropdown.Item>
                         )}

@@ -27,6 +27,8 @@ import { toDatePhrase } from '../../modules/helper'
 import { loopMoviesAddOrEdit } from '../../modules/helper'
 import { createUserMovie } from '../../modules/helper'
 import { getLoggedInUser } from '../../modules/helper'
+import { createWatchlistMovie } from '../../modules/helper'
+
 
 
 class MovieCard extends Component {
@@ -35,7 +37,7 @@ class MovieCard extends Component {
 
     // Add movie to a watchlist when user selects watchlist
     addToWatchlist = e => {
-        const watchlist = e.target.id
+        const watchlistId = e.target.id
         const movieId = this.movie.id
 
         ExternalApiManager.getMovie(movieId)
@@ -46,18 +48,29 @@ class MovieCard extends Component {
                         // add or edit movie in database with tmdbMovie
                         return loopMoviesAddOrEdit(tmdbMovie, movies)
                     })
-                    .then(response => {
+                    .then(movie => {
                         // simultaneously, get userMovies and create if not there
                         // AND get watchlistMovie and create if not there
                         // get userMovies and create if not there
-                        moviesApiManager.getUserMovie(parseInt(getLoggedInUser()), response.id)
+                        moviesApiManager.getUserMovie(parseInt(getLoggedInUser()), movie.id)
                         .then(userMovie => {
                             if (userMovie.length === 0) {
-                                createUserMovie(parseInt(getLoggedInUser()), response.id)
+                                createUserMovie(parseInt(getLoggedInUser()), movie.id)
                             }
                         })
-
-
+                        // // get watchlistMovie and create if not there
+                        moviesApiManager.getWatchlistMovie(parseInt(watchlistId), movie.id)
+                        .then(watchlistMovie => {
+                            if (watchlistMovie.length === 0) {
+                                // Need to get length of watchlist you are adding
+                                // movie to so you can set index of watchlistMovie
+                                moviesApiManager.getAllWatchlistMovies(parseInt(watchlistId))
+                                .then(watchlist => {
+                                    const listIndex = watchlist.length
+                                    createWatchlistMovie(parseInt(watchlistId), movie.id, listIndex)
+                                })
+                            }
+                        })
                     })
             })
     }

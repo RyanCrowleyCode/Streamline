@@ -80,3 +80,15 @@ export function createUserMovie (userId, movieId) {
 
     moviesApiManager.postUserMovie(newUserMovie)
 }
+
+export function createWatchlistMovie (watchlistId, movieId, listIndex) {
+    const newWatchlistMovie = {
+        watchlistId: watchlistId,
+        movieId: movieId,
+        comments: "",
+        listIndex: listIndex,
+        movieSourceId: null,
+    }
+
+    moviesApiManager.postWatchilstMovie(newWatchlistMovie)
+}

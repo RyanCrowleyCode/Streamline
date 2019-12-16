@@ -24,10 +24,26 @@ export default {
     },
 
     getUserMovie(userId, movieId) {
-        return StreamlineApiManager.getAll("userMovies", `?userId=${userId}&movieId=${movieId}`)
+        return StreamlineApiManager.getAll("userMovies", `userId=${userId}&movieId=${movieId}`)
     },
 
     postUserMovie(userMovieObj) {
         return StreamlineApiManager.post("userMovies", userMovieObj)
+    },
+
+    getWatchlist (watchlistId, userId) {
+        return StreamlineApiManager.getAll("watchlists", `id=${watchlistId}&userId=${userId}`)
+    },
+
+    getWatchlistMovie(watchlistId, movieId) {
+        return StreamlineApiManager.getAll("watchlistMovies", `watchlistId=${watchlistId}&movieId=${movieId}`)
+    },
+
+    getAllWatchlistMovies(watchlistId) {
+        return StreamlineApiManager.getAll("watchlistMovies", `watchlistId=${watchlistId}`)
+    },
+
+    postWatchilstMovie(watchlistMovieObj) {
+        return StreamlineApiManager.post("watchlistMovies", watchlistMovieObj)
     }
 }

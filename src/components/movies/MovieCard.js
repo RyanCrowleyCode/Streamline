@@ -20,6 +20,7 @@ import Dropdown from 'react-bootstrap/Dropdown'
 // MODULES
 import { toDatePhrase } from '../../modules/helper'
 
+
 class MovieCard extends Component {
     baseUrlPoster = "https://image.tmdb.org/t/p/original/"
     movie = this.props.movieObj
@@ -59,13 +60,11 @@ class MovieCard extends Component {
                             title="Watch"
                             variant="success"
                             className="watchlist-button"
-                        >
-                            <Dropdown.Item>
-                                Test dropdown option
+                        >{this.props.watchlists.map(watchlist =>
+                            <Dropdown.Item key={`${this.props.movieKey}-${watchlist.id}`}>
+                                {watchlist.listName}
                             </Dropdown.Item>
-                            <Dropdown.Item>
-                                Test dropdown option2
-                            </Dropdown.Item>
+                        )}
                         </DropdownButton>
                     </div>
                 </div>

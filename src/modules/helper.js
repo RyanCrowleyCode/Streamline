@@ -20,3 +20,7 @@ export function toDatePhrase(date) {
     return `${monthName} ${day}, ${year}`
     
 }
+
+export function getLoggedInUser() {
+    return localStorage.getItem("userId")
+}

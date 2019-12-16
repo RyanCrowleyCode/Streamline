@@ -20,13 +20,19 @@ import MovieCard from './MovieCard'
 
 // DATA
 import ExternalApiManager from '../../modules/ExternalApiManager'
+import watchlistApiManager from '../watchlists/watchlistApiManager'
+
+// HELPER FUNCTIONS
+import {getLoggedInUser} from '../../modules/helper'
 
 // STYLES
 import './MovieList.css'
 
+
 class MovieList extends Component {
     state = {
         movies: [],
+        watchlists: [],
         searchWord: '',
     }
 
@@ -40,10 +46,17 @@ class MovieList extends Component {
         if (this.state.searchWord) {
             ExternalApiManager.searchTitle(this.state.searchWord)
                 .then(response => {
-                    console.log(response.results)
                     this.setState({ movies: response.results })
                 })
         }
+    }
+
+    componentDidMount() {
+        watchlistApiManager.getOwnWatchlists(getLoggedInUser())
+        .then(watchlists => {
+            this.setState({watchlists: watchlists})
+        })
+        
     }
 
     render() {
@@ -72,6 +85,7 @@ class MovieList extends Component {
                             key={movie.id}
                             movieObj={movie}
                             movieKey={movie.id}
+                            watchlists={this.state.watchlists}
                         />
                     )}
                 </section>

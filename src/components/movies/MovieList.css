@@ -4,5 +4,14 @@
     flex-wrap: wrap;
     height: 100%;
     justify-content: space-around;
+    margin: 15px;
+}
+
+.search-area {
+    text-align: center;
     margin: 25px;
+}
+
+#searchWord {
+    width: 250px;
 }

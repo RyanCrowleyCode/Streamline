@@ -49,11 +49,12 @@ class MovieList extends Component {
     render() {
         return (
             <React.Fragment>
-                <section >
-                    <h2>Movies</h2>
+                <h1>Movies</h1>
+                <section className="search-area">
                     <input
                         id="searchWord"
                         type="search"
+                        placeholder="search by title"
                         onChange={this.handleEventChange}
                     >
                     </input>

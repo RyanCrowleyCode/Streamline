@@ -35,7 +35,13 @@ class MovieCard extends Component {
                         <div className="movie-card-details">
                             <h5>{this.movie.title}</h5>
                             <h6>{this.movie.release_date}</h6>
+                            {/* keep paragraph from getting too long */}
+                            {this.movie.overview.length <= 375 
+                            ?
                             <p>{this.movie.overview}</p>
+                            :
+                            <p>{this.movie.overview.slice(0, 375) + "..."}</p>
+                            }
                         </div>
                     </div>
                     <div className="movie-card-bottom">

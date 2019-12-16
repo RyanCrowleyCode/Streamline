@@ -17,20 +17,54 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilm } from '@fortawesome/free-solid-svg-icons'
 import Dropdown from 'react-bootstrap/Dropdown'
 
+// DATA
+import ExternalApiManager from '../../modules/ExternalApiManager'
+
 // MODULES
 import { toDatePhrase } from '../../modules/helper'
+import moviesApiManager from './moviesApiManager'
 
 
 class MovieCard extends Component {
     baseUrlPoster = "https://image.tmdb.org/t/p/original/"
     movie = this.props.movieObj
 
+    // add to or update a movie (internal database)
+    addMovie = (movieObj, mode) => {
+        const movie = {
+            imdb_id: movieObj.imdb_id,
+            title: movieObj.title,
+            releaseDate: movieObj.release_date,
+            runtime: movieObj.runtime,
+            synopsis: movieObj.overview,
+            image: movieObj.poster_path,
+            score: null
+        }
+
+        if (mode === "create") {
+            moviesApiManager.postMovie(movie)
+        } else {
+            console.log("function movie: ", movie)
+        }
+
+    }
 
     // Add movie to a watchlist when user selects watchlist
     addToWatchlist = e => {
-        console.log("watchlist selected: ", e.target.id)
-        console.log("selected movie: ", this.movie.title)
-        console.log("selected movieId: ", this.movie.id)
+        const watchlist = e.target.id
+        const movieId = this.movie.id
+        
+        ExternalApiManager.getMovie(movieId)
+        .then(movie => {
+            // get movies from internal database. if movie not in database, add
+            // movie to database.
+            moviesApiManager.getMovies()
+            .then(movies => {
+                // console.log(movie.imdb_id)
+                // console.log(movies)
+
+            })
+        })
     }
 
     render() {

@@ -6,3 +6,20 @@
 
     Author(s): Ryan Crowley
 */
+
+// INTERNAL API FACTORY
+import StreamlineApiManager from '../../modules/StreamlineApiManager'
+
+export default {
+    getMovies() {
+        return StreamlineApiManager.getAll("movies")
+    },
+
+    postMovie(movieObj) {
+        return StreamlineApiManager.post("movies", movieObj)
+    },
+
+    editMovie(movieObj) {
+        return StreamlineApiManager.update("movies", movieObj)
+    }
+}

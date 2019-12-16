@@ -12,7 +12,11 @@
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
 export function toDatePhrase(date) {
-    const month = date.slice(5, 7)
+    const month = parseInt(date.slice(5, 7))
+    const monthName = months[month -1]
     const year = date.slice(0, 4)
     const day = date.slice(8, 10)
+
+    return `${monthName} ${day}, ${year}`
+    
 }

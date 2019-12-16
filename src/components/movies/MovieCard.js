@@ -17,6 +17,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilm } from '@fortawesome/free-solid-svg-icons'
 import Dropdown from 'react-bootstrap/Dropdown'
 
+// MODULES
+import {toDatePhrase} from '../../modules/helper'
+
 class MovieCard extends Component {
     baseUrlPoster = "https://image.tmdb.org/t/p/original/"
     movie = this.props.movieObj
@@ -34,7 +37,7 @@ class MovieCard extends Component {
                         }
                         <div className="movie-card-details">
                             <h5>{this.movie.title}</h5>
-                            <h6>{this.movie.release_date}</h6>
+                            <h6>{toDatePhrase(this.movie.release_date)}</h6>
                             {/* keep paragraph from getting too long */}
                             {this.movie.overview.length <= 375 
                             ?

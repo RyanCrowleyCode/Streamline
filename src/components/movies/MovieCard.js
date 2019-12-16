@@ -2,7 +2,8 @@
     MovieCard.js
 
     Purpose:    This component is responsible for displaying the information
-                for a single movie.
+                for a single movie. This handles functionality for adding a
+                movie to a watchlist, including posting movies to the database.
 
     Author(s): Ryan Crowley
 */
@@ -30,7 +31,7 @@ class MovieCard extends Component {
     movie = this.props.movieObj
 
     // add to or update a movie (internal database)
-    addMovie = (movieObj, mode, score="", id="") => {
+    addMovie = (movieObj, mode, score = "", id = "") => {
         const movie = {
             imdb_id: movieObj.imdb_id,
             title: movieObj.title,
@@ -40,7 +41,6 @@ class MovieCard extends Component {
             image: movieObj.poster_path,
             score: null
         }
-
         if (mode === "create") {
             moviesApiManager.postMovie(movie)
         } else {
@@ -52,36 +52,40 @@ class MovieCard extends Component {
             movie.id = id
             moviesApiManager.editMovie(movie)
         }
+    }
 
+    // Loop through Movies in Database to determine if movie exists in database.
+    // Call correct post or edit function based on results.
+    loopThroughMovies = (tmdbMovie, movies) => {
+        // need to loop through movies using imdb_id
+        // if movie in database, update movie with latest data.
+        let movieInDatabase = false
+        for (const m of movies) {
+            if (m.imdb_id === tmdbMovie.imdb_id) {
+                movieInDatabase = true
+                this.addMovie(tmdbMovie, "edit", m.score, m.id)
+            }
+        }
+        // if movie not in database, add movie to database.
+        if (!movieInDatabase) {
+            this.addMovie(tmdbMovie, "create")
+        }
     }
 
     // Add movie to a watchlist when user selects watchlist
     addToWatchlist = e => {
         const watchlist = e.target.id
         const movieId = this.movie.id
-        
+
         ExternalApiManager.getMovie(movieId)
-        .then(tmdbMovie => {
-            // get movies from internal database. 
-            moviesApiManager.getMovies()
-            .then(movies => {
-                // need to loop through movies using imdb_id
-                // if movie in database, update movie with latest data.
-                let movieInDatabase = false
-                for (const m of movies) {
-                    if (m.imdb_id === tmdbMovie.imdb_id) {
-                        movieInDatabase = true
-                        this.addMovie(tmdbMovie, "edit", m.score, m.id)
-                    }
-                }
-                // if movie not in database, add movie to database.
-                if (!movieInDatabase) {
-                    this.addMovie(tmdbMovie, "create")
-                }
-
-
+            .then(tmdbMovie => {
+                // get movies from internal database. 
+                moviesApiManager.getMovies()
+                    .then(movies => {
+                        // add or edit movie in database with tmdbMovie
+                        this.loopThroughMovies(tmdbMovie, movies)
+                    })
             })
-        })
     }
 
     render() {
@@ -120,11 +124,11 @@ class MovieCard extends Component {
                             variant="success"
                             className="watchlist-button"
                         >{this.props.watchlists.map(watchlist =>
-                            <Dropdown.Item 
+                            <Dropdown.Item
                                 key={`${this.props.movieKey}-${watchlist.id}`}
                                 id={watchlist.id}
                                 onClick={this.addToWatchlist}
-                                >
+                            >
                                 {watchlist.listName}
                             </Dropdown.Item>
                         )}

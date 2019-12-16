@@ -21,5 +21,13 @@ export default {
 
     editMovie(movieObj) {
         return StreamlineApiManager.update("movies", movieObj)
+    },
+
+    getUserMovie(userId, movieId) {
+        return StreamlineApiManager.getAll("userMovies", `?userId=${userId}&movieId=${movieId}`)
+    },
+
+    postUserMovie(userMovieObj) {
+        return StreamlineApiManager.post("userMovies", userMovieObj)
     }
 }

@@ -70,3 +70,13 @@ export function loopMoviesAddOrEdit (tmdbMovie, movies) {
         return addMovie(tmdbMovie, "create")
     }
 }
+
+export function createUserMovie (userId, movieId) {
+    const newUserMovie = {
+        userId: userId,
+        movieId: movieId,
+        score: null
+    }
+
+    moviesApiManager.postUserMovie(newUserMovie)
+}

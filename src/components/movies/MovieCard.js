@@ -25,14 +25,13 @@ import ExternalApiManager from '../../modules/ExternalApiManager'
 import moviesApiManager from './moviesApiManager'
 import { toDatePhrase } from '../../modules/helper'
 import { loopMoviesAddOrEdit } from '../../modules/helper'
+import { createUserMovie } from '../../modules/helper'
+import { getLoggedInUser } from '../../modules/helper'
 
 
 class MovieCard extends Component {
     baseUrlPoster = "https://image.tmdb.org/t/p/original/"
     movie = this.props.movieObj
-
-
-    
 
     // Add movie to a watchlist when user selects watchlist
     addToWatchlist = e => {
@@ -50,6 +49,15 @@ class MovieCard extends Component {
                     .then(response => {
                         // simultaneously, get userMovies and create if not there
                         // AND get watchlistMovie and create if not there
+                        // get userMovies and create if not there
+                        moviesApiManager.getUserMovie(parseInt(getLoggedInUser()), response.id)
+                        .then(userMovie => {
+                            if (userMovie.length === 0) {
+                                createUserMovie(parseInt(getLoggedInUser()), response.id)
+                            }
+                        })
+
+
                     })
             })
     }

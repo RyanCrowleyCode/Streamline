@@ -24,35 +24,13 @@ import ExternalApiManager from '../../modules/ExternalApiManager'
 // MODULES
 import { toDatePhrase } from '../../modules/helper'
 import moviesApiManager from './moviesApiManager'
+import { addMovie } from '../../modules/helper'
 
 
 class MovieCard extends Component {
     baseUrlPoster = "https://image.tmdb.org/t/p/original/"
     movie = this.props.movieObj
 
-    // add to or update a movie (internal database)
-    addMovie = (movieObj, mode, score = "", id = "") => {
-        const movie = {
-            imdb_id: movieObj.imdb_id,
-            title: movieObj.title,
-            releaseDate: movieObj.release_date,
-            runtime: movieObj.runtime,
-            synopsis: movieObj.overview,
-            image: movieObj.poster_path,
-            score: null
-        }
-        if (mode === "create") {
-            return moviesApiManager.postMovie(movie)
-        } else {
-            /*  score is an internal app measurement, not external. make sure
-                score stays as whatever it was in Streamline, we are only trying
-                to update items we are pulling from TMDb. 
-            */
-            movie.score = score
-            movie.id = id
-            return moviesApiManager.editMovie(movie)
-        }
-    }
 
     // Loop through Movies in Database to determine if movie exists in database.
     // Call correct post or edit function based on results.
@@ -63,12 +41,12 @@ class MovieCard extends Component {
         for (const m of movies) {
             if (m.imdb_id === tmdbMovie.imdb_id) {
                 movieInDatabase = true
-                return this.addMovie(tmdbMovie, "edit", m.score, m.id)
+                return addMovie(tmdbMovie, "edit", m.score, m.id)
             }
         }
         // if movie not in database, add movie to database.
         if (!movieInDatabase) {
-            return this.addMovie(tmdbMovie, "create")
+            return addMovie(tmdbMovie, "create")
         }
     }
 

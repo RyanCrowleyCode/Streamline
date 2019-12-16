@@ -27,5 +27,15 @@ export default {
             },
             body: JSON.stringify(newObject)
         }).then(data => data.json())
+    },
+
+    update(endpoint, updatedObject) {
+        return fetch(`${baseUrl}/${endpoint}/${updatedObject.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(updatedObject)
+        }).then(response => response.json())
     }
 }

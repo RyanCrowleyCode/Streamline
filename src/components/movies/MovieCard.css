@@ -1,37 +1,79 @@
-.movie-card img {
-    height: auto;
-    width: 40%;
+.movie-card {
+    /* border: 1px solid red; */
+    display: flex;
+    margin: 30px 10px;
+    width: 30%;
+    min-width: 360px;
+    flex-direction: column;
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border-radius: 10px; /* rounded corners */
+    background: rgb(240, 240, 240);
+    justify-content: space-between;
 }
 
-.movie-card .default-icon {
+.movie-card-top img {
+    height: auto;
+    width: 40%;
+    padding-bottom: 20%;
+}
+
+.movie-card-top .default-icon {
     height: auto;
     width: 10%;
     padding: 5px;
     background-color: #4b545c;
+    margin: 0;
 }
 
-.movie-card {
-    border: 1px solid black;
+.movie-card-top {
+    /* border: 1px solid black; */
     display: flex;
-    margin: 30px 10px;
-    width: 47%;
     min-width: 360px;
 }
 
-.movie-card .movie-card-details {
+.movie-card-top .movie-card-details {
     padding: 5px;
 }
 
-.movie-card h5 {
+.movie-card-top h5 {
     text-align: center;
 }
 
-.movie-card h6 {
-    font-size: .9em;
+.movie-card-top h6 {
+    font-size: .8em;
+    font-weight: bold;
+    text-align: center;
 
 }
 
-.movie-card p {
-    font-size: .9em;
+.movie-card-top p {
+    font-size: .85em;
+    margin-bottom: 0;
+    padding: 5px;
+}
 
+
+.movie-card .watchlist-button{
+    text-align: center;
+}
+
+@media (max-width: 800px) {
+    /* CSS that should be displayed if width is equal to or less than 800px goes here */
+    .movie-card-top p {
+        font-size: .75em;
+    }
+    .movie-card-top img {
+        padding-bottom: 10%;
+    }
+}
+
+@media (max-width: 725px) {
+/* CSS that should be displayed if width is equal to or less than 725px goes here */
+    .movie-card-top p {
+    font-size: .70em;
+    }
+    .movie-card-top img {
+    padding-bottom: 5%;
+    }
 }

@@ -17,6 +17,7 @@ import apiKeys from '../apiKeys'
 const apiKey = apiKeys.TMDbKey
 const baseUrlTitle = "https://api.themoviedb.org/3/search/movie?"
 const baseUrlPopular = "https://api.themoviedb.org/3/discover/movie?api_key="
+const baseUrlMovie = "https://api.themoviedb.org/3/movie/"
 
 
 export default {
@@ -29,5 +30,10 @@ export default {
         return fetch(`${baseUrlPopular}${apiKey}&language=en-US&page=1&include_adult=false`)
         .then(result => result.json())
 
+    },
+
+    getMovie(movieId) {
+        return fetch(`${baseUrlMovie}${movieId}?language=en-US&api_key=${apiKey}`)
+        .then(result => result.json())
     }
 }

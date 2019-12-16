@@ -20,13 +20,19 @@ import MovieCard from './MovieCard'
 
 // DATA
 import ExternalApiManager from '../../modules/ExternalApiManager'
+import watchlistApiManager from '../watchlists/watchlistApiManager'
+
+// HELPER FUNCTIONS
+import {getLoggedInUser} from '../../modules/helper'
 
 // STYLES
 import './MovieList.css'
 
+
 class MovieList extends Component {
     state = {
         movies: [],
+        watchlists: [],
         searchWord: '',
     }
 
@@ -40,20 +46,28 @@ class MovieList extends Component {
         if (this.state.searchWord) {
             ExternalApiManager.searchTitle(this.state.searchWord)
                 .then(response => {
-                    console.log(response.results)
                     this.setState({ movies: response.results })
                 })
         }
     }
 
+    componentDidMount() {
+        watchlistApiManager.getOwnWatchlists(getLoggedInUser())
+        .then(watchlists => {
+            this.setState({watchlists: watchlists})
+        })
+        
+    }
+
     render() {
         return (
             <React.Fragment>
-                <section >
-                    <h2>Movies</h2>
+                <h1>Movies</h1>
+                <section className="search-area">
                     <input
                         id="searchWord"
                         type="search"
+                        placeholder="search by title"
                         onChange={this.handleEventChange}
                     >
                     </input>
@@ -70,6 +84,8 @@ class MovieList extends Component {
                         <MovieCard
                             key={movie.id}
                             movieObj={movie}
+                            movieKey={movie.id}
+                            watchlists={this.state.watchlists}
                         />
                     )}
                 </section>

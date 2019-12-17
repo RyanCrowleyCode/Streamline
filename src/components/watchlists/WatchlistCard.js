@@ -10,6 +10,7 @@
 // REACT
 import React, { Component } from 'react'
 
+
 // STYLES
 import './WatchlistCard.css'
 

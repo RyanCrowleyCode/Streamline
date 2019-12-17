@@ -9,6 +9,8 @@
 
 // REACT
 import React, { Component } from 'react'
+import WatchlistForm from './WatchlistForm'
+import Popup from "reactjs-popup";
 
 // STYLES
 import './WatchlistList.css'
@@ -34,22 +36,28 @@ class Watchlists extends Component {
             })
     }
 
-    render () {
+    render() {
         return (
             <React.Fragment>
                 <h1>Watchlists</h1>
-                <button 
+                {/* <button 
                     type="button"
-                    className="btn btn-success new-watchlist-btn">
+                    className="btn btn-success new-watchlist-btn"
+                    onClick>
                         New Watchlist
-                </button>
+                </button> */}
+                <Popup
+                    trigger={<button className="btn btn-success new-watchlist-btn">New Watchlist</button>}
+                    position="right center">
+                    <WatchlistForm />
+                </Popup>
                 <section className="watchlist-list">
-                    {this.state.watchlists.map(watchlist => 
-                        <WatchlistCard 
+                    {this.state.watchlists.map(watchlist =>
+                        <WatchlistCard
                             key={watchlist.id}
                             watchlist={watchlist}
                         />
-                        )}
+                    )}
                 </section>
             </React.Fragment>
         )

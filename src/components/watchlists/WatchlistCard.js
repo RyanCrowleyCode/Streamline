@@ -43,7 +43,7 @@ class WatchlistCard extends Component {
             .then(watchlistMovies => {
                 watchlistMovies.map(watchlistMovie => {
                     // Then, get movie for each watchlist movie
-                    movieApiManager.getOneMovie(watchlistMovie.movieId)
+                    return movieApiManager.getOneMovie(watchlistMovie.movieId)
                         .then(movieArray => {
                             // then, getPoster and add to state
                             this.getPosters(movieArray[0])
@@ -61,7 +61,11 @@ class WatchlistCard extends Component {
                     <p>{this.watchlist.listDescription}</p>
                     <section className="watchlist-posters">
                         {this.state.posters.map(poster =>
-                            <img className="watchlist-poster" src={`${this.baseUrlPoster}${poster}`} alt={"movie poster"} />
+                            <img 
+                                className="watchlist-poster" 
+                                src={`${this.baseUrlPoster}${poster}`} 
+                                alt={"movie poster"} 
+                                key={poster}/>
                         )}
                     </section>
                     <section className="watchlist-buttons">

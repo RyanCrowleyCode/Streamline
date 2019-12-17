@@ -18,8 +18,6 @@ import './auth.css'
 import authApiManager from './authApiManager'
 
 
-// MODULES
-
 class Register extends Component {
     state = {
         fullName: '',

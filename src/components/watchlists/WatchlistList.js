@@ -40,12 +40,6 @@ class Watchlists extends Component {
         return (
             <React.Fragment>
                 <h1>Watchlists</h1>
-                {/* <button 
-                    type="button"
-                    className="btn btn-success new-watchlist-btn"
-                    onClick>
-                        New Watchlist
-                </button> */}
                 <Popup
                     trigger={<button
                         className="btn btn-success new-watchlist-btn">
@@ -53,7 +47,7 @@ class Watchlists extends Component {
                         </button>}
                     modal
                     closeOnDocumentClick>
-                    <WatchlistForm />
+                    <WatchlistForm close={this.close}/>
                 </Popup>
                 <section className="watchlist-list">
                     {this.state.watchlists.map(watchlist =>

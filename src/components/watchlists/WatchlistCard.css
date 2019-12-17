@@ -19,7 +19,7 @@
 
 .watchlist-card p {
     font-size: .9em;
-    margin-bottom: 0;
+    margin: 15px;
     padding: 5px 10px;
 }
 
@@ -27,4 +27,15 @@
     width: 30%;
     height: auto;
     padding: 2px;
+    margin: 10px 0px 20px;
+}
+
+.watchlist-buttons {
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.watchlist-buttons button {
+    margin: 5px;
 }

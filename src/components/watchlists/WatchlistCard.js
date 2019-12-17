@@ -33,7 +33,7 @@ class WatchlistCard extends Component {
         if (movie.image && this.state.posters.length < 3) {
             images.push(movie.image)
         }
-        this.setState({posters: images})
+        this.setState({ posters: images })
     }
 
     componentDidMount() {
@@ -48,8 +48,8 @@ class WatchlistCard extends Component {
                             // then, getPoster and add to state
                             this.getPosters(movieArray[0])
                         })
-                    })
                 })
+            })
     }
 
 
@@ -60,11 +60,24 @@ class WatchlistCard extends Component {
                     <h4>{this.watchlist.listName}</h4>
                     <p>{this.watchlist.listDescription}</p>
                     <section className="watchlist-posters">
-                        {this.state.posters.map(poster => 
+                        {this.state.posters.map(poster =>
                             <img className="watchlist-poster" src={`${this.baseUrlPoster}${poster}`} alt={"movie poster"} />
-                            )}
+                        )}
                     </section>
-                    <section className="watchlist-buttons"></section>
+                    <section className="watchlist-buttons">
+                        <button
+                            type="button"
+                            className="btn btn-primary btn-sm"
+                        >
+                            See List
+                        </button>
+                        <button
+                            type="button"
+                            className="btn btn-danger btn-sm"
+                        >
+                            Delete List
+                        </button>
+                    </section>
 
                 </div>
             </React.Fragment>

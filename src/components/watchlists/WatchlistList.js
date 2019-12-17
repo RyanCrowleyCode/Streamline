@@ -47,8 +47,12 @@ class Watchlists extends Component {
                         New Watchlist
                 </button> */}
                 <Popup
-                    trigger={<button className="btn btn-success new-watchlist-btn">New Watchlist</button>}
-                    position="right center">
+                    trigger={<button
+                        className="btn btn-success new-watchlist-btn">
+                        New Watchlist
+                        </button>}
+                    modal
+                    closeOnDocumentClick>
                     <WatchlistForm />
                 </Popup>
                 <section className="watchlist-list">

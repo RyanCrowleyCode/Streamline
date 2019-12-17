@@ -57,7 +57,6 @@ class MovieList extends Component {
             .then(watchlists => {
                 this.setState({ watchlists: watchlists })
             })
-
     }
 
     render() {

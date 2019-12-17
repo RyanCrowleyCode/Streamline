@@ -15,6 +15,10 @@ export default {
         return StreamlineApiManager.getAll("movies")
     },
 
+    getOneMovie(movieId) {
+        return StreamlineApiManager.getAll("movies", `id=${movieId}` )
+    },
+
     postMovie(movieObj) {
         return StreamlineApiManager.post("movies", movieObj)
     },

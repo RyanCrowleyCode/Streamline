@@ -22,3 +22,9 @@
     margin-bottom: 0;
     padding: 5px 10px;
 }
+
+.watchlist-poster {
+    width: 30%;
+    height: auto;
+    padding: 2px;
+}

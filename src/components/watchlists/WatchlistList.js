@@ -41,7 +41,7 @@ class Watchlists extends Component {
                 <button 
                     type="button"
                     className="btn btn-success new-watchlist-btn">
-                        New
+                        New Watchlist
                 </button>
                 <section className="watchlist-list">
                     {this.state.watchlists.map(watchlist => 

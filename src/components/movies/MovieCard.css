@@ -27,7 +27,6 @@
 }
 
 .movie-card-top {
-    /* border: 1px solid black; */
     display: flex;
     min-width: 360px;
 }

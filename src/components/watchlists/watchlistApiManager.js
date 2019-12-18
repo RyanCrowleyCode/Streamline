@@ -14,5 +14,9 @@ import StreamlineApiManager from '../../modules/StreamlineApiManager'
 export default {
     getOwnWatchlists(userId) {
         return StreamlineApiManager.getAll("watchlists", `userId=${userId}`)
+    },
+
+    createNewWatchlist(watchlistObj) {
+        return StreamlineApiManager.post("watchlists", watchlistObj)
     }
 }

@@ -9,6 +9,7 @@
 
 // REACT
 import React, { Component } from 'react'
+import WatchlistForm from './WatchlistForm'
 
 // STYLES
 import './WatchlistList.css'
@@ -24,8 +25,9 @@ import { getLoggedInUser } from '../../modules/helper'
 
 class Watchlists extends Component {
     state = {
-        watchlists: []
+        watchlists: [],
     }
+
 
     componentDidMount() {
         watchlistApiManager.getOwnWatchlists(getLoggedInUser())
@@ -34,22 +36,18 @@ class Watchlists extends Component {
             })
     }
 
-    render () {
+    render() {
         return (
             <React.Fragment>
                 <h1>Watchlists</h1>
-                <button 
-                    type="button"
-                    className="btn btn-success new-watchlist-btn">
-                        New Watchlist
-                </button>
+                <WatchlistForm />
                 <section className="watchlist-list">
-                    {this.state.watchlists.map(watchlist => 
-                        <WatchlistCard 
+                    {this.state.watchlists.map(watchlist =>
+                        <WatchlistCard
                             key={watchlist.id}
                             watchlist={watchlist}
                         />
-                        )}
+                    )}
                 </section>
             </React.Fragment>
         )

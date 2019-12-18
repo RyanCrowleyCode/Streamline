@@ -34,5 +34,9 @@ export default {
 
     getAllMovieSources() {
         return StreamlineApiManager.getAll("movieSources")
+    },
+
+    updateWatchlistMovie(watchlistMovie) {
+        return StreamlineApiManager.update("watchlistMovies", watchlistMovie)
     }
 }

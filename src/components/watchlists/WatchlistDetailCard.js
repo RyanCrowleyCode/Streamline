@@ -46,6 +46,20 @@ class WatchlistDetailCard extends Component {
         sourceName: ''
     }
 
+    // updates where a user wants to watch a movie
+    updateMovieSource = (source) => {
+        const updatedWatchlistMovie = this.watchlistMovie
+        updatedWatchlistMovie.movieSourceId = source.id
+        watchlistApiManager.updateWatchlistMovie(updatedWatchlistMovie)
+        .then((wlMovie) => this.setState({
+            movieSource: wlMovie.movieSource,
+            sourceName: wlMovie.sourceName
+        }))
+
+    }
+
+
+
     componentDidMount() {
         Promise.all([
             // get movie
@@ -97,9 +111,9 @@ class WatchlistDetailCard extends Component {
                         >
                             {this.props.sources.map(source =>
                                 <Dropdown.Item
-                                    id={source.id}
+                                    id="sourceName"
                                     key={`${this.watchlistMovie.id}-source-${source.id}`}
-                                // onClick={this.DOSOMETHING}
+                                    onClick={() => this.updateMovieSource(source)}
                                 >
                                     {source.sourceName}
                                 </Dropdown.Item>

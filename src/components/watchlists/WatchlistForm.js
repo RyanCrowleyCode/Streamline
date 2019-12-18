@@ -11,6 +11,7 @@
 // REACT
 import React, { Component } from "react";
 import { Form, Button } from 'react-bootstrap'
+import Popup from "reactjs-popup";
 
 // DATA
 import watchlistApiManager from './watchlistApiManager'
@@ -63,7 +64,6 @@ class WatchlistForm extends Component {
                     if (isNew) {
                         // post newWatchlist to the database and close modal
                         watchlistApiManager.createNewWatchlist(newWatchlist)
-                        
                     } else {
                         window.alert("You already have a Watchlist with that name.")
                         this.setState({ loadingStatus: false })
@@ -79,32 +79,40 @@ class WatchlistForm extends Component {
 
     render() {
         return (
-            <Form>
-                <h4>New Watchlist</h4>
-                <Form.Group>
-                    <Form.Label>Title</Form.Label>
-                    <Form.Control
-                        id="listName"
-                        type="text"
-                        placeholder="Funny Movies"
-                        onChange={this.handleFieldChange} />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Description</Form.Label>
-                    <Form.Control
-                        id="listDescription"
-                        type="text"
-                        placeholder="Write something to describe your list."
-                        onChange={this.handleFieldChange} />
-                </Form.Group>
-                <Button
-                    variant="success"
-                    type="button"
-                    onClick={this.handleSubmit}
-                    disabled={this.state.loadingStatus}>
-                    Submit
+            <Popup
+                trigger={<button
+                    className="btn btn-success new-watchlist-btn">
+                    New Watchlist
+                        </button>}
+                modal
+                closeOnDocumentClick>
+                <Form>
+                    <h4>New Watchlist</h4>
+                    <Form.Group>
+                        <Form.Label>Title</Form.Label>
+                        <Form.Control
+                            id="listName"
+                            type="text"
+                            placeholder="Funny Movies"
+                            onChange={this.handleFieldChange} />
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>Description</Form.Label>
+                        <Form.Control
+                            id="listDescription"
+                            type="text"
+                            placeholder="Write something to describe your list."
+                            onChange={this.handleFieldChange} />
+                    </Form.Group>
+                    <Button
+                        variant="success"
+                        type="button"
+                        onClick={this.handleSubmit}
+                        disabled={this.state.loadingStatus}>
+                        Submit
                 </Button>
-            </Form>
+                </Form>
+            </Popup>
         )
     }
 }

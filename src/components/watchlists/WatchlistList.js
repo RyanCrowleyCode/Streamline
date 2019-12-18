@@ -10,7 +10,6 @@
 // REACT
 import React, { Component } from 'react'
 import WatchlistForm from './WatchlistForm'
-import Popup from "reactjs-popup";
 
 // STYLES
 import './WatchlistList.css'
@@ -27,8 +26,8 @@ import { getLoggedInUser } from '../../modules/helper'
 class Watchlists extends Component {
     state = {
         watchlists: [],
-        modalOpen: false
     }
+
 
     componentDidMount() {
         watchlistApiManager.getOwnWatchlists(getLoggedInUser())
@@ -41,15 +40,7 @@ class Watchlists extends Component {
         return (
             <React.Fragment>
                 <h1>Watchlists</h1>
-                <Popup
-                    trigger={<button
-                        className="btn btn-success new-watchlist-btn">
-                        New Watchlist
-                        </button>}
-                    modal
-                    closeOnDocumentClick>
-                    <WatchlistForm />
-                </Popup>
+                <WatchlistForm />
                 <section className="watchlist-list">
                     {this.state.watchlists.map(watchlist =>
                         <WatchlistCard

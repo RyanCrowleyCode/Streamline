@@ -26,5 +26,9 @@ export default {
 
     getMovieSource(id) {
         return StreamlineApiManager.getAll("movieSources", `id=${id}`)
+    },
+
+    getAllMovieSources() {
+        return StreamlineApiManager.getAll("movieSources")
     }
 }

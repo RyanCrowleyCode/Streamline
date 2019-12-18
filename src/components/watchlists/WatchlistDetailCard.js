@@ -53,6 +53,7 @@ class WatchlistDetailCard extends Component {
 
             // get movieSource
             watchlistApiManager.getMovieSource(this.watchlistMovie.movieSourceId)
+
         ])
             .then(([movie, movieSource]) => {
                 const m = movie[0]
@@ -94,15 +95,14 @@ class WatchlistDetailCard extends Component {
                             title={sourceName}
                             variant="primary"
                         >
-                        {/* {this.props.watchlists.map(watchlist =>
+                        {this.props.sources.map(source =>
                             <Dropdown.Item
-                                key={`${this.props.movieKey}-${watchlist.id}`}
-                                id={watchlist.id}
-                                onClick={this.addToWatchlist}
+                                key={`${this.watchlistMovie.id}-source-${source.id}`}
+                                // onClick={this.addToWatchlist}
                             >
-                                {watchlist.listName}
+                                {source.sourceName}
                             </Dropdown.Item>
-                        )} */}
+                        )}
                         </DropdownButton>
                     </div>
                 </div>

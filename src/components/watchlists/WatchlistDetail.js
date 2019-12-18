@@ -26,7 +26,8 @@ class WatchlistDetail extends Component {
     state = {
         listName: '',
         listDescription: '',
-        sortedMovies: []
+        sortedMovies: [],
+        sources: []
     }
 
     // handles deleting a watchlist
@@ -43,15 +44,20 @@ class WatchlistDetail extends Component {
             movieApiManager.getWatchlist(this.watchlistId, getLoggedInUser()),
 
             // get watchlist movies
-            movieApiManager.getAllWatchlistMovies(this.watchlistId)
+            movieApiManager.getAllWatchlistMovies(this.watchlistId),
+
+            // get sources
+            watchlistApiManager.getAllMovieSources()
 
         ])
-            .then(([watchlist, watchlistMovies]) => {
+            .then(([watchlist, watchlistMovies, sources]) => {
                 this.setState({
                     listName: watchlist[0].listName,
                     listDescription: watchlist[0].listDescription,
-                    sortedMovies: watchlistMovies
+                    sortedMovies: watchlistMovies,
+                    sources: sources
                 })
+                console.log(sources)
             })
     }
 
@@ -64,7 +70,8 @@ class WatchlistDetail extends Component {
                     {this.state.sortedMovies.map(watchlistMovie =>
                         <WatchlistDetailCard 
                         key={watchlistMovie.id}
-                        watchlistMovie={watchlistMovie}/>
+                        watchlistMovie={watchlistMovie}
+                        sources={this.state.sources}/>
                     )}
                 </div>
             </React.Fragment>

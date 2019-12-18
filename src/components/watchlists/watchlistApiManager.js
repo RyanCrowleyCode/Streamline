@@ -18,5 +18,9 @@ export default {
 
     createNewWatchlist(watchlistObj) {
         return StreamlineApiManager.post("watchlists", watchlistObj)
+    },
+
+    deleteWatchlist(watchlistId) {
+        return StreamlineApiManager.delete("watchlists", watchlistId)
     }
 }

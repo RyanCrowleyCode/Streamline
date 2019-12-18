@@ -10,7 +10,6 @@
 // REACT
 import React, { Component } from 'react'
 
-
 // STYLES
 import './WatchlistCard.css'
 
@@ -21,8 +20,6 @@ import movieApiManager from '../movies/moviesApiManager'
 class WatchlistCard extends Component {
     baseUrlPoster = "https://image.tmdb.org/t/p/original/"
     watchlist = this.props.watchlist
-
-
 
     state = {
         posters: []
@@ -79,6 +76,7 @@ class WatchlistCard extends Component {
                         <button
                             type="button"
                             className="btn btn-danger btn-sm"
+                            onClick={() => this.props.deleteWatchlist(this.watchlist.id)}
                         >
                             Delete List
                         </button>

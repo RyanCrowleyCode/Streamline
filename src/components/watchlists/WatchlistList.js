@@ -28,12 +28,24 @@ class Watchlists extends Component {
         watchlists: [],
     }
 
+    // handles deleting a watchlist
+    deleteWatchlist = id => {
+        watchlistApiManager.deleteWatchlist(id)
+            .then(() => {
+                this.getListsUpdateState()
+            })
+    }
 
-    componentDidMount() {
+    // gets watchlists and updates state
+    getListsUpdateState = () => {
         watchlistApiManager.getOwnWatchlists(getLoggedInUser())
             .then(watchlists => {
                 this.setState({ watchlists: watchlists })
             })
+    }
+
+    componentDidMount() {
+        this.getListsUpdateState()
     }
 
     render() {
@@ -46,6 +58,7 @@ class Watchlists extends Component {
                         <WatchlistCard
                             key={watchlist.id}
                             watchlist={watchlist}
+                            deleteWatchlist={this.deleteWatchlist}
                         />
                     )}
                 </section>

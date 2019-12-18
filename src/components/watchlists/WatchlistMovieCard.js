@@ -1,4 +1,13 @@
 /*
+    WatchlistMovieCard.js
+
+    Purpose:    This component is responsible for rendering a card for
+                a movie when user is on the WatchlistDetail view.
+
+    Author(s): Ryan Crowley
+*/
+
+/*
     WatchlistDetail.js
 
     Purpose:    This component is responsible for rendering the detailed
@@ -11,15 +20,12 @@
 import React, { Component } from "react";
 import { Form, Button } from 'react-bootstrap'
 
-// COMPONENTS
-import WatchlistMovieCard from './WatchlistMovieCard'
-
-class WatchlistDetail extends Component {
+class WatchlistMovieCard extends Component {
     render() {
         return(
-            <WatchlistMovieCard />
+            <h1>Watchlist Movie Card</h1>
         )
     }
 }
 
-export default WatchlistDetail
+export default WatchlistMovieCard

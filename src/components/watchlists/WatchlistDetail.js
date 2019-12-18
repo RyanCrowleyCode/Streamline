@@ -61,8 +61,10 @@ class WatchlistDetail extends Component {
                 <div className="watchlist-detail-container">
                     <h1>{this.state.listName}</h1>
                     <p>{this.state.listDescription}</p>
-                    {this.state.sortedMovies.map(movie =>
-                        <WatchlistMovieCard />
+                    {this.state.sortedMovies.map(watchlistMovie =>
+                        <WatchlistMovieCard 
+                        key={watchlistMovie.id}
+                        watchlistMovie={watchlistMovie}/>
                     )}
                 </div>
             </React.Fragment>

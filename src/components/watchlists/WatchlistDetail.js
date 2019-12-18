@@ -15,6 +15,13 @@ import { Form, Button } from 'react-bootstrap'
 import WatchlistMovieCard from './WatchlistMovieCard'
 
 class WatchlistDetail extends Component {
+    state = {
+        listName: '',
+        listDescription: '',
+        sortedMovies: ''
+    }
+
+
     render() {
         return(
             <WatchlistMovieCard />

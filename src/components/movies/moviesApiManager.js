@@ -44,7 +44,7 @@ export default {
     },
 
     getAllWatchlistMovies(watchlistId) {
-        return StreamlineApiManager.getAll("watchlistMovies", `watchlistId=${watchlistId}`)
+        return StreamlineApiManager.getAll("watchlistMovies", `watchlistId=${watchlistId}&_sort=listIndex&_order=asc`)
     },
 
     postWatchilstMovie(watchlistMovieObj) {

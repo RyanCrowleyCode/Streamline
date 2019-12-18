@@ -38,6 +38,14 @@ class WatchlistDetail extends Component {
             })
     }
 
+    // handles deleting a movie from a watchlist
+    deleteMovie = id => {
+        watchlistApiManager.deleteWatchlistMovie(id)
+            .then(() => {
+                this.getListsUpdateState()
+            })
+    }
+
     // gets watchlists and updates state
     getListsUpdateState = () => {
         Promise.all([
@@ -83,7 +91,8 @@ class WatchlistDetail extends Component {
                         <WatchlistDetailCard
                             key={watchlistMovie.id}
                             watchlistMovie={watchlistMovie}
-                            sources={this.state.sources} />
+                            sources={this.state.sources} 
+                            deleteMovie={this.deleteMovie}/>
                     )}
                 </div>
             </React.Fragment>

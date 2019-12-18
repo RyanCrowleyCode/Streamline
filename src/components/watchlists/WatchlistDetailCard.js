@@ -114,8 +114,8 @@ class WatchlistDetailCard extends Component {
                         <button
                             type="button"
                             className="btn btn-danger"
-                        >
-                            Delete List
+                            onClick={() => this.props.deleteMovie(this.watchlistMovie.id)}>
+                            Delete
                         </button>
                     </div>
                 </div>

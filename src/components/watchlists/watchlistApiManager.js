@@ -24,6 +24,10 @@ export default {
         return StreamlineApiManager.delete("watchlists", watchlistId)
     },
 
+    deleteWatchlistMovie(watchlistMovieId) {
+        return StreamlineApiManager.delete("watchlistMovies", watchlistMovieId)
+    },
+
     getMovieSource(id) {
         return StreamlineApiManager.getAll("movieSources", `id=${id}`)
     },

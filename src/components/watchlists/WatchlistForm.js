@@ -24,7 +24,8 @@ class WatchlistForm extends Component {
     state = {
         listName: '',
         listDescription: '',
-        loadingStatus: false
+        loadingStatus: false,
+        open: false
     }
 
     // update listName and Description in state with every keystroke in input field
@@ -81,7 +82,8 @@ class WatchlistForm extends Component {
         return (
             <Popup
                 trigger={<button
-                    className="btn btn-success new-watchlist-btn">
+                    className="btn btn-success new-watchlist-btn"
+                    onClick={() => this.setState({open: true})} >
                     New Watchlist
                         </button>}
                 modal

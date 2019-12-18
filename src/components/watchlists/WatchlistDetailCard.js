@@ -30,6 +30,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilm } from '@fortawesome/free-solid-svg-icons'
 import './WatchlistDetailCard.css'
 
+// COMPONENTS
+import WatchlistMovieForm from './WatchlistMovieForm'
+
 
 class WatchlistDetailCard extends Component {
     baseUrlPoster = "https://image.tmdb.org/t/p/original/"
@@ -120,12 +123,13 @@ class WatchlistDetailCard extends Component {
                                 </Dropdown.Item>
                             )}
                         </DropdownButton>
-                        <button
+                        {/* <button
                             type="button"
                             className="btn btn-success"
                         >
                             Edit Movie
-                        </button>
+                        </button> */}
+                        <WatchlistMovieForm />
                         <button
                             type="button"
                             className="btn btn-danger"

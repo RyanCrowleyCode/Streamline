@@ -23,6 +23,7 @@ import watchlistApiManager from '../watchlists/watchlistApiManager'
 // HELPER FUNCTIONS
 import { getLoggedInUser } from '../../modules/helper'
 
+
 class Watchlists extends Component {
     state = {
         watchlists: [],

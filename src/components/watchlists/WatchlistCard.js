@@ -9,6 +9,7 @@
 
 // REACT
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 // STYLES
 import './WatchlistCard.css'
@@ -59,20 +60,22 @@ class WatchlistCard extends Component {
                     <p>{this.watchlist.listDescription}</p>
                     <section className="watchlist-posters">
                         {this.state.posters.map(poster =>
-                            <img 
-                                className="watchlist-poster" 
-                                src={`${this.baseUrlPoster}${poster}`} 
-                                alt={"movie poster"} 
-                                key={poster}/>
+                            <img
+                                className="watchlist-poster"
+                                src={`${this.baseUrlPoster}${poster}`}
+                                alt={"movie poster"}
+                                key={poster} />
                         )}
                     </section>
                     <section className="watchlist-buttons">
-                        <button
-                            type="button"
-                            className="btn btn-primary btn-sm"
-                        >
-                            See List
+                        <Link to={`/watchlists/${this.watchlist.id}`}>
+                            <button
+                                type="button"
+                                className="btn btn-primary btn-sm"
+                            >
+                                See List
                         </button>
+                        </Link>
                         <button
                             type="button"
                             className="btn btn-danger btn-sm"

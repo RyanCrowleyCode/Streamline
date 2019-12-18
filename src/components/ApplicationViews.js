@@ -14,18 +14,17 @@ import { Route, Redirect } from 'react-router-dom'
 import Login from './auth/Login'
 import Register from './auth/Register'
 
-// Movies
+// Views
 import MovieList from './movies/MovieList'
 import Watchlists from './watchlists/WatchlistList'
-
-// Watchlists
+import WatchlistDetail from './watchlists/WatchlistDetail'
 
 
 class ApplicationsView extends Component {
     render() {
         return (
             <React.Fragment>
-                <Route path="/login" render={props => {
+                <Route exact path="/login" render={props => {
                     return !this.props.isLoggedIn ?
                         <Login
                             setUser={this.props.setUser}
@@ -33,7 +32,7 @@ class ApplicationsView extends Component {
                         :
                         <Redirect to="/" />
                 }} />
-                <Route path="/register" render={props => {
+                <Route exact path="/register" render={props => {
                     return !this.props.isLoggedIn ?
                         <Register
                             setUser={this.props.setUser}
@@ -60,13 +59,20 @@ class ApplicationsView extends Component {
                         :
                         <Redirect to="/login" />
                 }} />
-                <Route path="/watchlists" render={props => {
+                <Route exact path="/watchlists" render={props => {
                     return this.props.isLoggedIn ?
                         <Watchlists
                             getLoggedInUser={this.props.getLoggedInUser}
                             {...props}
                         />
                         :
+                        <Redirect to="/login" />
+                }} />
+                <Route exact path="/watchlists/:watchlistId(\d+)" render={props => {
+                    return this.props.isLoggedIn ?
+                    <WatchlistDetail watchlistId={props.match.params.watchlistId}
+                    {...props} />
+                    :
                         <Redirect to="/login" />
                 }} />
             </React.Fragment>

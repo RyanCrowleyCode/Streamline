@@ -10,13 +10,13 @@
 
 // REACT
 import React, { Component } from 'react'
-import DropdownButton from 'react-bootstrap/DropdownButton'
 
 // STYLES
 import './MovieCard.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilm } from '@fortawesome/free-solid-svg-icons'
 import Dropdown from 'react-bootstrap/Dropdown'
+import DropdownButton from 'react-bootstrap/DropdownButton'
 
 // DATA
 import ExternalApiManager from '../../modules/ExternalApiManager'

@@ -1,0 +1,63 @@
+.detail-card {
+    /* border: 1px solid red; */
+    display: flex;
+    margin: 30px 10px;
+    width: 80%;
+    min-width: 360px;
+    flex-direction: column;
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border-radius: 10px; /* rounded corners */
+    background: rgb(240, 240, 240);
+    justify-content: space-between;
+}
+
+.detail-card-top img {
+    height: auto;
+    width: 40%;
+    padding-bottom: 20%;
+}
+
+.detail-card-top .default-icon {
+    height: auto;
+    width: 10%;
+    padding: 5px;
+    background-color: #4b545c;
+    margin: 0;
+}
+
+.detail-card-top {
+    display: flex;
+    min-width: 360px;
+}
+
+.detail-card-top .movie-card-details {
+    padding: 5px;
+}
+
+.detail-card-top p {
+    font-size: .85em;
+    margin-bottom: 0;
+    padding: 5px;
+}
+
+
+@media (max-width: 800px) {
+    /* CSS that should be displayed if width is equal to or less than 800px goes here */
+    .detail-card-top p {
+        font-size: .75em;
+    }
+    .detail-card-top img {
+        padding-bottom: 10%;
+    }
+}
+
+@media (max-width: 725px) {
+/* CSS that should be displayed if width is equal to or less than 725px goes here */
+    .detail-card-top p {
+    font-size: .70em;
+    }
+    .detail-card-top img {
+    padding-bottom: 5%;
+    }
+}

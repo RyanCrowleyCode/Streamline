@@ -88,7 +88,7 @@ class WatchlistDetailCard extends Component {
                         </p>
                         <p>{synopsis}</p>
                     </div>
-                    <p>{synopsis}</p>
+                    <p>{comments}</p>
                     <div className="detail-card-bottom">
                         <DropdownButton
                             id={this.watchlistMovie.id}
@@ -114,7 +114,8 @@ class WatchlistDetailCard extends Component {
                         <button
                             type="button"
                             className="btn btn-danger"
-                            onClick={() => this.props.deleteMovie(this.watchlistMovie.id)}>
+                            onClick={() => this.props.deleteMovie(this.watchlistMovie.id)}
+                            disabled={this.props.loadingStatus}>
                             Delete
                         </button>
                     </div>

@@ -27,11 +27,13 @@ class WatchlistDetail extends Component {
         listName: '',
         listDescription: '',
         sortedMovies: [],
-        sources: []
+        sources: [],
+        loadingStatus: false
     }
 
     // handles deleting a watchlist
     deleteWatchlist = id => {
+        this.setState({loadingStatus: true})
         watchlistApiManager.deleteWatchlist(id)
             .then(() => {
                 this.props.history.push('/watchlists')
@@ -42,7 +44,7 @@ class WatchlistDetail extends Component {
     deleteMovie = id => {
         watchlistApiManager.deleteWatchlistMovie(id)
             .then(() => {
-                this.getListsUpdateState()
+                return this.getListsUpdateState()
             })
     }
 
@@ -66,8 +68,8 @@ class WatchlistDetail extends Component {
                     sortedMovies: watchlistMovies,
                     sources: sources
                 })
-                console.log(sources)
             })
+            // console.log.("state from GLUS: ", this.state)
     }
 
     componentDidMount() {
@@ -84,11 +86,13 @@ class WatchlistDetail extends Component {
                         type="button"
                         className="btn btn-danger"
                         onClick={() => this.deleteWatchlist(this.watchlistId)}
+                        disabled={this.state.loadingStatus}
                     >
                         Delete List
                         </button>
                     {this.state.sortedMovies.map(watchlistMovie =>
                         <WatchlistDetailCard
+                            loadingStatus={this.state.loadingStatus}
                             key={watchlistMovie.id}
                             watchlistMovie={watchlistMovie}
                             sources={this.state.sources} 

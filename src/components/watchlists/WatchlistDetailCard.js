@@ -52,9 +52,10 @@ class WatchlistDetailCard extends Component {
         updatedWatchlistMovie.movieSourceId = source.id
         watchlistApiManager.updateWatchlistMovie(updatedWatchlistMovie)
         .then((wlMovie) => this.setState({
-            movieSource: wlMovie.movieSource,
-            sourceName: wlMovie.sourceName
-        }))
+            movieSource: wlMovie.movieSourceId,
+            sourceName: source.sourceName
+        })
+        )
 
     }
 
@@ -85,7 +86,7 @@ class WatchlistDetailCard extends Component {
     }
 
     render() {
-        const { title, releaseDate, runtime, synopsis, image, comments, movieSource, sourceName } = this.state
+        const { title, releaseDate, runtime, synopsis, image, comments, sourceName } = this.state
         return (
             <React.Fragment>
                 <div className="detail-card">

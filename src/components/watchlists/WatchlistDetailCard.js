@@ -95,15 +95,28 @@ class WatchlistDetailCard extends Component {
                             title={sourceName}
                             variant="primary"
                         >
-                        {this.props.sources.map(source =>
-                            <Dropdown.Item
-                                key={`${this.watchlistMovie.id}-source-${source.id}`}
-                                // onClick={this.addToWatchlist}
-                            >
-                                {source.sourceName}
-                            </Dropdown.Item>
-                        )}
+                            {this.props.sources.map(source =>
+                                <Dropdown.Item
+                                    id={source.id}
+                                    key={`${this.watchlistMovie.id}-source-${source.id}`}
+                                // onClick={this.DOSOMETHING}
+                                >
+                                    {source.sourceName}
+                                </Dropdown.Item>
+                            )}
                         </DropdownButton>
+                        <button
+                            type="button"
+                            className="btn btn-success"
+                        >
+                            Edit Movie
+                        </button>
+                        <button
+                            type="button"
+                            className="btn btn-danger"
+                        >
+                            Delete List
+                        </button>
                     </div>
                 </div>
             </React.Fragment>

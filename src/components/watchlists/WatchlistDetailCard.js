@@ -129,7 +129,8 @@ class WatchlistDetailCard extends Component {
                         >
                             Edit Movie
                         </button> */}
-                        <WatchlistMovieForm />
+                        <WatchlistMovieForm 
+                            watchlistMovie={this.watchlistMovie}/>
                         <button
                             type="button"
                             className="btn btn-danger"

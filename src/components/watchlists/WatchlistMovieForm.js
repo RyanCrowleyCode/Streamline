@@ -36,7 +36,8 @@ class WatchlistMovieForm extends Component {
             <Popup
                 trigger={<button
                     className="btn btn-success"
-                    // onClick={() => this.setState({ open: true })} 
+                    // THIS IS WHERE YOU LEFT OFF. HAVING TROUBLE SENDING PROPS INTO POPUPS.
+                    onClick={() => console.log(this.props.watchlistMovie)} 
                     >
                     Edit
                     </button>}

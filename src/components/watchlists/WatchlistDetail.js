@@ -11,7 +11,7 @@
 import React, { Component } from "react";
 
 // COMPONENTS
-import WatchlistMovieCard from './WatchlistMovieCard'
+import WatchlistDetailCard from './WatchlistDetailCard'
 
 // DATA
 import watchlistApiManager from '../watchlists/watchlistApiManager'
@@ -62,7 +62,7 @@ class WatchlistDetail extends Component {
                     <h1>{this.state.listName}</h1>
                     <p>{this.state.listDescription}</p>
                     {this.state.sortedMovies.map(watchlistMovie =>
-                        <WatchlistMovieCard 
+                        <WatchlistDetailCard 
                         key={watchlistMovie.id}
                         watchlistMovie={watchlistMovie}/>
                     )}

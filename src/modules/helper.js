@@ -87,7 +87,7 @@ export function createWatchlistMovie (watchlistId, movieId, listIndex) {
         movieId: movieId,
         comments: "",
         listIndex: listIndex,
-        movieSourceId: null,
+        movieSourceId: 1,
     }
 
     moviesApiManager.postWatchilstMovie(newWatchlistMovie)

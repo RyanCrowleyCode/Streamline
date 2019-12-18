@@ -37,5 +37,11 @@ export default {
             },
             body: JSON.stringify(updatedObject)
         }).then(response => response.json())
+    },
+    
+    delete(endpoint, id) {
+      return fetch(`${baseUrl}/${endpoint}/${id}`, {
+        method: 'DELETE'
+      }).then((result) => result.json());
     }
 }

@@ -23,7 +23,7 @@ import { Form, Button } from 'react-bootstrap'
 class WatchlistMovieCard extends Component {
     render() {
         return(
-            <h1>Watchlist Movie Card</h1>
+            <h3>Watchlist Movie Card</h3>
         )
     }
 }

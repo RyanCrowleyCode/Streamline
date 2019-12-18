@@ -92,3 +92,4 @@ export function createWatchlistMovie (watchlistId, movieId, listIndex) {
 
     moviesApiManager.postWatchilstMovie(newWatchlistMovie)
 }
+

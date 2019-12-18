@@ -24,7 +24,7 @@ class ApplicationsView extends Component {
     render() {
         return (
             <React.Fragment>
-                <Route path="/login" render={props => {
+                <Route exact path="/login" render={props => {
                     return !this.props.isLoggedIn ?
                         <Login
                             setUser={this.props.setUser}
@@ -32,7 +32,7 @@ class ApplicationsView extends Component {
                         :
                         <Redirect to="/" />
                 }} />
-                <Route path="/register" render={props => {
+                <Route exact path="/register" render={props => {
                     return !this.props.isLoggedIn ?
                         <Register
                             setUser={this.props.setUser}

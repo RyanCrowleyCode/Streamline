@@ -43,7 +43,7 @@ class WatchlistForm extends Component {
             const newWatchlist = {
                 listName: this.state.listName,
                 listDescription: this.state.listDescription,
-                userId: getLoggedInUser()
+                userId: parseInt(getLoggedInUser())
             }
 
             // get watchlists for user. If no watchlist with the same name
@@ -52,16 +52,17 @@ class WatchlistForm extends Component {
             watchlistApiManager.getOwnWatchlists(getLoggedInUser())
                 .then(watchlists => {
                     let isNew = true
-                    watchlists.map(list => {
+                    for (const list of watchlists) {
                         if (newWatchlist.listName === list.listName) {
                             isNew = false
                         }
-                    })
+                    }
                     return isNew
                 })
                 .then(isNew => {
                     if (isNew) {
                         // post newWatchlist to the database and close modal
+                        watchlistApiManager.createNewWatchlist(newWatchlist)
                         
                     } else {
                         window.alert("You already have a Watchlist with that name.")

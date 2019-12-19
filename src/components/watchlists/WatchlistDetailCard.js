@@ -37,7 +37,6 @@ import moviesApiManager from "../movies/moviesApiManager";
 
 class WatchlistDetailCard extends Component {
     baseUrlPoster = "https://image.tmdb.org/t/p/original/"
-    watchlistMovie = this.props.watchlistMovie
 
     state = {
         title: '',
@@ -47,12 +46,13 @@ class WatchlistDetailCard extends Component {
         image: '',
         comments: '',
         movieSource: 1,
-        sourceName: ''
+        sourceName: '',
+        watchlistMovie: ''
     }
 
     // updates where a user wants to watch a movie
     updateMovieSource = (source) => {
-        const updatedWatchlistMovie = this.watchlistMovie
+        const updatedWatchlistMovie = this.state.watchlistMovie
         updatedWatchlistMovie.movieSourceId = source.id
         watchlistApiManager.updateWatchlistMovie(updatedWatchlistMovie)
             .then((wlMovie) => this.setState({
@@ -64,15 +64,16 @@ class WatchlistDetailCard extends Component {
     }
 
     getAndUpdate = () => {
+        this.setState({watchlistMovie: ''})
         Promise.all([
             // get movie
-            movieApiManager.getOneMovie(this.watchlistMovie.movieId),
+            movieApiManager.getOneMovie(this.props.watchlistMovie.movieId),
 
             // get movieSource
-            watchlistApiManager.getMovieSource(this.watchlistMovie.movieSourceId),
+            watchlistApiManager.getMovieSource(this.props.watchlistMovie.movieSourceId),
 
             // get watchlistMovie for comment's sake
-            moviesApiManager.getWatchlistMovie(this.watchlistMovie.watchlistId, this.watchlistMovie.movieId)
+            moviesApiManager.getWatchlistMovie(this.props.watchlistMovie.watchlistId, this.props.watchlistMovie.movieId)
 
         ])
             .then(([movie, movieSource, wlMovie]) => {
@@ -86,7 +87,8 @@ class WatchlistDetailCard extends Component {
                     comments: wlMovie[0].comments,
                     image: m.image,
                     movieSource: mSource.id,
-                    sourceName: mSource.sourceName
+                    sourceName: mSource.sourceName,
+                    watchlistMovie: wlMovie[0]
                 })
             })
     }
@@ -118,28 +120,31 @@ class WatchlistDetailCard extends Component {
                     <p>{comments}</p>
                     <div className="detail-card-bottom">
                         <DropdownButton
-                            id={this.watchlistMovie.id}
+                            id={this.state.watchlistMovie.id}
                             title={sourceName}
                             variant="primary"
                         >
                             {this.props.sources.map(source =>
                                 <Dropdown.Item
                                     id="sourceName"
-                                    key={`${this.watchlistMovie.id}-source-${source.id}`}
+                                    key={`${this.state.watchlistMovie.id}-source-${source.id}`}
                                     onClick={() => this.updateMovieSource(source)}
                                 >
                                     {source.sourceName}
                                 </Dropdown.Item>
                             )}
                         </DropdownButton>
-                        <WatchlistMovieForm
-                            key={this.watchlistMovie.id}
-                            watchlistMovie={this.watchlistMovie}
-                            getAndUpdate={this.getAndUpdate} />
+                        {this.state.watchlistMovie ?
+                            <WatchlistMovieForm
+                                key={this.state.watchlistMovie.id}
+                                watchlistMovie={this.state.watchlistMovie}
+                                getAndUpdate={this.getAndUpdate} />
+                            : null
+                        }
                         <button
                             type="button"
                             className="btn btn-danger"
-                            onClick={() => this.props.deleteMovie(this.watchlistMovie.id)}
+                            onClick={() => this.props.deleteMovie(this.state.watchlistMovie.id)}
                             disabled={this.props.loadingStatus}>
                             Delete
                         </button>

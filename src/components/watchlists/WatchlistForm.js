@@ -25,7 +25,7 @@ class WatchlistForm extends Component {
         listName: '',
         listDescription: '',
         loadingStatus: false,
-        show: false
+        open: false
     }
 
     // update listName and Description in state with every keystroke in input field
@@ -65,10 +65,9 @@ class WatchlistForm extends Component {
                     if (isNew) {
                         // post newWatchlist to the database
                         watchlistApiManager.createNewWatchlist(newWatchlist)
-                        // get and render watchlists
-                        this.props.getListsUpdateState()
                         // close modal
                         this.setState({open: false})
+                       
                     } else {
                         window.alert("You already have a Watchlist with that name.")
                         this.setState({ loadingStatus: false })
@@ -81,6 +80,7 @@ class WatchlistForm extends Component {
             this.setState({ loadingStatus: false })
         }
     }
+    
 
     render() {
         return (
@@ -89,11 +89,13 @@ class WatchlistForm extends Component {
                     New Watchlist
                 </Button>
 
-                <Modal show={this.state.open} onHide={() => this.setState({open: false})}>
+                <Modal 
+                    show={this.state.open} onHide={() => this.setState({open: false})}
+                    centered>
 
                     <Form>
                         <h4>New Watchlist</h4>
-                        <Form.Group>
+                        <Form.Group onSubmit={this.handleSubmit}>
                             <Form.Label>Title</Form.Label>
                             <Form.Control
                                 id="listName"
@@ -111,7 +113,7 @@ class WatchlistForm extends Component {
                         </Form.Group>
                         <Button
                             variant="success"
-                            type="button"
+                            type="submit"
                             onClick={this.handleSubmit}
                             disabled={this.state.loadingStatus}>
                             Submit

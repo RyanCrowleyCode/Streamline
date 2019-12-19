@@ -53,7 +53,7 @@ class Watchlists extends Component {
         return (
             <React.Fragment>
                 <h1>Watchlists</h1>
-                <WatchlistForm />
+                <WatchlistForm getListsUpdateState={this.getListsUpdateState}/>
                 <section className="watchlist-list">
                     {this.state.watchlists.map(watchlist =>
                         <WatchlistCard

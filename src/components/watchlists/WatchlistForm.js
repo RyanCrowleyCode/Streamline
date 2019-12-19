@@ -10,8 +10,8 @@
 
 // REACT
 import React, { Component } from "react";
-import { Form, Button } from 'react-bootstrap'
-import Popup from "reactjs-popup";
+import { Form, Button, Modal } from 'react-bootstrap'
+// import Popup from "reactjs-popup";
 
 // DATA
 import watchlistApiManager from './watchlistApiManager'
@@ -25,7 +25,7 @@ class WatchlistForm extends Component {
         listName: '',
         listDescription: '',
         loadingStatus: false,
-        open: false
+        show: false
     }
 
     // update listName and Description in state with every keystroke in input field
@@ -63,8 +63,12 @@ class WatchlistForm extends Component {
                 })
                 .then(isNew => {
                     if (isNew) {
-                        // post newWatchlist to the database and close modal
+                        // post newWatchlist to the database
                         watchlistApiManager.createNewWatchlist(newWatchlist)
+                        // get and render watchlists
+                        this.props.getListsUpdateState()
+                        // close modal
+                        this.setState({open: false})
                     } else {
                         window.alert("You already have a Watchlist with that name.")
                         this.setState({ loadingStatus: false })
@@ -80,41 +84,41 @@ class WatchlistForm extends Component {
 
     render() {
         return (
-            <Popup
-                trigger={<button
-                    className="btn btn-success new-watchlist-btn"
-                    onClick={() => this.setState({open: true})} >
+            <React.Fragment>
+                <Button variant="success" onClick={() => this.setState({ open: true })}>
                     New Watchlist
-                        </button>}
-                modal
-                closeOnDocumentClick>
-                <Form>
-                    <h4>New Watchlist</h4>
-                    <Form.Group>
-                        <Form.Label>Title</Form.Label>
-                        <Form.Control
-                            id="listName"
-                            type="text"
-                            placeholder="Funny Movies"
-                            onChange={this.handleFieldChange} />
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Label>Description</Form.Label>
-                        <Form.Control
-                            id="listDescription"
-                            type="text"
-                            placeholder="Write something to describe your list."
-                            onChange={this.handleFieldChange} />
-                    </Form.Group>
-                    <Button
-                        variant="success"
-                        type="button"
-                        onClick={this.handleSubmit}
-                        disabled={this.state.loadingStatus}>
-                        Submit
                 </Button>
-                </Form>
-            </Popup>
+
+                <Modal show={this.state.open} onHide={() => this.setState({open: false})}>
+
+                    <Form>
+                        <h4>New Watchlist</h4>
+                        <Form.Group>
+                            <Form.Label>Title</Form.Label>
+                            <Form.Control
+                                id="listName"
+                                type="text"
+                                placeholder="Funny Movies"
+                                onChange={this.handleFieldChange} />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Description</Form.Label>
+                            <Form.Control
+                                id="listDescription"
+                                type="text"
+                                placeholder="Write something to describe your list."
+                                onChange={this.handleFieldChange} />
+                        </Form.Group>
+                        <Button
+                            variant="success"
+                            type="button"
+                            onClick={this.handleSubmit}
+                            disabled={this.state.loadingStatus}>
+                            Submit
+                        </Button>
+                    </Form>
+                </Modal>
+            </React.Fragment>
         )
     }
 }

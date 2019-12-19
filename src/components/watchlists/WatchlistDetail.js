@@ -20,6 +20,9 @@ import movieApiManager from '../movies/moviesApiManager'
 // HELPER FUNCTIONS
 import { getLoggedInUser } from '../../modules/helper'
 
+// STYLES
+import './WatchlistDetail.css'
+
 class WatchlistDetail extends Component {
     watchlistId = parseInt(this.props.watchlistId)
 
@@ -33,7 +36,7 @@ class WatchlistDetail extends Component {
 
     // handles deleting a watchlist
     deleteWatchlist = id => {
-        this.setState({loadingStatus: true})
+        this.setState({ loadingStatus: true })
         watchlistApiManager.deleteWatchlist(id)
             .then(() => {
                 this.props.history.push('/watchlists')
@@ -53,13 +56,13 @@ class WatchlistDetail extends Component {
         Promise.all([
             // get watchlist
             movieApiManager.getWatchlist(this.watchlistId, getLoggedInUser()),
-    
+
             // get watchlist movies
             movieApiManager.getAllWatchlistMovies(this.watchlistId),
-    
+
             // get sources
             watchlistApiManager.getAllMovieSources()
-    
+
         ])
             .then(([watchlist, watchlistMovies, sources]) => {
                 this.setState({
@@ -69,7 +72,7 @@ class WatchlistDetail extends Component {
                     sources: sources
                 })
             })
-            // console.log.("state from GLUS: ", this.state)
+        // console.log.("state from GLUS: ", this.state)
     }
 
     componentDidMount() {
@@ -80,25 +83,29 @@ class WatchlistDetail extends Component {
         return (
             <React.Fragment>
                 <div className="watchlist-detail-container">
-                    <h1>{this.state.listName}</h1>
-                    <p>{this.state.listDescription}</p>
-                    <button
-                        type="button"
-                        className="btn btn-danger"
-                        onClick={() => this.deleteWatchlist(this.watchlistId)}
-                        disabled={this.state.loadingStatus}
-                    >
-                        Delete List
-                        </button>
+                    <header>
+                        <h1>{this.state.listName}</h1>
+                        <p>{this.state.listDescription}</p>
+                    </header>
                     {this.state.sortedMovies.map(watchlistMovie =>
                         <WatchlistDetailCard
                             loadingStatus={this.state.loadingStatus}
                             key={watchlistMovie.id}
                             watchlistMovie={watchlistMovie}
-                            sources={this.state.sources} 
+                            sources={this.state.sources}
                             deleteMovie={this.deleteMovie}
-                            {...this.props}/>
+                            {...this.props} />
                     )}
+                    <footer>
+                        <button
+                            type="button"
+                            className="btn btn-danger delete-list"
+                            onClick={() => this.deleteWatchlist(this.watchlistId)}
+                            disabled={this.state.loadingStatus}
+                        >
+                            Delete List
+                        </button>
+                    </footer>
                 </div>
             </React.Fragment>
         )

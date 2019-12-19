@@ -71,17 +71,17 @@ class WatchlistCard extends Component {
                         <Link to={`/watchlists/${this.watchlist.id}`}>
                             <button
                                 type="button"
-                                className="btn btn-primary btn-sm"
+                                className="btn btn-primary"
                             >
                                 See List
                         </button>
                         </Link>
                         <button
                             type="button"
-                            className="btn btn-danger btn-sm"
+                            className="btn btn-danger"
                             onClick={() => this.props.deleteWatchlist(this.watchlist.id)}
                         >
-                            Delete List
+                            Delete
                         </button>
                     </section>
 

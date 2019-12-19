@@ -132,12 +132,6 @@ class WatchlistDetailCard extends Component {
                                 </Dropdown.Item>
                             )}
                         </DropdownButton>
-                        {/* <button
-                            type="button"
-                            className="btn btn-success"
-                            onClick={() => this.props.history.push(`/watchlists/${this.watchlistMovie.watchlistId}/edit/${this.watchlistMovie.id}`)}>
-                            Edit Movie
-                        </button> */}
                         <WatchlistMovieForm
                             key={this.watchlistMovie.id}
                             watchlistMovie={this.watchlistMovie}

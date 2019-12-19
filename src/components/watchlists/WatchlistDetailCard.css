@@ -1,7 +1,7 @@
 .detail-card {
     /* border: 1px solid red; */
     display: flex;
-    margin: 30px 10px;
+    margin: 20px 5px;
     width: 80%;
     min-width: 360px;
     flex-direction: column;
@@ -29,8 +29,8 @@
 .detail-card-top {
     display: flex;
     min-width: 360px;
-    border: 1px solid red;
     margin: 0;
+    padding: 0;
 
 }
 
@@ -38,9 +38,6 @@
     text-align: center;
 }
 
-.detail-card-top .detail-card-details {
-    border: 1px solid green;
-}
 
 .detail-card-top p {
     font-size: .85em;
@@ -51,6 +48,15 @@
 .detail-card-top .year-runtime{
     display: flex;
     justify-content: space-around;
+}
+
+.detail-card-bottom {
+    display: flex;
+    justify-content: space-around;
+}
+
+.detail-card-bottom .dropdown{
+    display: inline-block;
 }
 
 

@@ -65,9 +65,16 @@ class WatchlistForm extends Component {
                     if (isNew) {
                         // post newWatchlist to the database
                         watchlistApiManager.createNewWatchlist(newWatchlist)
-                        // close modal
-                        this.setState({open: false})
-                       
+                        .then(() => {
+                            // close modal and reset state
+                            this.setState({
+                                listName: '',
+                                listDescription: '',
+                                loadingStatus: false,
+                                open: false})
+                            // call parent render function
+                            this.props.parentFunction()
+                        })
                     } else {
                         window.alert("You already have a Watchlist with that name.")
                         this.setState({ loadingStatus: false })
@@ -85,7 +92,10 @@ class WatchlistForm extends Component {
     render() {
         return (
             <React.Fragment>
-                <Button variant="success" onClick={() => this.setState({ open: true })}>
+                <Button 
+                    variant="success" 
+                    className="new-watchlist-button"
+                    onClick={() => this.setState({ open: true })}>
                     New Watchlist
                 </Button>
 

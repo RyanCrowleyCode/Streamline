@@ -20,8 +20,8 @@ import movieApiManager from '../movies/moviesApiManager'
 
 
 class WatchlistMovieForm extends Component {
-    watchlistId = parseInt(this.props.watchlistId)
-    watchlistMovieId = parseInt(this.props.watchlistMovieId)
+    watchlistId = parseInt(this.props.watchlistMovie.watchlistId)
+    watchlistMovieId = parseInt(this.props.watchlistMovie.id)
 
     state = {
         comments: '',
@@ -47,6 +47,11 @@ class WatchlistMovieForm extends Component {
         this.setState({ [e.target.id]: e.target.value })
     }
 
+    // updates comments
+    handleCommentChange = e => {
+        this.setState({ comments: e.target.value })
+    }
+
     // handles putting to database
     updateComments = evt => {
         evt.preventDefault()
@@ -57,7 +62,12 @@ class WatchlistMovieForm extends Component {
         // update watchlistMovie in database
         watchlistApiManager.updateWatchlistMovie(updatedObject)
             // then, return user back to watchlist view
-            .then(() => this.props.history.push(`/watchlists/${this.watchlistId}`))
+            .then(() => {
+                // close modal and reset state
+                this.close()
+                // call parent render function
+                this.props.getAndUpdate()
+            })
     }
 
     componentDidMount() {
@@ -80,27 +90,32 @@ class WatchlistMovieForm extends Component {
                 <Button
                     variant="success"
                     className="edit-movie-button"
-                    onClick={() => this.setState({open: true})>
+                    onClick={() => this.setState({ open: true })}>
                     Edit Movie
-                        </Button>
-                <Form>
-                    <h4>Edit Comments</h4>
-                    <Form.Group>
-                        <Form.Label>{this.state.title}</Form.Label>
-                        <Form.Control
-                            id="comments"
-                            type="text"
-                            value={this.state.comments}
-                            onChange={this.handleFieldChange} />
-                    </Form.Group>
-                    <Button
-                        variant="success"
-                        type="button"
-                        onClick={this.updateComments}
-                        disabled={this.state.loadingStatus}>
-                        Update
                 </Button>
-                </Form>
+                <Modal
+                    show={this.state.open}
+                    onHide={() => this.close()}
+                    centered>
+                    <Form>
+                        <h4>Edit Comments</h4>
+                        <Form.Group>
+                            <Form.Label>{this.state.title}</Form.Label>
+                            <Form.Control
+                                id={`comments-${this.watchlistMovieId}`}
+                                type="text"
+                                value={this.state.comments}
+                                onChange={this.handleCommentChange} />
+                        </Form.Group>
+                        <Button
+                            variant="success"
+                            type="button"
+                            onClick={this.updateComments}
+                            disabled={this.state.loadingStatus}>
+                            Update
+                </Button>
+                    </Form>
+                </Modal>
             </React.Fragment>
         )
     }

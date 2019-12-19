@@ -1,8 +1,4 @@
-comments: '',
-        title: '',
-        watchlistMovie: {},
-        loadingStatus: false,
-        open: false/*
+/*
     WatchlistMovieCard.js
 
     Purpose:    This component is responsible for rendering a card for
@@ -35,7 +31,7 @@ import { faFilm } from '@fortawesome/free-solid-svg-icons'
 import './WatchlistDetailCard.css'
 
 // COMPONENTS
-// import WatchlistMovieForm from './WatchlistMovieForm'
+import WatchlistMovieForm from './WatchlistMovieForm'
 
 
 class WatchlistDetailCard extends Component {
@@ -66,16 +62,15 @@ class WatchlistDetailCard extends Component {
 
     }
 
-
-
-    componentDidMount() {
+    getAndUpdate() {
+        console.log("get and update ran!")
         Promise.all([
             // get movie
             movieApiManager.getOneMovie(this.watchlistMovie.movieId),
-
+    
             // get movieSource
             watchlistApiManager.getMovieSource(this.watchlistMovie.movieSourceId)
-
+    
         ])
             .then(([movie, movieSource]) => {
                 const m = movie[0]
@@ -90,6 +85,10 @@ class WatchlistDetailCard extends Component {
                     sourceName: mSource.sourceName
                 })
             })
+    }
+
+    componentDidMount() {
+        this.getAndUpdate()
     }
 
     render() {
@@ -127,14 +126,16 @@ class WatchlistDetailCard extends Component {
                                 </Dropdown.Item>
                             )}
                         </DropdownButton>
-                        <button
+                        {/* <button
                             type="button"
                             className="btn btn-success"
                             onClick={() => this.props.history.push(`/watchlists/${this.watchlistMovie.watchlistId}/edit/${this.watchlistMovie.id}`)}>
                             Edit Movie
-                        </button>
-                        {/* <WatchlistMovieForm 
-                            watchlistMovie={this.watchlistMovie}/> */}
+                        </button> */}
+                        <WatchlistMovieForm
+                            key={this.watchlistMovie.id}
+                            watchlistMovie={this.watchlistMovie}
+                            getAndUpdate={this.getAndUpdate}/>
                         <button
                             type="button"
                             className="btn btn-danger"

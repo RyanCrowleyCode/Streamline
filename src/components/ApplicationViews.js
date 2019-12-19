@@ -18,7 +18,6 @@ import Register from './auth/Register'
 import MovieList from './movies/MovieList'
 import Watchlists from './watchlists/WatchlistList'
 import WatchlistDetail from './watchlists/WatchlistDetail'
-import WatchlistMovieForm from './watchlists/WatchlistMovieForm'
 
 
 class ApplicationsView extends Component {

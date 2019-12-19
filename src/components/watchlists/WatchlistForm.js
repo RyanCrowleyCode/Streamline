@@ -108,7 +108,6 @@ class WatchlistForm extends Component {
                     show={this.state.open}
                     onHide={() => this.close()}
                     centered>
-
                     <Form>
                         <h4>New Watchlist</h4>
                         <Form.Group onSubmit={this.handleSubmit}>
@@ -127,16 +126,20 @@ class WatchlistForm extends Component {
                                 placeholder="Write something to describe your list."
                                 onChange={this.handleFieldChange} />
                         </Form.Group>
-                        <Button
-                            variant="success"
-                            type="submit"
-                            onClick={this.handleSubmit}
-                            disabled={this.state.loadingStatus}>
-                            Submit
+                        <div className="form-buttons">
+                            <Button
+                                variant="success"
+                                type="submit"
+                                onClick={this.handleSubmit}
+                                disabled={this.state.loadingStatus}>
+                                Submit
                         </Button>
-                        <Button onClick={() => this.close()}>
-                            Cancel
+                            <Button
+                                onClick={() => this.close()}
+                                variant="dark">
+                                Cancel
                         </Button>
+                        </div>
                     </Form>
                 </Modal>
             </React.Fragment>

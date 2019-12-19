@@ -6,3 +6,18 @@ h1 {
     text-align: center;
     margin: 20px;
 }
+
+form {
+    padding: 5px;   
+}
+
+form h4 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+form .form-buttons {
+    text-align: center;
+}
+
+

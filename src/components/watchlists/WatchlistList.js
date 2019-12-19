@@ -53,7 +53,7 @@ class Watchlists extends Component {
 
     render() {
         return (
-            <React.Fragment>
+            <div className="watchlist-content">
                 <h1>Watchlists</h1>
                 <WatchlistForm 
                     parentFunction={this.getListsUpdateState}
@@ -67,7 +67,7 @@ class Watchlists extends Component {
                         />
                     )}
                 </section>
-            </React.Fragment>
+            </div>
         )
     }
 }

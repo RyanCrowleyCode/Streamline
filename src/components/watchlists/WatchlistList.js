@@ -26,7 +26,7 @@ import { getLoggedInUser } from '../../modules/helper'
 
 class Watchlists extends Component {
     state = {
-        watchlists: [],
+        watchlists: []
     }
 
     // handles deleting a watchlist
@@ -41,7 +41,9 @@ class Watchlists extends Component {
     getListsUpdateState = () => {
         watchlistApiManager.getOwnWatchlists(getLoggedInUser())
             .then(watchlists => {
-                this.setState({ watchlists: watchlists })
+                this.setState({ 
+                    watchlists: watchlists,
+                    modalOpen: false})
             })
     }
 
@@ -53,7 +55,9 @@ class Watchlists extends Component {
         return (
             <React.Fragment>
                 <h1>Watchlists</h1>
-                <WatchlistForm />
+                <WatchlistForm 
+                    parentFunction={this.getListsUpdateState}
+                    />
                 <section className="watchlist-list">
                     {this.state.watchlists.map(watchlist =>
                         <WatchlistCard

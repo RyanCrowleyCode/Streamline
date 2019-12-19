@@ -76,15 +76,6 @@ class ApplicationsView extends Component {
                     :
                         <Redirect to="/login" />
                 }} />
-                <Route exact path="/watchlists/:watchlistId(\d+)/edit/:watchlistMovieId(\d+)" render={props => {
-                    return this.props.isLoggedIn ?
-                    <WatchlistMovieForm 
-                        watchlistId={props.match.params.watchlistId}
-                        watchlistMovieId={props.match.params.watchlistMovieId}
-                        {...props} />
-                    :
-                        <Redirect to="/login" />
-                }} />
             </React.Fragment>
         )
     }

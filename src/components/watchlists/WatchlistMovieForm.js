@@ -11,7 +11,7 @@
 
 // REACT
 import React, { Component } from "react";
-import { Form, Button } from 'react-bootstrap'
+import { Form, Button, Modal } from 'react-bootstrap'
 
 
 // DATA
@@ -27,7 +27,19 @@ class WatchlistMovieForm extends Component {
         comments: '',
         title: '',
         watchlistMovie: {},
-        loadingStatus: false
+        loadingStatus: false,
+        open: false
+    }
+
+    // close modal and reset state
+    close() {
+        this.setState({
+            comments: '',
+            title: '',
+            watchlistMovie: {},
+            loadingStatus: false,
+            open: false
+        })
     }
 
     // update listName and Description in state with every keystroke in input field
@@ -64,24 +76,32 @@ class WatchlistMovieForm extends Component {
 
     render() {
         return (
-            <Form>
-                <h4>Edit Comments</h4>
-                <Form.Group>
-                    <Form.Label>{this.state.title}</Form.Label>
-                    <Form.Control
-                        id="comments"
-                        type="text"
-                        value={this.state.comments}
-                        onChange={this.handleFieldChange} />
-                </Form.Group>
+            <React.Fragment>
                 <Button
                     variant="success"
-                    type="button"
-                    onClick={this.updateComments}
-                    disabled={this.state.loadingStatus}>
-                    Update
+                    className="edit-movie-button"
+                    onClick={() => this.setState({open: true})>
+                    Edit Movie
+                        </Button>
+                <Form>
+                    <h4>Edit Comments</h4>
+                    <Form.Group>
+                        <Form.Label>{this.state.title}</Form.Label>
+                        <Form.Control
+                            id="comments"
+                            type="text"
+                            value={this.state.comments}
+                            onChange={this.handleFieldChange} />
+                    </Form.Group>
+                    <Button
+                        variant="success"
+                        type="button"
+                        onClick={this.updateComments}
+                        disabled={this.state.loadingStatus}>
+                        Update
                 </Button>
-            </Form>
+                </Form>
+            </React.Fragment>
         )
     }
 }

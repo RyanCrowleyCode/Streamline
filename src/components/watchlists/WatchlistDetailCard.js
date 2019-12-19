@@ -1,4 +1,8 @@
-/*
+comments: '',
+        title: '',
+        watchlistMovie: {},
+        loadingStatus: false,
+        open: false/*
     WatchlistMovieCard.js
 
     Purpose:    This component is responsible for rendering a card for

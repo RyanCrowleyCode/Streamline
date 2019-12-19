@@ -28,6 +28,16 @@ class WatchlistForm extends Component {
         open: false
     }
 
+    // close modal and reset state
+    close() {
+        this.setState({
+            listName: '',
+            listDescription: '',
+            loadingStatus: false,
+            open: false
+        })
+    }
+
     // update listName and Description in state with every keystroke in input field
     handleFieldChange = e => {
         this.setState({ [e.target.id]: e.target.value })
@@ -65,16 +75,12 @@ class WatchlistForm extends Component {
                     if (isNew) {
                         // post newWatchlist to the database
                         watchlistApiManager.createNewWatchlist(newWatchlist)
-                        .then(() => {
-                            // close modal and reset state
-                            this.setState({
-                                listName: '',
-                                listDescription: '',
-                                loadingStatus: false,
-                                open: false})
-                            // call parent render function
-                            this.props.parentFunction()
-                        })
+                            .then(() => {
+                                // close modal and reset state
+                                this.close()
+                                // call parent render function
+                                this.props.parentFunction()
+                            })
                     } else {
                         window.alert("You already have a Watchlist with that name.")
                         this.setState({ loadingStatus: false })
@@ -87,20 +93,21 @@ class WatchlistForm extends Component {
             this.setState({ loadingStatus: false })
         }
     }
-    
+
 
     render() {
         return (
             <React.Fragment>
-                <Button 
-                    variant="success" 
+                <Button
+                    variant="success"
                     className="new-watchlist-button"
                     onClick={() => this.setState({ open: true })}>
                     New Watchlist
                 </Button>
 
-                <Modal 
-                    show={this.state.open} onHide={() => this.setState({open: false})}
+                <Modal
+                    show={this.state.open}
+                    onHide={() => this.close()}
                     centered>
 
                     <Form>
@@ -127,6 +134,9 @@ class WatchlistForm extends Component {
                             onClick={this.handleSubmit}
                             disabled={this.state.loadingStatus}>
                             Submit
+                        </Button>
+                        <Button onClick={() => this.close()}>
+                            Cancel
                         </Button>
                     </Form>
                 </Modal>

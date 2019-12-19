@@ -12,16 +12,20 @@
 // REACT
 import React, { Component } from "react";
 import { Form, Button } from 'react-bootstrap'
-import Popup from "reactjs-popup";
+// import Popup from "reactjs-popup";
 
 // DATA
-import watchlistApiManager from './watchlistApiManager'
+import watchlistApiManager from './watchlistApiManager' 
+import movieApiManager from '../movies/moviesApiManager'
 
 
 class WatchlistMovieForm extends Component {
+    watchlistId = parseInt(this.props.watchlistId)
+    watchlistMovieId = parseInt(this.props.watchlistMovieId)
 
     state = {
         comments: '',
+        title: '',
         loadingStatus: false
     }
 
@@ -30,6 +34,18 @@ class WatchlistMovieForm extends Component {
         this.setState({ [e.target.id]: e.target.value })
     }
 
+    componentDidMount() {
+        console.log(this.watchlistId)
+        console.log(this.watchlistMovieId)
+        // get watchlist movie
+        watchlistApiManager.getWatchlistMovieById(this.watchlistMovieId)
+        .then(watchlistMovie => {
+            this.setState({comments: watchlistMovie[0].comments})
+            // get movie
+            movieApiManager.getOneMovie(watchlistMovie[0].movieId)
+            .then(movie => this.setState({title: movie[0].title}))
+        })
+    }
 
     render() {
         return (
@@ -46,10 +62,11 @@ class WatchlistMovieForm extends Component {
             <Form>
                 <h4>Edit Comments</h4>
                 <Form.Group>
-                    <Form.Label>Comments</Form.Label>
+                <Form.Label>{this.state.title}</Form.Label>
                     <Form.Control
                         id="comments"
                         type="text"
+                        value={this.state.comments}
                         // value={COMMENTS}
                         onChange={this.handleFieldChange} />
                 </Form.Group>

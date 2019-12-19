@@ -75,7 +75,7 @@ class MovieList extends Component {
                     <button
                         type="submit"
                         value="Submit"
-                        className="btn btn-primary"
+                        className="btn btn-primary search-button"
                         onClick={this.handleSearch}
                     >
                         Search

@@ -55,26 +55,25 @@ class WatchlistDetailCard extends Component {
         const updatedWatchlistMovie = this.watchlistMovie
         updatedWatchlistMovie.movieSourceId = source.id
         watchlistApiManager.updateWatchlistMovie(updatedWatchlistMovie)
-        .then((wlMovie) => this.setState({
-            movieSource: wlMovie.movieSourceId,
-            sourceName: source.sourceName
-        })
-        )
+            .then((wlMovie) => this.setState({
+                movieSource: wlMovie.movieSourceId,
+                sourceName: source.sourceName
+            })
+            )
 
     }
 
     getAndUpdate = () => {
-        console.log("get and update ran!")
         Promise.all([
             // get movie
             movieApiManager.getOneMovie(this.watchlistMovie.movieId),
-    
+
             // get movieSource
             watchlistApiManager.getMovieSource(this.watchlistMovie.movieSourceId),
 
             // get watchlistMovie for comment's sake
             moviesApiManager.getWatchlistMovie(this.watchlistMovie.watchlistId, this.watchlistMovie.movieId)
-    
+
         ])
             .then(([movie, movieSource, wlMovie]) => {
                 const m = movie[0]
@@ -107,12 +106,14 @@ class WatchlistDetailCard extends Component {
                             :
                             <FontAwesomeIcon className="default-icon" icon={faFilm} size="6x" />
                         }
-                        <h3>{title}</h3>
-                        <p className="year-runtime">
-                            <span>{releaseDate}</span>
-                            <span>{runtime}</span>
-                        </p>
-                        <p>{synopsis}</p>
+                        <div className="detail-card-details">
+                            <h3>{title}</h3>
+                            <p className="year-runtime">
+                                <span>{releaseDate}</span>
+                                <span>{runtime}</span>
+                            </p>
+                            <p>{synopsis}</p>
+                        </div>
                     </div>
                     <p>{comments}</p>
                     <div className="detail-card-bottom">
@@ -140,7 +141,7 @@ class WatchlistDetailCard extends Component {
                         <WatchlistMovieForm
                             key={this.watchlistMovie.id}
                             watchlistMovie={this.watchlistMovie}
-                            getAndUpdate={this.getAndUpdate}/>
+                            getAndUpdate={this.getAndUpdate} />
                         <button
                             type="button"
                             className="btn btn-danger"

@@ -20,4 +20,44 @@ form .form-buttons {
     text-align: center;
 }
 
+@media (max-width: 800px) {
+    h1 {
+        font-size: 2em;
+    }
+    p {
+        font-size: .95em;
+    }
+}
+
+@media (max-width: 700px) {
+/* CSS that should be displayed if width is equal to or less than 725px goes here */
+    h1 {
+     font-size: 1.8em;
+    }
+    p {
+        font-size: .9em;
+    }
+    
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.6em;
+       }
+    p {
+        font-size: .85em;
+    }
+    
+}
+
+@media (max-width: 500px) {
+/* CSS that should be displayed if width is equal to or less than 725px goes here */
+    h1 {
+     font-size: 1.4em;
+    }
+    p {
+        font-size: .8em;
+    }  
+}
+
 

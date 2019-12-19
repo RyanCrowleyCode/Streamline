@@ -29,16 +29,28 @@
 .detail-card-top {
     display: flex;
     min-width: 360px;
+    border: 1px solid red;
+    margin: 0;
+
 }
 
-.detail-card-top .movie-card-details {
-    padding: 5px;
+.detail-card-top h3 {
+    text-align: center;
+}
+
+.detail-card-top .detail-card-details {
+    border: 1px solid green;
 }
 
 .detail-card-top p {
     font-size: .85em;
     margin-bottom: 0;
     padding: 5px;
+}
+
+.detail-card-top .year-runtime{
+    display: flex;
+    justify-content: space-around;
 }
 
 
@@ -58,6 +70,9 @@
     font-size: .70em;
     }
     .detail-card-top img {
-    padding-bottom: 5%;
+    padding-bottom: 2%;
+    }
+    .detail-card-top h3 {
+        font-size: 1.2em;
     }
 }

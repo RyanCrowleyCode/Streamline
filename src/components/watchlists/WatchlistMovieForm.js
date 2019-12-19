@@ -33,35 +33,35 @@ class WatchlistMovieForm extends Component {
 
     render() {
         return (
-            <Popup
-                trigger={<button
-                    className="btn btn-success"
-                    // THIS IS WHERE YOU LEFT OFF. HAVING TROUBLE SENDING PROPS INTO POPUPS.
-                    onClick={() => console.log(this.props.watchlistMovie)} 
-                    >
-                    Edit
-                    </button>}
-                    modal
-                    closeOnDocumentClick>
-                <Form>
-                    <h4>Edit Comments</h4>
-                    <Form.Group>
-                        <Form.Label>Comments</Form.Label>
-                        <Form.Control
-                            id="comments"
-                            type="text"
-                            // value={COMMENTS}
-                            onChange={this.handleFieldChange} />
-                    </Form.Group>
-                    <Button
-                        variant="success"
-                        type="button"
-                        // onClick={this.handleSubmit}
-                        disabled={this.state.loadingStatus}>
-                        Update
+            // <Popup
+            //     trigger={<button
+            //         className="btn btn-success"
+            //         // THIS IS WHERE YOU LEFT OFF. HAVING TROUBLE SENDING PROPS INTO POPUPS.
+            //         onClick={() => console.log(this.props.watchlistMovie)} 
+            //         >
+            //         Edit
+            //         </button>}
+            //         modal
+            //         closeOnDocumentClick>
+            <Form>
+                <h4>Edit Comments</h4>
+                <Form.Group>
+                    <Form.Label>Comments</Form.Label>
+                    <Form.Control
+                        id="comments"
+                        type="text"
+                        // value={COMMENTS}
+                        onChange={this.handleFieldChange} />
+                </Form.Group>
+                <Button
+                    variant="success"
+                    type="button"
+                    // onClick={this.handleSubmit}
+                    disabled={this.state.loadingStatus}>
+                    Update
                 </Button>
-                </Form>
-            </Popup>
+            </Form>
+            // </Popup>
         )
     }
 }

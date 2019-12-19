@@ -96,7 +96,8 @@ class WatchlistDetail extends Component {
                             key={watchlistMovie.id}
                             watchlistMovie={watchlistMovie}
                             sources={this.state.sources} 
-                            deleteMovie={this.deleteMovie}/>
+                            deleteMovie={this.deleteMovie}
+                            {...this.props}/>
                     )}
                 </div>
             </React.Fragment>

@@ -31,7 +31,7 @@ import { faFilm } from '@fortawesome/free-solid-svg-icons'
 import './WatchlistDetailCard.css'
 
 // COMPONENTS
-import WatchlistMovieForm from './WatchlistMovieForm'
+// import WatchlistMovieForm from './WatchlistMovieForm'
 
 
 class WatchlistDetailCard extends Component {
@@ -123,14 +123,14 @@ class WatchlistDetailCard extends Component {
                                 </Dropdown.Item>
                             )}
                         </DropdownButton>
-                        {/* <button
+                        <button
                             type="button"
                             className="btn btn-success"
-                        >
+                            onClick={() => this.props.history.push(`/watchlists/${this.watchlistMovie.watchlistId}/edit/${this.watchlistMovie.id}`)}>
                             Edit Movie
-                        </button> */}
-                        <WatchlistMovieForm 
-                            watchlistMovie={this.watchlistMovie}/>
+                        </button>
+                        {/* <WatchlistMovieForm 
+                            watchlistMovie={this.watchlistMovie}/> */}
                         <button
                             type="button"
                             className="btn btn-danger"

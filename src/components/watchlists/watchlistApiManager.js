@@ -38,5 +38,9 @@ export default {
 
     updateWatchlistMovie(watchlistMovie) {
         return StreamlineApiManager.update("watchlistMovies", watchlistMovie)
+    },
+
+    getWatchlistMovieById(watchlistMovieId) {
+        return StreamlineApiManager.getAll("watchlistMovies", `id=${watchlistMovieId}`)
     }
 }

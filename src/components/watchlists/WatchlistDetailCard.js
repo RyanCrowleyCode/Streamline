@@ -30,6 +30,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilm } from '@fortawesome/free-solid-svg-icons'
 import './WatchlistDetailCard.css'
 
+// COMPONENTS
+// import WatchlistMovieForm from './WatchlistMovieForm'
+
 
 class WatchlistDetailCard extends Component {
     baseUrlPoster = "https://image.tmdb.org/t/p/original/"
@@ -123,9 +126,11 @@ class WatchlistDetailCard extends Component {
                         <button
                             type="button"
                             className="btn btn-success"
-                        >
+                            onClick={() => this.props.history.push(`/watchlists/${this.watchlistMovie.watchlistId}/edit/${this.watchlistMovie.id}`)}>
                             Edit Movie
                         </button>
+                        {/* <WatchlistMovieForm 
+                            watchlistMovie={this.watchlistMovie}/> */}
                         <button
                             type="button"
                             className="btn btn-danger"

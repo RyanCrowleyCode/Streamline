@@ -12,7 +12,6 @@
 // REACT
 import React, { Component } from "react";
 import { Form, Button } from 'react-bootstrap'
-// import Popup from "reactjs-popup";
 
 
 // DATA
@@ -65,16 +64,6 @@ class WatchlistMovieForm extends Component {
 
     render() {
         return (
-            // <Popup
-            //     trigger={<button
-            //         className="btn btn-success"
-            //         // THIS IS WHERE YOU LEFT OFF. HAVING TROUBLE SENDING PROPS INTO POPUPS.
-            //         onClick={() => console.log(this.props.watchlistMovie)} 
-            //         >
-            //         Edit
-            //         </button>}
-            //         modal
-            //         closeOnDocumentClick>
             <Form>
                 <h4>Edit Comments</h4>
                 <Form.Group>
@@ -93,7 +82,6 @@ class WatchlistMovieForm extends Component {
                     Update
                 </Button>
             </Form>
-            // </Popup>
         )
     }
 }

@@ -43,7 +43,7 @@ class Watchlists extends Component {
             .then(watchlists => {
                 this.setState({ 
                     watchlists: watchlists,
-                    modalOpen: false})
+                   })
             })
     }
 

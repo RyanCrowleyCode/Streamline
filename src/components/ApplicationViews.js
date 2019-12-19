@@ -18,7 +18,6 @@ import Register from './auth/Register'
 import MovieList from './movies/MovieList'
 import Watchlists from './watchlists/WatchlistList'
 import WatchlistDetail from './watchlists/WatchlistDetail'
-import WatchlistMovieForm from './watchlists/WatchlistMovieForm'
 
 
 class ApplicationsView extends Component {
@@ -73,15 +72,6 @@ class ApplicationsView extends Component {
                     return this.props.isLoggedIn ?
                     <WatchlistDetail watchlistId={props.match.params.watchlistId}
                     {...props} />
-                    :
-                        <Redirect to="/login" />
-                }} />
-                <Route exact path="/watchlists/:watchlistId(\d+)/edit/:watchlistMovieId(\d+)" render={props => {
-                    return this.props.isLoggedIn ?
-                    <WatchlistMovieForm 
-                        watchlistId={props.match.params.watchlistId}
-                        watchlistMovieId={props.match.params.watchlistMovieId}
-                        {...props} />
                     :
                         <Redirect to="/login" />
                 }} />

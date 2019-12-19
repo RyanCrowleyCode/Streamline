@@ -11,7 +11,6 @@
 // REACT
 import React, { Component } from "react";
 import { Form, Button, Modal } from 'react-bootstrap'
-// import Popup from "reactjs-popup";
 
 // DATA
 import watchlistApiManager from './watchlistApiManager'

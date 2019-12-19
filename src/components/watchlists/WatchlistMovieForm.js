@@ -68,6 +68,7 @@ class WatchlistMovieForm extends Component {
                 // call parent render function
                 this.props.getAndUpdate()
             })
+
     }
 
     componentDidMount() {

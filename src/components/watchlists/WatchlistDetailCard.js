@@ -32,6 +32,7 @@ import './WatchlistDetailCard.css'
 
 // COMPONENTS
 import WatchlistMovieForm from './WatchlistMovieForm'
+import moviesApiManager from "../movies/moviesApiManager";
 
 
 class WatchlistDetailCard extends Component {
@@ -44,7 +45,7 @@ class WatchlistDetailCard extends Component {
         runtime: null,
         synopsis: '',
         image: '',
-        comments: this.watchlistMovie.comments,
+        comments: '',
         movieSource: 1,
         sourceName: ''
     }
@@ -62,17 +63,20 @@ class WatchlistDetailCard extends Component {
 
     }
 
-    getAndUpdate() {
+    getAndUpdate = () => {
         console.log("get and update ran!")
         Promise.all([
             // get movie
             movieApiManager.getOneMovie(this.watchlistMovie.movieId),
     
             // get movieSource
-            watchlistApiManager.getMovieSource(this.watchlistMovie.movieSourceId)
+            watchlistApiManager.getMovieSource(this.watchlistMovie.movieSourceId),
+
+            // get watchlistMovie for comment's sake
+            moviesApiManager.getWatchlistMovie(this.watchlistMovie.watchlistId, this.watchlistMovie.movieId)
     
         ])
-            .then(([movie, movieSource]) => {
+            .then(([movie, movieSource, wlMovie]) => {
                 const m = movie[0]
                 const mSource = movieSource[0]
                 this.setState({
@@ -80,6 +84,7 @@ class WatchlistDetailCard extends Component {
                     releaseDate: m.releaseDate,
                     runtime: m.runtime,
                     synopsis: m.synopsis,
+                    comments: wlMovie[0].comments,
                     image: m.image,
                     movieSource: mSource.id,
                     sourceName: mSource.sourceName

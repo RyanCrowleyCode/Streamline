@@ -35,7 +35,7 @@ import WatchlistMovieForm from './WatchlistMovieForm'
 import moviesApiManager from "../movies/moviesApiManager";
 
 // MODULES
-import { toDatePhrase } from '../../modules/helper'
+import { toDatePhrase, hoursMinutes } from '../../modules/helper'
 
 
 class WatchlistDetailCard extends Component {
@@ -123,7 +123,12 @@ class WatchlistDetailCard extends Component {
                                     :
                                     null
                                 }
-                                <span>{runtime}</span>
+                                {runtime
+                                    ?
+                                    <span>{hoursMinutes(runtime)}</span>
+                                    :
+                                    null
+                                }
                             </p>
                             <p>{synopsis}</p>
                         </div>

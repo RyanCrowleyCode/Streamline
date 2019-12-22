@@ -71,6 +71,7 @@ export function loopMoviesAddOrEdit (tmdbMovie, movies) {
     }
 }
 
+// Creates a userMovie object
 export function createUserMovie (userId, movieId) {
     const newUserMovie = {
         userId: userId,
@@ -81,6 +82,7 @@ export function createUserMovie (userId, movieId) {
     moviesApiManager.postUserMovie(newUserMovie)
 }
 
+// Creates a watchlistMovie object
 export function createWatchlistMovie (watchlistId, movieId, listIndex) {
     const newWatchlistMovie = {
         watchlistId: watchlistId,
@@ -93,3 +95,18 @@ export function createWatchlistMovie (watchlistId, movieId, listIndex) {
     moviesApiManager.postWatchilstMovie(newWatchlistMovie)
 }
 
+// converts a runtime from minutes to Hours
+export function hoursMinutes(runtime) {
+    const hours = runtime/60
+    const rhours = Math.floor(hours)
+    const minutes = Math.round((hours - rhours) * 60)
+    if (rhours > 0) {
+        if (minutes > 0) {
+            return `${rhours}h ${minutes}min`
+        } else {
+            return `${rhours}h`
+        }
+    } else {
+        return `${minutes}min`
+    }
+}

@@ -130,15 +130,16 @@ class WatchlistDetailCard extends Component {
                                     null
                                 }
                             </p>
-                            <p>{synopsis}</p>
+                            <p className="synopsis">{synopsis}</p>
                         </div>
                     </div>
-                    <p>{comments}</p>
+                    <p className="comments">{comments}</p>
                     <div className="detail-card-bottom">
                         <DropdownButton
                             id={this.state.watchlistMovie.id}
                             title={sourceName}
                             variant="primary"
+                            size="sm"
                         >
                             {this.props.sources.map(source =>
                                 <Dropdown.Item
@@ -153,15 +154,15 @@ class WatchlistDetailCard extends Component {
                         {this.state.watchlistMovie ?
                             <WatchlistMovieForm
                                 key={this.state.watchlistMovie.id}
-                                // watchlistMovie={this.state.watchlistMovie}
                                 watchlistId={this.state.watchlistMovie.watchlistId}
                                 watchlistMovieId={this.state.watchlistMovie.id}
-                                getAndUpdate={this.getAndUpdate} />
+                                getAndUpdate={this.getAndUpdate} 
+                                />
                             : null
                         }
                         <button
                             type="button"
-                            className="btn btn-danger"
+                            className="btn btn-danger btn-sm"
                             onClick={() => this.props.deleteMovie(this.state.watchlistMovie.id)}
                             disabled={this.props.loadingStatus}>
                             Delete

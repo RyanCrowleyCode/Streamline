@@ -86,15 +86,16 @@ class WatchlistMovieForm extends Component {
                 <Button
                     variant="success"
                     className="edit-movie-button"
+                    size="sm"
                     onClick={() => this.setState({ open: true })}>
-                    Edit Movie
+                    Notes
                 </Button>
                 <Modal
                     show={this.state.open}
                     onHide={() => this.close()}
                     centered>
                     <Form>
-                        <h4>Edit Comments</h4>
+                        <h4>My Notes</h4>
                         <Form.Group>
                             <Form.Label>{this.state.title}</Form.Label>
                             <Form.Control

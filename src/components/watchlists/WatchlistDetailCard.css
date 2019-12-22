@@ -1,9 +1,9 @@
 .detail-card {
-    /* border: 1px solid red; */
     display: flex;
     margin: 20px 5px;
     width: 80%;
     min-width: 360px;
+    max-width: 825px;
     flex-direction: column;
     /* Add shadows to create the "card" effect */
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -15,7 +15,6 @@
 .detail-card-top img {
     height: auto;
     width: 40%;
-    padding-bottom: 20%;
 }
 
 .detail-card-top .default-icon {
@@ -34,25 +33,45 @@
 
 }
 
+.detail-card-details {
+    margin: 2px;
+}
+
 .detail-card-top h3 {
     text-align: center;
 }
 
 
 .detail-card-top p {
-    font-size: .85em;
-    margin-bottom: 0;
+    margin: 10px;
     padding: 5px;
 }
 
-.detail-card-top .year-runtime{
+.detail-card-top .year-runtime {
     display: flex;
     justify-content: space-around;
+    font-size: .85em;
+    font-weight: bold;
+}
+
+.detail-card-top .synopsis {
+    padding: 10px;
+}
+
+.detail-card .comments {
+    border: 1px solid #343a40;
+    background-color: #505961;
+    color: rgb(233, 230, 230);
+    border-radius: 10px;
+    padding: 5px;
+    margin: 15px 5px 25px;
+    font-size: .75em;
+    text-align: center;
 }
 
 .detail-card-bottom {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
 }
 
 .detail-card-bottom .dropdown{
@@ -62,8 +81,11 @@
 
 @media (max-width: 800px) {
     /* CSS that should be displayed if width is equal to or less than 800px goes here */
-    .detail-card-top p {
+    .detail-card-top .synopsis {
         font-size: .75em;
+    }
+    .detail-card-top .year-runtime {
+        font-size: .70em;
     }
     .detail-card-top img {
         padding-bottom: 10%;
@@ -72,11 +94,14 @@
 
 @media (max-width: 725px) {
 /* CSS that should be displayed if width is equal to or less than 725px goes here */
-    .detail-card-top p {
+    .detail-card-top .synopsis {
     font-size: .70em;
     }
+    .detail-card-top .year-runtime {
+        font-size: .65em;
+    }
     .detail-card-top img {
-    padding-bottom: 2%;
+    padding-bottom: 5%;
     }
     .detail-card-top h3 {
         font-size: 1.2em;

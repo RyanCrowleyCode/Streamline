@@ -7,3 +7,7 @@
 .delete-list {
     display: block;
 }
+
+.watchlist-detail-container header {
+    text-align: center;
+}

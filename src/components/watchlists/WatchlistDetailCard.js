@@ -55,16 +55,16 @@ class WatchlistDetailCard extends Component {
         const updatedWatchlistMovie = this.state.watchlistMovie
         updatedWatchlistMovie.movieSourceId = source.id
         watchlistApiManager.updateWatchlistMovie(updatedWatchlistMovie)
-            .then((wlMovie) => this.setState({
-                movieSource: wlMovie.movieSourceId,
-                sourceName: source.sourceName
+            .then((wlMovie) => {
+                this.setState({
+                    movieSource: wlMovie.movieSourceId,
+                    sourceName: source.sourceName
+                })
             })
-            )
-
     }
 
     getAndUpdate = () => {
-        this.setState({watchlistMovie: ''})
+        this.setState({ watchlistMovie: '' })
         Promise.all([
             // get movie
             movieApiManager.getOneMovie(this.props.watchlistMovie.movieId),
@@ -96,11 +96,11 @@ class WatchlistDetailCard extends Component {
     componentDidMount() {
         this.getAndUpdate()
     }
-
+    
     render() {
         const { title, releaseDate, runtime, synopsis, image, comments, sourceName } = this.state
         return (
-            <React.Fragment>
+            <React.Fragment >
                 <div className="detail-card">
                     <div className="detail-card-top">
                         {image ?
@@ -137,7 +137,9 @@ class WatchlistDetailCard extends Component {
                         {this.state.watchlistMovie ?
                             <WatchlistMovieForm
                                 key={this.state.watchlistMovie.id}
-                                watchlistMovie={this.state.watchlistMovie}
+                                // watchlistMovie={this.state.watchlistMovie}
+                                watchlistId={this.state.watchlistMovie.watchlistId}
+                                watchlistMovieId={this.state.watchlistMovie.id}
                                 getAndUpdate={this.getAndUpdate} />
                             : null
                         }
@@ -150,7 +152,7 @@ class WatchlistDetailCard extends Component {
                         </button>
                     </div>
                 </div>
-            </React.Fragment>
+            </React.Fragment >
         )
     }
 }

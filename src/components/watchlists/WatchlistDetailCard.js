@@ -69,16 +69,13 @@ class WatchlistDetailCard extends Component {
             // get movie
             movieApiManager.getOneMovie(this.props.watchlistMovie.movieId),
 
-            // get movieSource
-            watchlistApiManager.getMovieSource(this.props.watchlistMovie.movieSourceId),
 
             // get watchlistMovie for comment's sake
             moviesApiManager.getWatchlistMovie(this.props.watchlistMovie.watchlistId, this.props.watchlistMovie.movieId)
 
         ])
-            .then(([movie, movieSource, wlMovie]) => {
+            .then(([movie, wlMovie]) => {
                 const m = movie[0]
-                const mSource = movieSource[0]
                 this.setState({
                     title: m.title,
                     releaseDate: m.releaseDate,
@@ -86,9 +83,15 @@ class WatchlistDetailCard extends Component {
                     synopsis: m.synopsis,
                     comments: wlMovie[0].comments,
                     image: m.image,
-                    movieSource: mSource.id,
-                    sourceName: mSource.sourceName,
                     watchlistMovie: wlMovie[0]
+                })
+                // get movieSource
+                watchlistApiManager.getMovieSource(wlMovie[0].movieSourceId)
+                .then(mSource => {
+                    this.setState({
+                        movieSource: mSource[0].id,
+                        sourceName: mSource[0].sourceName,
+                    })
                 })
             })
     }
@@ -96,7 +99,7 @@ class WatchlistDetailCard extends Component {
     componentDidMount() {
         this.getAndUpdate()
     }
-    
+
     render() {
         const { title, releaseDate, runtime, synopsis, image, comments, sourceName } = this.state
         return (

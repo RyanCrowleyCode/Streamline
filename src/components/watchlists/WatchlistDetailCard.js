@@ -34,6 +34,9 @@ import './WatchlistDetailCard.css'
 import WatchlistMovieForm from './WatchlistMovieForm'
 import moviesApiManager from "../movies/moviesApiManager";
 
+// MODULES
+import { toDatePhrase, hoursMinutes } from '../../modules/helper'
+
 
 class WatchlistDetailCard extends Component {
     baseUrlPoster = "https://image.tmdb.org/t/p/original/"
@@ -87,12 +90,12 @@ class WatchlistDetailCard extends Component {
                 })
                 // get movieSource
                 watchlistApiManager.getMovieSource(wlMovie[0].movieSourceId)
-                .then(mSource => {
-                    this.setState({
-                        movieSource: mSource[0].id,
-                        sourceName: mSource[0].sourceName,
+                    .then(mSource => {
+                        this.setState({
+                            movieSource: mSource[0].id,
+                            sourceName: mSource[0].sourceName,
+                        })
                     })
-                })
             })
     }
 
@@ -114,8 +117,18 @@ class WatchlistDetailCard extends Component {
                         <div className="detail-card-details">
                             <h3>{title}</h3>
                             <p className="year-runtime">
-                                <span>{releaseDate}</span>
-                                <span>{runtime}</span>
+                                {releaseDate
+                                    ?
+                                    <span>{toDatePhrase(releaseDate)}</span>
+                                    :
+                                    null
+                                }
+                                {runtime
+                                    ?
+                                    <span>{hoursMinutes(runtime)}</span>
+                                    :
+                                    null
+                                }
                             </p>
                             <p>{synopsis}</p>
                         </div>

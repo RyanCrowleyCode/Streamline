@@ -96,11 +96,11 @@ class MovieCard extends Component {
                                 null
                             }
                             {/* keep paragraph from getting too long */}
-                            {this.movie.overview.length <= 375
+                            {this.movie.overview.length <= 350
                                 ?
                                 <p>{this.movie.overview}</p>
                                 :
-                                <p>{this.movie.overview.slice(0, 375) + "..."}</p>
+                                <p>{this.movie.overview.slice(0, 347) + "..."}</p>
                             }
                         </div>
                     </div>

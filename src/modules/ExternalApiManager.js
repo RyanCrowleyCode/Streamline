@@ -20,6 +20,7 @@ const baseUrlPopular = "https://api.themoviedb.org/3/discover/movie?api_key="
 const baseUrlMovie = "https://api.themoviedb.org/3/movie/"
 
 
+
 export default {
     searchTitle(movie) {
         return fetch(`${baseUrlTitle}api_key=${apiKey}&language=en-US&query=${movie}&page=1&include_adult=false`)

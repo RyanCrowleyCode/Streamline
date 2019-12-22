@@ -55,30 +55,27 @@ class WatchlistDetailCard extends Component {
         const updatedWatchlistMovie = this.state.watchlistMovie
         updatedWatchlistMovie.movieSourceId = source.id
         watchlistApiManager.updateWatchlistMovie(updatedWatchlistMovie)
-            .then((wlMovie) => this.setState({
-                movieSource: wlMovie.movieSourceId,
-                sourceName: source.sourceName
+            .then((wlMovie) => {
+                this.setState({
+                    movieSource: wlMovie.movieSourceId,
+                    sourceName: source.sourceName
+                })
             })
-            )
-
     }
 
     getAndUpdate = () => {
-        this.setState({watchlistMovie: ''})
+        this.setState({ watchlistMovie: '' })
         Promise.all([
             // get movie
             movieApiManager.getOneMovie(this.props.watchlistMovie.movieId),
 
-            // get movieSource
-            watchlistApiManager.getMovieSource(this.props.watchlistMovie.movieSourceId),
 
             // get watchlistMovie for comment's sake
             moviesApiManager.getWatchlistMovie(this.props.watchlistMovie.watchlistId, this.props.watchlistMovie.movieId)
 
         ])
-            .then(([movie, movieSource, wlMovie]) => {
+            .then(([movie, wlMovie]) => {
                 const m = movie[0]
-                const mSource = movieSource[0]
                 this.setState({
                     title: m.title,
                     releaseDate: m.releaseDate,
@@ -86,9 +83,15 @@ class WatchlistDetailCard extends Component {
                     synopsis: m.synopsis,
                     comments: wlMovie[0].comments,
                     image: m.image,
-                    movieSource: mSource.id,
-                    sourceName: mSource.sourceName,
                     watchlistMovie: wlMovie[0]
+                })
+                // get movieSource
+                watchlistApiManager.getMovieSource(wlMovie[0].movieSourceId)
+                .then(mSource => {
+                    this.setState({
+                        movieSource: mSource[0].id,
+                        sourceName: mSource[0].sourceName,
+                    })
                 })
             })
     }
@@ -100,7 +103,7 @@ class WatchlistDetailCard extends Component {
     render() {
         const { title, releaseDate, runtime, synopsis, image, comments, sourceName } = this.state
         return (
-            <React.Fragment>
+            <React.Fragment >
                 <div className="detail-card">
                     <div className="detail-card-top">
                         {image ?
@@ -137,7 +140,9 @@ class WatchlistDetailCard extends Component {
                         {this.state.watchlistMovie ?
                             <WatchlistMovieForm
                                 key={this.state.watchlistMovie.id}
-                                watchlistMovie={this.state.watchlistMovie}
+                                // watchlistMovie={this.state.watchlistMovie}
+                                watchlistId={this.state.watchlistMovie.watchlistId}
+                                watchlistMovieId={this.state.watchlistMovie.id}
                                 getAndUpdate={this.getAndUpdate} />
                             : null
                         }
@@ -150,7 +155,7 @@ class WatchlistDetailCard extends Component {
                         </button>
                     </div>
                 </div>
-            </React.Fragment>
+            </React.Fragment >
         )
     }
 }

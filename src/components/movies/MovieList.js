@@ -32,8 +32,10 @@ import './MovieList.css'
 class MovieList extends Component {
     state = {
         movies: [],
+        popularMovies: [],
         watchlists: [],
         searchWord: '',
+        searching: false
     }
 
     // Update searchWord in state as user types
@@ -44,6 +46,7 @@ class MovieList extends Component {
     // Use searchWord to search external api
     handleSearch = e => {
         e.preventDefault()
+        this.setState({searching: true, popularMovies: []})
         if (this.state.searchWord) {
             ExternalApiManager.searchTitle(this.state.searchWord)
                 .then(response => {
@@ -57,6 +60,10 @@ class MovieList extends Component {
             .then(watchlists => {
                 this.setState({ watchlists: watchlists })
             })
+        if (!this.state.searching) {
+            ExternalApiManager.getPopular()
+            .then(popular => this.setState({popularMovies: popular.results.slice(0,6)}))
+        }
     }
 
     render() {
@@ -83,6 +90,14 @@ class MovieList extends Component {
                 </form>
                 <section className="movie-list">
                     {this.state.movies.map(movie =>
+                        <MovieCard
+                            key={movie.id}
+                            movieObj={movie}
+                            movieKey={movie.id}
+                            watchlists={this.state.watchlists}
+                        />
+                    )}
+                    {this.state.popularMovies.map(movie =>
                         <MovieCard
                             key={movie.id}
                             movieObj={movie}

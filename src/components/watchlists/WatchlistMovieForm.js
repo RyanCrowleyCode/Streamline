@@ -20,13 +20,12 @@ import movieApiManager from '../movies/moviesApiManager'
 
 
 class WatchlistMovieForm extends Component {
-    watchlistId = parseInt(this.props.watchlistMovie.watchlistId)
-    watchlistMovieId = parseInt(this.props.watchlistMovie.id)
+    watchlistId = parseInt(this.props.watchlistId)
+    watchlistMovieId = parseInt(this.props.watchlistMovieId)
 
     state = {
         comments: '',
         title: '',
-        watchlistMovie: {},
         loadingStatus: false,
         open: false
     }
@@ -42,11 +41,6 @@ class WatchlistMovieForm extends Component {
         })
     }
 
-    // update listName and Description in state with every keystroke in input field
-    handleFieldChange = e => {
-        this.setState({ [e.target.id]: e.target.value })
-    }
-
     // updates comments
     handleCommentChange = e => {
         this.setState({ comments: e.target.value })
@@ -57,18 +51,20 @@ class WatchlistMovieForm extends Component {
         evt.preventDefault()
         this.setState({ loadingStatus: true })
         // new object with updated comments]
-        const updatedObject = this.state.watchlistMovie
-        updatedObject.comments = this.state.comments
-        // update watchlistMovie in database
-        watchlistApiManager.updateWatchlistMovie(updatedObject)
-            // then, return user back to watchlist view
-            .then(() => {
-                // close modal and reset state
-                this.close()
-                // call parent render function
-                this.props.getAndUpdate()
+        // get watchlist movie
+        watchlistApiManager.getWatchlistMovieById(this.watchlistMovieId)
+            .then(watchlistMovie => {
+                const updatedObject = watchlistMovie[0]
+                updatedObject.comments = this.state.comments
+                // update watchlistMovie in database
+                watchlistApiManager.updateWatchlistMovie(updatedObject)
+                    .then(() => {
+                        // close modal and reset state
+                        this.close()
+                        // call parent render function
+                        this.props.getAndUpdate()
+                    })
             })
-
     }
 
     componentDidMount() {
@@ -77,7 +73,6 @@ class WatchlistMovieForm extends Component {
             .then(watchlistMovie => {
                 this.setState({
                     comments: watchlistMovie[0].comments,
-                    watchlistMovie: watchlistMovie[0]
                 })
                 // get movie
                 movieApiManager.getOneMovie(watchlistMovie[0].movieId)
@@ -87,7 +82,7 @@ class WatchlistMovieForm extends Component {
 
     render() {
         return (
-            <React.Fragment>
+            <React.Fragment >
                 <Button
                     variant="success"
                     className="edit-movie-button"
@@ -117,7 +112,7 @@ class WatchlistMovieForm extends Component {
                 </Button>
                     </Form>
                 </Modal>
-            </React.Fragment>
+            </React.Fragment >
         )
     }
 }

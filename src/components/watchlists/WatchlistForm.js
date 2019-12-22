@@ -115,7 +115,7 @@ class WatchlistForm extends Component {
                             <Form.Control
                                 id="listName"
                                 type="text"
-                                placeholder="Funny Movies"
+                                placeholder="Awesome Title Goes Here"
                                 onChange={this.handleFieldChange} />
                         </Form.Group>
                         <Form.Group>
@@ -123,7 +123,7 @@ class WatchlistForm extends Component {
                             <Form.Control
                                 id="listDescription"
                                 type="text"
-                                placeholder="Write something to describe your list."
+                                placeholder="Tell me about your list."
                                 onChange={this.handleFieldChange} />
                         </Form.Group>
                         <div className="form-buttons">

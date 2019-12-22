@@ -49,7 +49,7 @@
 
 .detail-card-top .year-runtime {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     font-size: .85em;
     font-weight: bold;
 }

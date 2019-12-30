@@ -53,42 +53,21 @@ class EditWatchlistForm extends Component {
         if (listName && listDescription) {
             this.setState({ loadingStatus: true })
 
-            const newWatchlist = {
+            const updatedWatchlist = {
+                id: this.watchlist.id,
                 listName: this.state.listName,
                 listDescription: this.state.listDescription,
                 userId: parseInt(getLoggedInUser())
             }
 
-            // // get watchlists for user. If no watchlist with the same name
-            // // exists, create new watchlist. Otherwise, let the user know
-            // // that they already have a watchlist with this name.
-            // watchlistApiManager.getOwnWatchlists(getLoggedInUser())
-            //     .then(watchlists => {
-            //         let isNew = true
-            //         for (const list of watchlists) {
-            //             if (newWatchlist.listName === list.listName) {
-            //                 isNew = false
-            //             }
-            //         }
-            //         return isNew
-            //     })
-            //     .then(isNew => {
-            //         if (isNew) {
-            //             // post newWatchlist to the database
-            //             watchlistApiManager.createNewWatchlist(newWatchlist)
-            //                 .then(() => {
-            //                     // close modal and reset state
-            //                     this.close()
-            //                     // call parent render function
-            //                     this.props.parentFunction()
-            //                 })
-            //         } else {
-            //             window.alert("You already have a Watchlist with that name.")
-            //             this.setState({ loadingStatus: false })
-            //         }
-            //     })
-
-
+            // post updatedWatchlist to the database
+            watchlistApiManager.updateWatchlist(updatedWatchlist)
+                .then(() => {
+                    // close modal and reset state
+                    this.close()
+                    // call parent render function
+                    // this.props.parentFunction()
+                })
         } else {
             window.alert("Please fill out all of the fields.")
             this.setState({ loadingStatus: false })
@@ -97,12 +76,12 @@ class EditWatchlistForm extends Component {
 
     componentDidMount() {
         moviesApiManager.getWatchlist(this.watchlist.id, getLoggedInUser())
-        .then(watchlist => {
-            this.setState({
-                listName: watchlist[0].listName,
-                listDescription: watchlist[0].listDescription
+            .then(watchlist => {
+                this.setState({
+                    listName: watchlist[0].listName,
+                    listDescription: watchlist[0].listDescription
+                })
             })
-        })
     }
 
 
@@ -110,7 +89,8 @@ class EditWatchlistForm extends Component {
         return (
             <React.Fragment>
                 <Button
-                    variant="success"
+                    variant="dark"
+                    size="sm"
                     className="new-watchlist-button"
                     onClick={() => this.setState({ open: true })}>
                     Edit

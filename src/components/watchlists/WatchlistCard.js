@@ -76,7 +76,7 @@ class WatchlistCard extends Component {
                                 type="button"
                                 className="btn btn-primary btn-sm"
                             >
-                                See List
+                                Select
                         </button>
                         </Link>
                         <EditWatchlistForm watchlist={this.props.watchlist}/>

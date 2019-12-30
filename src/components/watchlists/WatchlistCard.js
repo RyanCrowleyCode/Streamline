@@ -17,6 +17,9 @@ import './WatchlistCard.css'
 // DATA
 import movieApiManager from '../movies/moviesApiManager'
 
+// COMPONENTS
+import EditWatchlistForm from './EditWatchlistForm'
+
 
 class WatchlistCard extends Component {
     baseUrlPoster = "https://image.tmdb.org/t/p/original/"
@@ -76,6 +79,7 @@ class WatchlistCard extends Component {
                                 See List
                         </button>
                         </Link>
+                        <EditWatchlistForm watchlist={this.props.watchlist}/>
                         <button
                             type="button"
                             className="btn btn-danger btn-sm"

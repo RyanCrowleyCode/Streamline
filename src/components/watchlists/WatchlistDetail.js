@@ -99,7 +99,7 @@ class WatchlistDetail extends Component {
                     <footer>
                         <button
                             type="button"
-                            className="btn btn-danger delete-list"
+                            className="btn btn-danger delete-list btn-sm"
                             onClick={() => this.deleteWatchlist(this.watchlistId)}
                             disabled={this.state.loadingStatus}
                         >

@@ -44,7 +44,7 @@ class WatchlistCard extends Component {
     }
 
     getWatchlist = () => {
-        // reset state
+        // reset state to force re-render of Edit form button
         this.setState({
             title: '',
             description: ''
@@ -78,7 +78,7 @@ class WatchlistCard extends Component {
     }
 
     getListUpdateState = () => {
-        // reset state
+        // reset state 
         this.setState({
             title: '',
             description: '',
@@ -118,6 +118,8 @@ class WatchlistCard extends Component {
                                 Select
                         </button>
                         </Link>
+                        {/* conditional to force EditWatchlistForm button to 
+                        re-render after submitting*/}
                         {this.state.title ?
                             <EditWatchlistForm
                                 key={this.watchlistId}

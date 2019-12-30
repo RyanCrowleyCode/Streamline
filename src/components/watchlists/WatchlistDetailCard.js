@@ -151,6 +151,8 @@ class WatchlistDetailCard extends Component {
                                 </Dropdown.Item>
                             )}
                         </DropdownButton>
+                        {/* conditional to force WatchlistMovieForm button to 
+                        re-render after submitting. */}
                         {this.state.watchlistMovie ?
                             <WatchlistMovieForm
                                 key={this.state.watchlistMovie.id}

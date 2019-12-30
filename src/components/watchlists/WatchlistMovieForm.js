@@ -26,6 +26,7 @@ class WatchlistMovieForm extends Component {
     state = {
         comments: '',
         title: '',
+        watchlistMovie: {},
         loadingStatus: false,
         open: false
     }
@@ -39,6 +40,8 @@ class WatchlistMovieForm extends Component {
             loadingStatus: false,
             open: false
         })
+        // call parent render function
+        this.props.getAndUpdate()
     }
 
     // updates comments
@@ -61,8 +64,6 @@ class WatchlistMovieForm extends Component {
                     .then(() => {
                         // close modal and reset state
                         this.close()
-                        // call parent render function
-                        this.props.getAndUpdate()
                     })
             })
     }
@@ -110,7 +111,12 @@ class WatchlistMovieForm extends Component {
                             onClick={this.updateComments}
                             disabled={this.state.loadingStatus}>
                             Update
-                </Button>
+                        </Button>
+                        <Button
+                            onClick={() => this.close()}
+                            variant="dark">
+                            Cancel
+                        </Button>
                     </Form>
                 </Modal>
             </React.Fragment >

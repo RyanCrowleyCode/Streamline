@@ -19,13 +19,16 @@ import movieApiManager from '../movies/moviesApiManager'
 
 // COMPONENTS
 import EditWatchlistForm from './EditWatchlistForm'
+import { getLoggedInUser } from '../../modules/helper'
 
 
 class WatchlistCard extends Component {
     baseUrlPoster = "https://image.tmdb.org/t/p/original/"
-    watchlist = this.props.watchlist
+    watchlistId = this.props.watchlist.id
 
     state = {
+        title: '',
+        description: '',
         posters: []
     }
 
@@ -35,14 +38,34 @@ class WatchlistCard extends Component {
         if (movie.image && this.state.posters.length < 3) {
             images.push(movie.image)
         }
-        this.setState({ posters: images })
+        if (images) {
+            this.setState({ posters: images })
+        }
     }
 
-    componentDidMount() {
-        // getting posters for each movie in watchlist.
-        // first, get watchlistMovies for this watchlist
-        movieApiManager.getAllWatchlistMovies(this.watchlist.id)
+    getWatchlist = () => {
+        // reset state
+        this.setState({
+            title: '',
+            description: ''
+        })
+        // get Watchlist
+        movieApiManager.getWatchlist(this.watchlistId, getLoggedInUser())
+            .then(watchlist => {
+                // update title and description for this watchlist
+                this.setState({
+                    title: watchlist[0].listName,
+                    description: watchlist[0].listDescription
+                })
+            })
+    }
+
+
+    getWatchlistMovies = () => {
+        // get watchlistMovies for this watchlist
+        movieApiManager.getAllWatchlistMovies(this.watchlistId)
             .then(watchlistMovies => {
+                // getting  posters for each movie in watchlist.
                 watchlistMovies.map(watchlistMovie => {
                     // Then, get movie for each watchlist movie
                     return movieApiManager.getOneMovie(watchlistMovie.movieId)
@@ -54,13 +77,29 @@ class WatchlistCard extends Component {
             })
     }
 
+    getListUpdateState = () => {
+        // reset state
+        this.setState({
+            title: '',
+            description: '',
+            posters: []
+        })
+        this.getWatchlist()
+        this.getWatchlistMovies()
+
+    }
+
+    componentDidMount() {
+        this.getListUpdateState()
+    }
+
 
     render() {
         return (
             <React.Fragment>
                 <div className="watchlist-card">
-                    <h4>{this.watchlist.listName}</h4>
-                    <p>{this.watchlist.listDescription}</p>
+                    <h4>{this.state.title}</h4>
+                    <p>{this.state.description}</p>
                     <section className="watchlist-posters">
                         {this.state.posters.map(poster =>
                             <img
@@ -71,7 +110,7 @@ class WatchlistCard extends Component {
                         )}
                     </section>
                     <section className="watchlist-buttons">
-                        <Link to={`/watchlists/${this.watchlist.id}`}>
+                        <Link to={`/watchlists/${this.watchlistId}`}>
                             <button
                                 type="button"
                                 className="btn btn-primary btn-sm"
@@ -79,11 +118,18 @@ class WatchlistCard extends Component {
                                 Select
                         </button>
                         </Link>
-                        <EditWatchlistForm watchlist={this.props.watchlist}/>
+                        {this.state.title ?
+                            <EditWatchlistForm
+                                key={this.watchlistId}
+                                watchlist={this.props.watchlist}
+                                parentFunction={this.getWatchlist} />
+                            : null
+
+                        }
                         <button
                             type="button"
                             className="btn btn-danger btn-sm"
-                            onClick={() => this.props.deleteWatchlist(this.watchlist.id)}
+                            onClick={() => this.props.deleteWatchlist(this.watchlistId)}
                         >
                             Delete
                         </button>

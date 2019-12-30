@@ -37,6 +37,8 @@ class EditWatchlistForm extends Component {
             loadingStatus: false,
             open: false
         })
+        // call parent render function
+        this.props.parentFunction()
     }
 
     // update listName and Description in state with every keystroke in input field
@@ -65,8 +67,7 @@ class EditWatchlistForm extends Component {
                 .then(() => {
                     // close modal and reset state
                     this.close()
-                    // call parent render function
-                    // this.props.parentFunction()
+
                 })
         } else {
             window.alert("Please fill out all of the fields.")
@@ -102,7 +103,7 @@ class EditWatchlistForm extends Component {
                     centered>
                     <Form>
                         <h4>Edit Watchlist</h4>
-                        <Form.Group onSubmit={this.handleSubmit}>
+                        <Form.Group>
                             <Form.Label>Title</Form.Label>
                             <Form.Control
                                 id="listName"
@@ -121,16 +122,16 @@ class EditWatchlistForm extends Component {
                         <div className="form-buttons">
                             <Button
                                 variant="success"
-                                type="submit"
+                                type="button"
                                 onClick={this.handleSubmit}
                                 disabled={this.state.loadingStatus}>
-                                Submit
-                        </Button>
+                                Update
+                            </Button>
                             <Button
                                 onClick={() => this.close()}
                                 variant="dark">
                                 Cancel
-                        </Button>
+                            </Button>
                         </div>
                     </Form>
                 </Modal>

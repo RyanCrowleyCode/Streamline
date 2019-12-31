@@ -34,6 +34,13 @@
     height: auto;
 }
 
+.watchlist-posters .default-icon{
+    padding: 10px;
+    width: 30%;
+    margin: 25px;
+    height: auto;
+}
+
 .watchlist-buttons {
     margin: 10px;
     display: flex;

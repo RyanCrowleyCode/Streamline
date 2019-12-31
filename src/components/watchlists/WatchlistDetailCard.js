@@ -133,7 +133,10 @@ class WatchlistDetailCard extends Component {
                             <p className="synopsis">{synopsis}</p>
                         </div>
                     </div>
-                    <p className="comments">{comments}</p>
+                    {this.state.comments ?
+                        <p className="comments">{comments}</p>
+                        : <p className="empty-comments"></p>
+                    }
                     <div className="detail-card-bottom">
                         <DropdownButton
                             id={this.state.watchlistMovie.id}

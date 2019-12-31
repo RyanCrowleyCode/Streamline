@@ -13,6 +13,8 @@ import { Link } from 'react-router-dom'
 
 // STYLES
 import './WatchlistCard.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFilm } from '@fortawesome/free-solid-svg-icons'
 
 // DATA
 import movieApiManager from '../movies/moviesApiManager'
@@ -101,13 +103,17 @@ class WatchlistCard extends Component {
                     <h4>{this.state.title}</h4>
                     <p>{this.state.description}</p>
                     <section className="watchlist-posters">
-                        {this.state.posters.map(poster =>
-                            <img
-                                className="watchlist-poster"
-                                src={`${this.baseUrlPoster}${poster}`}
-                                alt={"movie poster"}
-                                key={poster} />
-                        )}
+                        {this.state.posters.length > 0 ?
+                            this.state.posters.map(poster =>
+                                <img
+                                    className="watchlist-poster"
+                                    src={`${this.baseUrlPoster}${poster}`}
+                                    alt={"movie poster"}
+                                    key={poster} />
+                            )
+                            : 
+                            <FontAwesomeIcon className="default-icon" icon={faFilm} size="6x" color="white"/>
+                        }
                     </section>
                     <section className="watchlist-buttons">
                         <Link to={`/watchlists/${this.watchlistId}`}>

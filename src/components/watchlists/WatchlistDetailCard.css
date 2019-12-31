@@ -1,7 +1,7 @@
 .detail-card {
     display: flex;
-    margin: 20px 5px;
-    width: 80%;
+    margin: 5px 5px;
+    /* width: 80%; */
     min-width: 360px;
     max-width: 825px;
     flex-direction: column;
@@ -59,14 +59,20 @@
 }
 
 .detail-card .comments {
-    border: 1px solid #343a40;
-    background-color: #505961;
-    color: rgb(233, 230, 230);
+    border: 1px solid #656f78;
+    background-color: #656f78;
+    /* color: rgb(233, 230, 230); */
+    color: white;
     border-radius: 10px;
     padding: 5px;
     margin: 15px 5px 25px;
-    font-size: .75em;
+    font-size: .9em;
     text-align: center;
+}
+
+.detail-card .empty-comments {
+    padding: 5px;
+    margin: 15px 5px 25px;
 }
 
 .detail-card-bottom {
@@ -90,6 +96,9 @@
     .detail-card-top img {
         padding-bottom: 10%;
     }
+    .detail-card .comments {
+        font-size: .8em;
+    }
 }
 
 @media (max-width: 725px) {
@@ -105,5 +114,8 @@
     }
     .detail-card-top h3 {
         font-size: 1.2em;
+    }
+    .detail-card .comments {
+        font-size: .7em;
     }
 }

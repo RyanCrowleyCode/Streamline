@@ -84,7 +84,7 @@ class MovieCard extends Component {
                         {this.movie.poster_path ?
                             <img src={`${this.baseUrlPoster}${this.movie.poster_path}`} alt={this.movie.title} />
                             :
-                            <FontAwesomeIcon className="default-icon" icon={faFilm} size="6x" />
+                            <FontAwesomeIcon className="default-icon" icon={faFilm} color="white" size="6x" />
                         }
                         <div className="movie-card-details">
                             <h5>{this.movie.title}</h5>

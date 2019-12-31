@@ -26,6 +26,7 @@ class WatchlistMovieForm extends Component {
     state = {
         comments: '',
         title: '',
+        watchlistMovie: {},
         loadingStatus: false,
         open: false
     }
@@ -39,6 +40,8 @@ class WatchlistMovieForm extends Component {
             loadingStatus: false,
             open: false
         })
+        // call parent render function
+        this.props.getAndUpdate()
     }
 
     // updates comments
@@ -61,8 +64,6 @@ class WatchlistMovieForm extends Component {
                     .then(() => {
                         // close modal and reset state
                         this.close()
-                        // call parent render function
-                        this.props.getAndUpdate()
                     })
             })
     }
@@ -86,15 +87,16 @@ class WatchlistMovieForm extends Component {
                 <Button
                     variant="success"
                     className="edit-movie-button"
+                    size="sm"
                     onClick={() => this.setState({ open: true })}>
-                    Edit Movie
+                    Notes
                 </Button>
                 <Modal
                     show={this.state.open}
                     onHide={() => this.close()}
                     centered>
                     <Form>
-                        <h4>Edit Comments</h4>
+                        <h4>My Notes</h4>
                         <Form.Group>
                             <Form.Label>{this.state.title}</Form.Label>
                             <Form.Control
@@ -109,7 +111,12 @@ class WatchlistMovieForm extends Component {
                             onClick={this.updateComments}
                             disabled={this.state.loadingStatus}>
                             Update
-                </Button>
+                        </Button>
+                        <Button
+                            onClick={() => this.close()}
+                            variant="dark">
+                            Cancel
+                        </Button>
                     </Form>
                 </Modal>
             </React.Fragment >

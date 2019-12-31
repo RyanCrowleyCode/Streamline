@@ -84,7 +84,7 @@ class MovieCard extends Component {
                         {this.movie.poster_path ?
                             <img src={`${this.baseUrlPoster}${this.movie.poster_path}`} alt={this.movie.title} />
                             :
-                            <FontAwesomeIcon className="default-icon" icon={faFilm} size="6x" />
+                            <FontAwesomeIcon className="default-icon" icon={faFilm} color="white" size="6x" />
                         }
                         <div className="movie-card-details">
                             <h5>{this.movie.title}</h5>
@@ -96,11 +96,11 @@ class MovieCard extends Component {
                                 null
                             }
                             {/* keep paragraph from getting too long */}
-                            {this.movie.overview.length <= 375
+                            {this.movie.overview.length <= 350
                                 ?
                                 <p>{this.movie.overview}</p>
                                 :
-                                <p>{this.movie.overview.slice(0, 375) + "..."}</p>
+                                <p>{this.movie.overview.slice(0, 347) + "..."}</p>
                             }
                         </div>
                     </div>

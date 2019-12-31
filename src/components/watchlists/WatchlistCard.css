@@ -26,11 +26,18 @@
     border: 1px solid black;
     border-radius: 10px;
     background-color: black;
-    margin: 5px;
+    margin: 15px 5px;
 }
 
 .watchlist-poster {
     width: 30%;
+    height: auto;
+}
+
+.watchlist-posters .default-icon{
+    padding: 10px;
+    width: 30%;
+    margin: 25px;
     height: auto;
 }
 

@@ -7,3 +7,22 @@
 .delete-list {
     display: block;
 }
+
+.watchlist-detail-container header {
+    text-align: center;
+    /* border-bottom: 1px solid black; */
+    padding: 2px;
+    width: 100%;
+}
+
+.watchlist-detail-container .list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* border: 1px solid red; */
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border-radius: 10px; /* rounded corners */
+    background-color: #c1c4c6;
+}
+

@@ -1,5 +1,10 @@
+@import url("https://fonts.googleapis.com/css?family=Nunito&display=swap");
+
 body {
     background-color: #e9ecef;
+    font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
 }
 
 h1 {
@@ -20,7 +25,16 @@ form .form-buttons {
     text-align: center;
 }
 
-@media (max-width: 800px) {
+@media (min-width: 1500px) {
+    h1 {
+        font-size: 2.5em;
+    }
+    p {
+        font-size: 1.5em;
+    }
+}
+
+@media (max-width: 900px) {
     h1 {
         font-size: 2em;
     }
@@ -53,11 +67,14 @@ form .form-buttons {
 @media (max-width: 500px) {
 /* CSS that should be displayed if width is equal to or less than 725px goes here */
     h1 {
-     font-size: 1.4em;
+        font-size: 1.4em;
     }
     p {
         font-size: .8em;
     }  
+    h5 {
+        font-size: 1.1em;
+    }
 }
 
 

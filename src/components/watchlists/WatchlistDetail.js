@@ -12,6 +12,7 @@ import React, { Component } from "react";
 
 // COMPONENTS
 import WatchlistDetailCard from './WatchlistDetailCard'
+import EditWatchlistForm from './EditWatchlistForm'
 
 // DATA
 import watchlistApiManager from '../watchlists/watchlistApiManager'
@@ -31,6 +32,7 @@ class WatchlistDetail extends Component {
         listDescription: '',
         sortedMovies: [],
         sources: [],
+        watchlist: '',
         loadingStatus: false
     }
 
@@ -51,8 +53,19 @@ class WatchlistDetail extends Component {
             })
     }
 
-    // gets watchlists and updates state
+    // resets state to reset edit button
+    resetState = () => {
+        this.setState({
+            listName: '',
+            listDescription: '',
+            watchlist: '',
+            loadingStatus: false
+        })
+    }
+
+    // gets watchlist and updates state
     getListsUpdateState = () => {
+        this.resetState()
         Promise.all([
             // get watchlist
             movieApiManager.getWatchlist(this.watchlistId, getLoggedInUser()),
@@ -69,7 +82,8 @@ class WatchlistDetail extends Component {
                     listName: watchlist[0].listName,
                     listDescription: watchlist[0].listDescription,
                     sortedMovies: watchlistMovies,
-                    sources: sources
+                    sources: sources,
+                    watchlist: watchlist[0]
                 })
             })
         // console.log.("state from GLUS: ", this.state)
@@ -86,26 +100,34 @@ class WatchlistDetail extends Component {
                     <header>
                         <h1>{this.state.listName}</h1>
                         <p>{this.state.listDescription}</p>
-                    </header>
-                    {this.state.sortedMovies.map(watchlistMovie =>
-                        <WatchlistDetailCard
-                            loadingStatus={this.state.loadingStatus}
-                            key={watchlistMovie.id}
-                            watchlistMovie={watchlistMovie}
-                            sources={this.state.sources}
-                            deleteMovie={this.deleteMovie}
-                            {...this.props} />
-                    )}
-                    <footer>
-                        <button
-                            type="button"
-                            className="btn btn-danger delete-list"
-                            onClick={() => this.deleteWatchlist(this.watchlistId)}
-                            disabled={this.state.loadingStatus}
-                        >
-                            Delete List
+                        <div className="watchlist-buttons">
+                            {this.state.watchlist ?
+                                <EditWatchlistForm
+                                    parentFunction={this.getListsUpdateState}
+                                    watchlist={this.state.watchlist} />
+                                : null
+                            }
+                            <button
+                                type="button"
+                                className="btn btn-danger delete-list btn-sm"
+                                onClick={() => this.deleteWatchlist(this.watchlistId)}
+                                disabled={this.state.loadingStatus}
+                            >
+                                Delete
                         </button>
-                    </footer>
+                        </div>
+                    </header>
+                    <div className="list">
+                        {this.state.sortedMovies.map(watchlistMovie =>
+                            <WatchlistDetailCard
+                                loadingStatus={this.state.loadingStatus}
+                                key={watchlistMovie.id}
+                                watchlistMovie={watchlistMovie}
+                                sources={this.state.sources}
+                                deleteMovie={this.deleteMovie}
+                                {...this.props} />
+                        )}
+                    </div>
                 </div>
             </React.Fragment>
         )

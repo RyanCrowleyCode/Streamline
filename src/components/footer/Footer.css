@@ -6,31 +6,31 @@
     right: 0;
     display: flex;
     justify-content: space-between;
-    height: 100px;
+    height: 80px;
 }
 .tmbd-credit {
     display: flex;  
     align-items: center;
-    margin: 15px;
+    margin: 10px;
 }
 
 .tmbd-text {
     display: flex;  
     flex-direction: column; 
-    margin: 0 15px;
+    margin: 0 20px;
 }
 
 
 #tmbd-logo {
-   height: 58px;
+   height: 45px;
 }
 
 .tmbd-credit p {
-    font-size: .75em;
-    width: 220px;
+    font-size: .7em;
+    width: 190px;
     margin: 5px 0;
 }
 
 .tmbd-credit a {
-    font-size: .85em;
+    font-size: .75em;
 }

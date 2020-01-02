@@ -11,7 +11,7 @@ body {
   in the middle of the screen if there isn't enough content to cover the viewport */
   display: block;
   position: relative;
-  padding-bottom: 100px; /* height of footer. Prevents footer from covering content */
+  padding-bottom: 80px; /* height of footer. Prevents footer from covering content */
 }
 
 code {

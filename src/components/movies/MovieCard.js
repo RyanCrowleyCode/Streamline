@@ -39,12 +39,6 @@ class MovieCard extends Component {
     movie = this.props.movieObj
     movieId = this.movie.id
 
-    state = {
-        watchlists: ''
-    }
-
-
-
     // Fetch calls to database for adding to watchlist
     addMovie = (watchlistId, movieId) => {
         ExternalApiManager.getMovie(movieId)
@@ -91,7 +85,7 @@ class MovieCard extends Component {
     // Adds movie to newly created watchlist
     addToNewList = (listId) => {
         // this updates the dropdown menues for all movie cards to have the new list
-        this.props.getLists()   
+        this.props.getLists()
         //  add current movie to new list
         this.addMovie(listId, this.movieId)
     }
@@ -132,18 +126,16 @@ class MovieCard extends Component {
                             variant="success"
                             className="watchlist-button"
                         >
-                            <div className="new-dropdown-button-container">
-                                <Dropdown.Item
-                                    key={`${this.props.movieKey}-new`}
-                                    id="new"
-                                    className="new-dropdown-button"
-                                    onClick={() => this.setState({ modalOpen: true })}
-                                >
-                                    <WatchlistForm
-                                        movieCard={true}
-                                        parentFunction={this.addToNewList}
-                                        />
-                                </Dropdown.Item>
+                            <div
+                                key={`${this.props.movieKey}-new`}
+                                id="new"
+                                className="new-dropdown-button"
+                                onClick={() => this.setState({ modalOpen: true })}
+                            >
+                                <WatchlistForm
+                                    movieCard={true}
+                                    parentFunction={this.addToNewList}
+                                />
                             </div>
                             {this.props.watchlists.map(watchlist =>
                                 <Dropdown.Item

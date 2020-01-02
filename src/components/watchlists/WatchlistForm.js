@@ -110,7 +110,7 @@ class WatchlistForm extends Component {
                     <div
                         onClick={() => this.setState({ open: true })}>
                         + New
-                </div>
+                    </div>
                     : <Button
                         variant="success"
                         className="new-watchlist-button"

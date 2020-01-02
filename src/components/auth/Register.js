@@ -16,6 +16,7 @@ import './auth.css'
 
 // DATABASE
 import authApiManager from './authApiManager'
+import watchlistApiManager from '../watchlists/watchlistApiManager'
 
 
 class Register extends Component {
@@ -60,7 +61,21 @@ class Register extends Component {
                                     // Valid new user, POST to database and setUser
                                     authApiManager.createNewUser(newUser)
                                         .then(user => {
-                                            this.props.setUser(user)
+                                            // create a first watchlist for that user
+                                            const defaultWatchlist = {
+                                                listName: "My First Watchlist",
+                                                listDescription: "Add movies to your watchlist.",
+                                                userId: user.id
+                                            }
+                                            watchlistApiManager.createNewWatchlist(defaultWatchlist)
+                                            .then(watchlist => {
+                                                // get user
+                                                authApiManager.getAllUsers(`id=${watchlist.userId}`)
+                                                .then(user => {
+                                                    // setUser and enter logged in view of application
+                                                    this.props.setUser(user[0])
+                                                })
+                                            })
                                         })
                                 } else {
                                     window.alert("There is already an account with that username.")
@@ -72,12 +87,6 @@ class Register extends Component {
                         this.setState({ loadingStatus: false })
                     }
                 })
-
-            // authApiManager.createNewUser(newUser)
-            //     .then(user => {
-            //         // SET USER AFTER POST, WILL NEED ID FROM RETURN!!
-            //         console.log("new user: ", user)
-            //     })
         } else {
             window.alert("Please make sure your passwords match")
             this.setState({ loadingStatus: false })

@@ -55,11 +55,16 @@ class MovieList extends Component {
         }
     }
 
-    componentDidMount() {
+    // gets watchlists for user
+    getLists = () => {
         watchlistApiManager.getOwnWatchlists(getLoggedInUser())
             .then(watchlists => {
                 this.setState({ watchlists: watchlists })
             })
+    }
+
+    componentDidMount() {
+        this.getLists()
         if (!this.state.searching) {
             ExternalApiManager.getPopular()
             .then(popular => this.setState({popularMovies: popular.results.slice(0,6)}))
@@ -95,6 +100,7 @@ class MovieList extends Component {
                             movieObj={movie}
                             movieKey={movie.id}
                             watchlists={this.state.watchlists}
+                            getLists={this.getLists}
                         />
                     )}
                     {this.state.popularMovies.map(movie =>
@@ -103,6 +109,7 @@ class MovieList extends Component {
                             movieObj={movie}
                             movieKey={movie.id}
                             watchlists={this.state.watchlists}
+                            getLists={this.getLists}
                         />
                     )}
                 </section>

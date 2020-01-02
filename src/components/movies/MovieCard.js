@@ -21,6 +21,9 @@ import DropdownButton from 'react-bootstrap/DropdownButton'
 // DATA
 import ExternalApiManager from '../../modules/ExternalApiManager'
 
+// COMPONENTS
+import WatchlistForm from '../watchlists/WatchlistForm'
+
 // MODULES
 import moviesApiManager from './moviesApiManager'
 import { toDatePhrase } from '../../modules/helper'
@@ -34,12 +37,10 @@ import { createWatchlistMovie } from '../../modules/helper'
 class MovieCard extends Component {
     baseUrlPoster = "https://image.tmdb.org/t/p/original/"
     movie = this.props.movieObj
+    movieId = this.movie.id
 
-    // Add movie to a watchlist when user selects watchlist
-    addToWatchlist = e => {
-        const watchlistId = e.target.id
-        const movieId = this.movie.id
-
+    // Fetch calls to database for adding to watchlist
+    addMovie = (watchlistId, movieId) => {
         ExternalApiManager.getMovie(movieId)
             .then(tmdbMovie => {
                 // get movies from internal database. 
@@ -53,26 +54,40 @@ class MovieCard extends Component {
                         // AND get watchlistMovie and create if not there
                         // get userMovies and create if not there
                         moviesApiManager.getUserMovie(parseInt(getLoggedInUser()), movie.id)
-                        .then(userMovie => {
-                            if (userMovie.length === 0) {
-                                createUserMovie(parseInt(getLoggedInUser()), movie.id)
-                            }
-                        })
+                            .then(userMovie => {
+                                if (userMovie.length === 0) {
+                                    createUserMovie(parseInt(getLoggedInUser()), movie.id)
+                                }
+                            })
                         // // get watchlistMovie and create if not there
                         moviesApiManager.getWatchlistMovie(parseInt(watchlistId), movie.id)
-                        .then(watchlistMovie => {
-                            if (watchlistMovie.length === 0) {
-                                // Need to get length of watchlist you are adding
-                                // movie to so you can set index of watchlistMovie
-                                moviesApiManager.getAllWatchlistMovies(parseInt(watchlistId))
-                                .then(watchlist => {
-                                    const listIndex = watchlist.length
-                                    createWatchlistMovie(parseInt(watchlistId), movie.id, listIndex)
-                                })
-                            }
-                        })
+                            .then(watchlistMovie => {
+                                if (watchlistMovie.length === 0) {
+                                    // Need to get length of watchlist you are adding
+                                    // movie to so you can set index of watchlistMovie
+                                    moviesApiManager.getAllWatchlistMovies(parseInt(watchlistId))
+                                        .then(watchlist => {
+                                            const listIndex = watchlist.length
+                                            createWatchlistMovie(parseInt(watchlistId), movie.id, listIndex)
+                                        })
+                                }
+                            })
                     })
             })
+    }
+
+    // Add movie to a watchlist when user selects watchlist
+    addToWatchlist = e => {
+        const watchlistId = e.target.id
+        this.addMovie(watchlistId, this.movieId)
+    }
+
+    // Adds movie to newly created watchlist
+    addToNewList = (listId) => {
+        // this updates the dropdown menues for all movie cards to have the new list
+        this.props.getLists()
+        //  add current movie to new list
+        this.addMovie(listId, this.movieId)
     }
 
     render() {
@@ -110,15 +125,27 @@ class MovieCard extends Component {
                             title="Watch"
                             variant="success"
                             className="watchlist-button"
-                        >{this.props.watchlists.map(watchlist =>
-                            <Dropdown.Item
-                                key={`${this.props.movieKey}-${watchlist.id}`}
-                                id={watchlist.id}
-                                onClick={this.addToWatchlist}
+                        >
+                            <div
+                                key={`${this.props.movieKey}-new`}
+                                id="new"
+                                className="new-dropdown-button"
+                                onClick={() => this.setState({ modalOpen: true })}
                             >
-                                {watchlist.listName}
-                            </Dropdown.Item>
-                        )}
+                                <WatchlistForm
+                                    movieCard={true}
+                                    parentFunction={this.addToNewList}
+                                />
+                            </div>
+                            {this.props.watchlists.map(watchlist =>
+                                <Dropdown.Item
+                                    key={`${this.props.movieKey}-${watchlist.id}`}
+                                    id={watchlist.id}
+                                    onClick={this.addToWatchlist}
+                                >
+                                    {watchlist.listName}
+                                </Dropdown.Item>
+                            )}
                         </DropdownButton>
                     </div>
                 </div>

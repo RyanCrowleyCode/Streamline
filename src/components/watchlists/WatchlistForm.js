@@ -74,11 +74,14 @@ class WatchlistForm extends Component {
                     if (isNew) {
                         // post newWatchlist to the database
                         watchlistApiManager.createNewWatchlist(newWatchlist)
-                            .then(() => {
+                            .then((newList) => {
                                 // close modal and reset state
                                 this.close()
                                 // call parent render function
-                                this.props.parentFunction()
+                                this.props.movieCard ?
+                                    this.props.parentFunction(newList.id)
+                                    : this.props.parentFunction()
+                                
                             })
                     } else {
                         window.alert("You already have a Watchlist with that name.")
@@ -93,16 +96,28 @@ class WatchlistForm extends Component {
         }
     }
 
+    componentDidMount() {
+        this.setState({
+            open: this.props.open
+        })
+    }
+
 
     render() {
         return (
             <React.Fragment>
-                <Button
-                    variant="success"
-                    className="new-watchlist-button"
-                    onClick={() => this.setState({ open: true })}>
-                    New Watchlist
-                </Button>
+                {this.props.movieCard ?
+                    <div
+                        onClick={() => this.setState({ open: true })}>
+                        + New
+                    </div>
+                    : <Button
+                        variant="success"
+                        className="new-watchlist-button"
+                        onClick={() => this.setState({ open: true })}>
+                        New Watchlist
+            </Button>
+                }
 
                 <Modal
                     show={this.state.open}

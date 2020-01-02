@@ -21,6 +21,9 @@ import DropdownButton from 'react-bootstrap/DropdownButton'
 // DATA
 import ExternalApiManager from '../../modules/ExternalApiManager'
 
+// COMPONENTS
+import WatchlistForm from '../watchlists/WatchlistForm'
+
 // MODULES
 import moviesApiManager from './moviesApiManager'
 import { toDatePhrase } from '../../modules/helper'
@@ -34,13 +37,16 @@ import { createWatchlistMovie } from '../../modules/helper'
 class MovieCard extends Component {
     baseUrlPoster = "https://image.tmdb.org/t/p/original/"
     movie = this.props.movieObj
+    movieId = this.movie.id
+
+    state = {
+        watchlists: ''
+    }
 
 
-    // Add movie to a watchlist when user selects watchlist
-    addToWatchlist = e => {
-        const watchlistId = e.target.id
-        const movieId = this.movie.id
 
+    // Fetch calls to database for adding to watchlist
+    addMovie = (watchlistId, movieId) => {
         ExternalApiManager.getMovie(movieId)
             .then(tmdbMovie => {
                 // get movies from internal database. 
@@ -74,6 +80,20 @@ class MovieCard extends Component {
                             })
                     })
             })
+    }
+
+    // Add movie to a watchlist when user selects watchlist
+    addToWatchlist = e => {
+        const watchlistId = e.target.id
+        this.addMovie(watchlistId, this.movieId)
+    }
+
+    // Adds movie to newly created watchlist
+    addToNewList = (listId) => {
+        // this updates the dropdown menues for all movie cards to have the new list
+        this.props.getLists()   
+        //  add current movie to new list
+        this.addMovie(listId, this.movieId)
     }
 
     render() {
@@ -117,9 +137,12 @@ class MovieCard extends Component {
                                     key={`${this.props.movieKey}-new`}
                                     id="new"
                                     className="new-dropdown-button"
-                                // onClick={this.addToWatchlist}
+                                    onClick={() => this.setState({ modalOpen: true })}
                                 >
-                                    + New
+                                    <WatchlistForm
+                                        movieCard={true}
+                                        parentFunction={this.addToNewList}
+                                        />
                                 </Dropdown.Item>
                             </div>
                             {this.props.watchlists.map(watchlist =>

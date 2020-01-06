@@ -67,7 +67,7 @@ class MovieList extends Component {
         this.getLists()
         if (!this.state.searching) {
             ExternalApiManager.getPopular()
-            .then(popular => this.setState({popularMovies: popular.results.slice(0,6)}))
+            .then(popular => this.setState({popularMovies: popular.results.slice(0,18)}))
         }
     }
 

@@ -1,68 +1,37 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# STREAMLINE
 
-## Available Scripts
+## What is Streamline?
 
-In the project directory, you can run:
+With the rise of different streaming platforms and physical media options, Streamline provides a way for users to keep track of all the movies they want to watch in one place. With Streamline, you can create custom watchlists, track where you want to view the movie, and add notes to each movie.
 
-### `npm start`
+## Setup: Follow these instructions exactly
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Clone this repository
+1. `cd` into the directory it creates
+1. In the `api` directory, create a copy of the `database.json.example` and remove the .example extension.
+1. Run `npm install` and wait for all dependencies to be installed
+1. Run `npm start` to verify that installation was successful.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Running Your Server
 
-### `npm test`
+1. Open another terminal window and navigate to the `api` folder within `src`
+1. Run `json-server -p 5002 -w database.json`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Using Streamline
 
-### `npm run build`
+1. In the browser, navigate to `localhost:3000`
+1. If you are a returning user, `Login` with your account information
+1. If you have never used Streamline before, click `Register` in the Navbar to go to the registration view and register for a new account
+1. On the `Movies` view, search for a movie that you would like to watch.
+2. To add a movie, select the `Watch` dropdown button on that movie card.
+2. Either select a watchlist from the dropdown, or create a new watchlist to add the movie to a new watchlist.
+1. On the `Watchlists` view, you can `Edit` or `Delete` any of your watchlists. You can click on `Select` to see the details view of a watchlist.
+2. On the details view of a watchlist, select the `Watch On` dropdown menu to select an option of where you want to watch the movie.
+2. On the details view of a watchlist, select the `Notes` button to add your own notes to that movie.
+1. To logout, click on your `username` in the top right corner of the Nav Bar to see a dropdown menu and select `Logout`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## ERD
+![streamline erd](./StreamlineERD.png)
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+&copy;2019 - Ryan Crowley

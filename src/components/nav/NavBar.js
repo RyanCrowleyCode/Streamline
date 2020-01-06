@@ -17,6 +17,8 @@ import DropdownButton from 'react-bootstrap/DropdownButton'
 // STYLES
 import './NavBar.css'
 import Dropdown from 'react-bootstrap/Dropdown'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFilm } from '@fortawesome/free-solid-svg-icons'
 
 // MODULES
 import { activeUsername } from '../../modules/activeUser'
@@ -26,7 +28,10 @@ class NavBar extends Component {
 
         return (
             <nav className="navbar bg-dark text-white flex-md-nowrap p-0 shadow">
-                <h3>STREAMLINE</h3>
+                <div className="brand">
+                    <FontAwesomeIcon className="default-icon" icon={faFilm} size="2x" color="white" />
+                    <h3>STREAMLINE</h3>
+                </div>
                 {this.props.isLoggedIn ?
                     <ul className="nav nav-pills nav-fill">
                         <li className="nav-item">

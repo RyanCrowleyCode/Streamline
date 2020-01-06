@@ -1,18 +1,46 @@
 {
-    "users": [
-        {
-            "id": 1,
-            "fullName": "User One",
-            "email": "userone@users.com",
-            "username": "coolUser77",
-            "password": "asdf"
-        }
-    ],
+    "users": [],
     "movies": [],
     "userMovies": [],
     "watchlists": [],
     "watchlistMovies": [],
-    "movieSources": [],
+    "movieSources": [
+        {
+      "id": 1,
+      "sourceType": "none",
+      "sourceName": "Watch On:"
+    },
+    {
+      "id": 2,
+      "sourceType": "streaming",
+      "sourceName": "Netflix"
+    },
+    {
+      "id": 3,
+      "sourceType": "streaming",
+      "sourceName": "Disney Plus"
+    },
+    {
+      "id": 4,
+      "sourceType": "physical",
+      "sourceName": "Blu-ray"
+    },
+    {
+      "id": 5,
+      "sourceType": "physical",
+      "sourceName": "DVD"
+    },
+    {
+      "id": 6,
+      "sourceType": "physical",
+      "sourceName": "VHS"
+    },
+    {
+      "id": 7,
+      "sourceType": "streaming",
+      "sourceName": "Hulu"
+    }
+    ],
     "rankingslists": [],
     "rankingslistMovies": [],
     "friends": []

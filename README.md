@@ -24,21 +24,19 @@ With the rise of different streaming platforms and physical media options, Strea
 
 1. In the browser, navigate to `localhost:3000`
 1. If you are a returning user, `Login` with your account information
+1. If you have never used Streamline before, click `Register` in the Navbar to go to the registration view and register for a new account
 
 ![streamline movies](./images/StreamlineMovies.png)
 
-
-1. If you have never used Streamline before, click `Register` in the Navbar to go to the registration view and register for a new account
 1. On the `Movies` view, search for a movie that you would like to watch.
 2. To add a movie, select the `Watch` dropdown button on that movie card.
 2. Either select a watchlist from the dropdown, or create a new watchlist to add the movie to a new watchlist.
-1. On the `Watchlists` view, you can `Edit` or `Delete` any of your watchlists. You can click on `Select` to see the details view of a watchlist.
-2. On the details view of a watchlist, select the `Watch On` dropdown menu to select an option of where you want to watch the movie.
-2. On the details view of a watchlist, select the `Notes` button to add your own notes to that movie.
 
 ![streamline watchlist](./images/StreamlineWatchlist.png)
 
-
+1. On the `Watchlists` view, you can `Edit` or `Delete` any of your watchlists. You can click on `Select` to see the details view of a watchlist.
+2. On the details view of a watchlist, select the `Watch On` dropdown menu to select an option of where you want to watch the movie.
+2. On the details view of a watchlist, select the `Notes` button to add your own notes to that movie.
 1. To logout, click on your `username` in the top right corner of the Nav Bar to see a dropdown menu and select `Logout`
 
 ## ERD

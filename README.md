@@ -4,8 +4,11 @@
 
 ## What is Streamline?
 
-With the rise of different streaming platforms and physical media options, Streamline provides a way for users to keep track of all the movies they want to watch in one place. With Streamline, you can create custom watchlists, track where you want to view the movie, and add notes to each movie.
+With the rise of different streaming platforms and physical media options, Streamline provides a way for users to keep track of all the movies they want to watch in one place. With Streamline, you can create custom watchlists, track where you want to view the movie, and add notes to each movie. 
 
+## The Movie Database
+
+Streamline leverages the power of [The Movie Database](https://www.themoviedb.org/?language=en-US) API.
 
 ## Setup: Follow these instructions exactly
 

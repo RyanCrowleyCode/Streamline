@@ -11,3 +11,9 @@
     text-decoration: none;
     color: #0056b3;
 }
+
+.brand {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+}

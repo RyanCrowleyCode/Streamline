@@ -14,6 +14,7 @@ Streamline leverages the power of [The Movie Database](https://www.themoviedb.or
 
 1. Clone this repository
 1. `cd` into the directory it creates
+1. Make sure you have `json-server` and `npm`
 1. In the `api` directory, create a copy of the `database.json.example` and remove the .example extension.
 1. In the `src` directory, create a copy of the `apiKeys.js.example` and remove the .example extension.
 1. Add your api key to `apiKeys.js` from TMDb

@@ -9,7 +9,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^12.1.5",
     "@testing-library/user-event": "^14.4.3",
-    "bootstrap": "^5.2.3",
+    "bootstrap": "^5.3.0",
     "react": "^16.14.0",
     "react-bootstrap": "^2.7.4",
     "react-dom": "^16.14.0",
